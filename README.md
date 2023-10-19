@@ -1,5 +1,5 @@
 # Link-vault
-Paving the Way for Widespread Crypto and Algorand Adoption, Including Algorand Standard Asset Integration
+Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration. 
 
 # Introduction:
 LinkVault stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
