@@ -1,5 +1,8 @@
 import algosdk from "algosdk";
 
+
+
+
 //generates new algorand Account
 let account = algosdk.generateAccount();
 console.log("Account: ", account)
