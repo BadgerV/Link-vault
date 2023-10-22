@@ -1,0 +1,20 @@
+{
+    "folders": [
+      {
+        "name": "@link-vault/backend",
+        "path": "./server"
+      },
+      {
+        "name": "@link-vault/frontend",
+        "path": "./client"
+      },
+      {
+        "name": "@link-vault/contracts",
+        "path": "./contracts"
+      },
+      {
+        "name": "root",
+        "path": "./"
+      }
+    ]
+  }
