@@ -3,10 +3,6 @@ import { secp256k1 } from '@noble/curves/secp256k1';
 
 const priv = secp256k1.utils.randomPrivateKey();
 console.log(`Private Key : ${priv}`);
-const privStr=uint8ArrayToString(priv)
-console.log(`Private Key string : ${privStr}`);
-console.log(`Private Key arr : ${stringToUint8Array(priv)}`);
-
 
 const pub = secp256k1.getPublicKey(priv);
 console.log(`Pub Key : ${pub}`);
