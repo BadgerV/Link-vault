@@ -18,8 +18,13 @@ console.log('Uint8Array Private Key:', privateKeyUint8Array);
 
 //gets the public key from the account keypair
 const publickey=privateKeyUint8Array.slice(32,64);
-const publicKeyString = algosdk.encodeAddress(publickey)
-console.log('String Private Key:',publicKeyString)
+const publicKeyString = algosdk.encodeAddress([
+    28, 155, 116, 218, 251,  91,  25,  27,
+    66, 108, 246, 165,  84, 226, 118,  70,
+   215, 156, 249, 114, 169,  33, 196,  80,
+    68, 104, 200, 118,  85, 244, 205, 251
+ ])
+console.log('String Public Key:',publicKeyString)
 
 
 
