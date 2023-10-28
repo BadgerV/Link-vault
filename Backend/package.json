@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "algosdk": "^2.7.0"
+    "@noble/curves": "^1.2.0",
+    "algosdk": "^2.7.0",
+    "pako": "^2.1.0",
+    "secp256k1": "^5.0.0"
   }
 }
