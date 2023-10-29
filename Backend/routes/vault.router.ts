@@ -4,11 +4,11 @@ import {createVault, getWallet} from '../controllers/vault.controller';
 // creating vault route
 const vaultRouter = express.Router();
 
-//making bill payments
+//create linkvault
 vaultRouter.get('/', createVault);
 
+//get wallet from vault
 vaultRouter.get('/:vault', getWallet);
-
 
 export default vaultRouter;
 

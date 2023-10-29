@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "cook-space.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +11,20 @@
   "dependencies": {
     "@noble/curves": "^1.2.0",
     "algosdk": "^2.7.0",
-    "base32-encode": "^2.0.0",
-    "pako": "^2.1.0",
-    "secp256k1": "^5.0.0"
+    "cora": "^0.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.15",
+    "@types/dotenv": "^8.2.0",
+    "@types/helmet": "^4.0.0",
+    "@types/morgan": "^1.9.7",
+    "@types/qrcode": "^1.5.4",
+    "ts-node": "^10.9.1"
   }
 }
