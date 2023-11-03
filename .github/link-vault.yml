@@ -6,6 +6,11 @@ on:
       - main
       - dev
       - staging
+  pull_request:
+    branches:
+      - main
+      - dev
+      - staging
 
 jobs:
   lint:
@@ -27,4 +32,3 @@ jobs:
         run: |
           npx eslint . 
           npx prettier --check .
-

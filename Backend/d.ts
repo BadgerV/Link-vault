@@ -1,2 +1,2 @@
-declare module 'qr-code';
-declare module 'cors';
+declare module "qr-code";
+declare module "cors";
