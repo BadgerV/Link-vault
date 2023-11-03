@@ -1,0 +1,32 @@
+{
+  "name": "link-vault",
+  "version": "1.0.0",
+  "description": " Providing Non Custodial algorand wallets via a simple link or QR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samuellyworld/Link-vault.git"
+  },
+  "author": "Samuel Tosin and David Kazeem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Samuellyworld/Link-vault/issues"
+  },
+  "homepage": "https://github.com/Samuellyworld/Link-vault#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.1.6"
+  }
+}

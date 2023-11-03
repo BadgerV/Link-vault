@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+/.DS_Store
+.env
+/dist
+dist
+server/.env
+client/.env
+.DS_Store
+package-lock.json
