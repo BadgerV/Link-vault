@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": " Providing Non Custodial algorand wallets via a simple link or QR",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "npm start --w @link-vault/server",
+      "heroku-postbuild": "npm run build  --w @link-vault/server",
+      "server": "npm run dev --w @link-vault/server",
+      "client": "npm start --w @link-vault/client",
+      "dev": "npm run server && npm run client",
+      "deploy": "npm run build --w @link-vault/client && npm run dev --w @link-vault/server",
+      "lint": "eslint .",
+      "lint:fix": "eslint . --fix",
+      "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "repository": {
     "type": "git",
