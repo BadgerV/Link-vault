@@ -26,8 +26,6 @@
   },
   "homepage": "https://github.com/Samuellyworld/Link-vault#readme",
   "devDependencies": {
-    "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
