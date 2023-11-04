@@ -7,4 +7,3 @@ dist
 server/.env
 client/.env
 .DS_Store
-package-lock.json
