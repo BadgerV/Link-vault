@@ -12,7 +12,7 @@ export const LogoContainer = styled.div`
 
   h2 {
     font-weight: 700;
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-m);
     color: var(--vault-primary);
     font-family: var(--font-family-geom);
   }
@@ -21,10 +21,12 @@ export const LogoContainer = styled.div`
 export const HeaderAddons = styled.div`
   display: flex;
   align-items: center;
+  gap: 1rem;
 
   .header__addons__items {
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
     font-family: var(--font-family-nista);
     ${flexCenter()};
+    gap: 0.5rem;
   }
 `;

@@ -6,7 +6,8 @@ import {
   ButtonBlock,
   ButtonSpinnerContainer,
   ButtonSpinnerRing,
-  ButtonSpin
+  ButtonSpin,
+  ButtonPurple
 } from "./Button.styles";
 
 const ButtonSpinner = () => {
@@ -50,7 +51,7 @@ export const CustomButton = ({
 }: ButtonProps) => {
   const isDisabled = isLoading === true || disabled === true;
   return (
-    <Button
+    <ButtonPurple
       type={type}
       disabled={isDisabled}
       style={style}
@@ -61,7 +62,7 @@ export const CustomButton = ({
         {isLoading ? <ButtonSpinner /> : null}
         {isLoading && loadingText ? loadingText : children}
       </ButtonFlex>
-    </Button>
+    </ButtonPurple>
   );
 };
 
