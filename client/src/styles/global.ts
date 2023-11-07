@@ -7,6 +7,14 @@ export const GlobalStyle = createGlobalStyle`
   --vault-primary : #653780;
   --font-family-geom : 'Geom', sans-serif;
   --font-family-nista : 'Nista', sans-serif;
+  --font-size-xxs: 0.8rem;
+  --font-size-xs: 0.875rem;
+  --font-size-s: 1rem;
+  --font-size-m: 1.125rem;
+  --font-size-l: 1.25rem;
+  --font-size-xl: 1.563rem;
+  --font-size-xxl: 1.875rem;
+  --font-size-xxxl: 2.5rem;
  
   @font-face {
     font-family: 'Nista';
@@ -59,7 +67,7 @@ export const GlobalStyle = createGlobalStyle`
     margin:0; 
     width:100%;
     overflow-x : hidden;
-    background : url('/svg/background.svg') no-repeat center center fixed;
+    background : url('/assets/svg/background.svg') no-repeat center center fixed;
   }
 
   html {
