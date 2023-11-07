@@ -1,8 +1,8 @@
+import AppRouter from "./routing/AppRouter";
+
 function App() {
   return (
-    <>
-      <>i</>
-    </>
+    <AppRouter />
   );
 }
 
