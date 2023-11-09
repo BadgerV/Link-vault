@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <img src={Logo} />
+        <img src={Logo} alt="logo" />
         <h2>LinkVault</h2>
       </LogoContainer>
       <HeaderAddons>
