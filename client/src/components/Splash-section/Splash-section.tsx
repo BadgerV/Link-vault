@@ -8,9 +8,15 @@ export const SplashSection = () => {
   return (
     <SplashSectionContainer>
       <h1>
-        The Link is your <img src={Logo} alt="logo" /> <span>Vault.</span>
+        <span>
+          The Link <img src={Logo} alt="logo" className="logo-splash" /> is{" "}
+        </span>
+        <span>
+          {" "}
+          your <span className="vault-">Vault.</span>
+        </span>
       </h1>
-      <p>Non-custodial algorand wallets via a Link. </p>
+      <p className="sub__text">Non-custodial algorand wallets via a Link. </p>
       <CustomButton variant="filled" type="button">
         Create a LinkVault
       </CustomButton>

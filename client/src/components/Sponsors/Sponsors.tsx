@@ -5,9 +5,9 @@ import CircleIcon from "/assets/svg/circle.svg";
 export const Sponsors = () => {
   return (
     <SponsorsContainer>
-      Powered by <img src={AlgorandIcon} alt="algorand" />
+      Powered by <img src={AlgorandIcon} alt="algorand" className="algorand" />
       algorand and
-      <img src={CircleIcon} alt="circle" />
+      <img src={CircleIcon} alt="circle" className="circle" />
     </SponsorsContainer>
   );
 };
