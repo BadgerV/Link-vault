@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { flexCenter, flexRowBetween } from "../../styles/mixins";
+import { flexCenter, flexRowBetween } from "../../styles/__mixins";
 
 export const HeaderContainer = styled.div`
   ${flexRowBetween()};
