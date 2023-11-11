@@ -9,6 +9,7 @@ export const SplashSectionContainer = styled.div`
   ${flexCenter()};
   flex-direction: column;
   gap: 2rem;
+  padding-bottom: 2rem;
 
   h1 {
     font-family: var(--font-family-geom);
