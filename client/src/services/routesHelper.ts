@@ -3,6 +3,7 @@ const REACT_APP_DEV_API_URL = import.meta.env.VITE_APP_DEV_API_URL;
 const REACT_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 const REACT_APP_DEV_CLIENT_URL = import.meta.env.VITE_APP_DEV_CLIENT_URL;
 const REACT_APP_CLIENT_URL = import.meta.env.VITE_APP_CLIENT_URL;
+const REACT_APP_DEV_ASSETS_URL = import.meta.env.VITE_APP_DEV_ASSETS_URL;
 
 let host = "";
 
@@ -22,3 +23,5 @@ if (NODE_ENV === "production") {
 export const hostRoute = host;
 
 export const clientRoute = client;
+
+export const allAssetsRoute = REACT_APP_DEV_ASSETS_URL;
