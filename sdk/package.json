@@ -1,0 +1,26 @@
+{
+  "name": "link-vault",
+  "version": "1.0.1",
+  "description": "Integrating Linkvault: Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davonjagah/linkvault-package.git"
+  },
+  "keywords": [
+    "linkvault"
+  ],
+  "author": "David Kazeem and Samuel Tosin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davonjagah/linkvault-package/issues"
+  },
+  "homepage": "https://github.com/davonjagah/linkvault-package#readme",
+  "dependencies": {
+    "@noble/curves": "^1.2.0",
+    "typescript": "^5.2.2"
+  }
+}
