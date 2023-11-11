@@ -18,20 +18,20 @@ interface CorsSettings {
 
 export const corsSettings: CorsSettings = isProd
   ? {
-    credentials: true,
-    origin: ["https://google.com"],
-    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
-  }
+      credentials: true,
+      origin: ["https://google.com"],
+      methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
+    }
   : {
-    credentials: true,
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:5173",
-      "https://www.linkvault.io"
-    ],
-    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
-  };
+      credentials: true,
+      origin: [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost:5173",
+        "https://www.linkvault.io"
+      ],
+      methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
+    };
 
 // defaultConfig object - this contains any config strings || numbers
 export const defaultConfig: defaultConfigTypes = {

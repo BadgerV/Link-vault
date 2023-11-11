@@ -51,11 +51,11 @@ export const Button = styled.button`
   white-space: nowrap;
   font-weight: 500;
   font-size: 16px;
-  border-radius: 4px;
-  height: 46px;
+  border-radius: 8px;
   text-align: center;
-  padding: 0 20px;
+  padding: 5px 20px;
   transition: 0.25s ease;
+  cursor: pointer;
 
   &.block {
     width: 100%;
@@ -135,7 +135,7 @@ export const ButtonGradient = styled(Button)`
 
 export const ButtonPurple = styled(Button)`
   &.filled {
-    background: #731054;
+    background: var(--vault-primary);
     color: var(--vault-white);
 
     &:hover {
