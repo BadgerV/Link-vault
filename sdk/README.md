@@ -37,7 +37,7 @@ The `createVault` method generates a new Algorand account and provides a link to
 ### Getting Wallet Information
 
 ```javascript
-const url = 'https://linkvault.com.nd/vaultString'; // Replace with the actual link to the vault
+const url = 'https://linkvault.com.ng/vaultString'; // Replace with the actual link to the vault
 
 try {
     const vault = linkvault.getWallet(url);
@@ -261,18 +261,13 @@ sendASATokens();
 
 It creates a recipient address using Linkvault's createVault function, and then sends ASAs or NFTs from a specified sender to the Linkvault address.
 
-
-
-
-
-
 ## Package Information
 
 - **Package Name**: link-vault
 - **Version**: 1.0.1
-- **Author**: jagah
+- **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
-- **GitHub Repository**: [linkvault-package](https://github.com/davonjagah/linkvault-package)
-- **Issues**: [Linkvault Issues](https://github.com/davonjagah/linkvault-package/issues)
+- **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)
+- **Issues**: [Linkvault Issues](https://github.com/Samuellyworld/Link-vault/issues)
 
-For more details and examples, please refer to the [Linkvault GitHub Repository](https://github.com/davonjagah/linkvault-package#readme). Feel free to contribute, report issues, or provide feedback!
+For more details and examples, please refer to the [Linkvault GitHub Repository](https://github.com/Samuellyworld/Link-vault/tree/main/sdk#readme). Feel free to contribute, report issues, or provide feedback!
