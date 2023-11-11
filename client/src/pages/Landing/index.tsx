@@ -3,7 +3,9 @@ import SplashSection from "../../components/Splash-section";
 import Hero from "../../components/Hero";
 import ScrollContainer from "../../components/Scroll-Container";
 
+
 export const LandingPage = () => {
+
   return (
     <>
       <Header />
