@@ -7,6 +7,7 @@ export const HeroContainer = styled.div`
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  width: 100vw;
 
   &::-webkit-scrollbar {
     display: none;
@@ -14,7 +15,7 @@ export const HeroContainer = styled.div`
 `;
 
 export const HeroSection = styled.div`
-  flex: 0 0 100vw;
+  width: 100vw;
   height: 100vh;
   scroll-snap-align: start;
   transition: white 0.3s ease; /* Add a smooth background color transition */

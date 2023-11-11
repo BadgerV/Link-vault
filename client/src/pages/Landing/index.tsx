@@ -1,6 +1,7 @@
 import Header from "../../components/Header";
 import SplashSection from "../../components/Splash-section";
 import Hero from "../../components/Hero";
+import ScrollContainer from "../../components/Scroll-Container";
 
 export const LandingPage = () => {
   return (
@@ -8,6 +9,7 @@ export const LandingPage = () => {
       <Header />
       <SplashSection />
       <Hero />
+      <ScrollContainer />
     </>
   );
 };

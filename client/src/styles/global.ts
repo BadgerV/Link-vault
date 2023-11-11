@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
       font-family: 'Nista';
       font-style: normal;
       font-weight: 400;
-      src: url('/fonts/nista/BwNistaGeometricDEMO-Regular.otf.otf') format('truetype');
+      src: url('/fonts/nista/BwNistaGeometricDEMO-Regular.otf') format('truetype');
   }
 
 @font-face {
@@ -72,6 +72,9 @@ export const GlobalStyle = createGlobalStyle`
     width:100%;
     overflow-x : hidden;
     background : url('/assets/svg/background.svg') no-repeat center center fixed;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   html {
