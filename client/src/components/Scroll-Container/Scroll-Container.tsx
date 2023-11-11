@@ -1,36 +1,73 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ScrollProgress, ScrollSection, ScrollContainerP } from "./Scroll-Container.styles";
 
-const ScrollContainer = () => {
-  const [scrollPercentage, setScrollPercentage] = useState(0);
+const ScrollContainer: React.FC = () => {
+  const [scrollPercentage, setScrollPercentage] = useState<number>(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const rafId = useRef<number | null>(null);
 
   const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const percentage = (scrollPosition / totalHeight) * 100;
-    setScrollPercentage(percentage);
+    if (!scrollContainerRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = scrollContainerRef.current;
+    const newScrollPercentage = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    setScrollPercentage(newScrollPercentage);
+    // Cancel the previous animation frame request
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+    }
+
+    // Schedule a new animation frame request
+    rafId.current = requestAnimationFrame(() => {
+      setScrollPercentage(newScrollPercentage);
+    });
   };
 
   console.log(scrollPercentage);
+  console.log(scrollContainerRef.current, "scrollPosition");
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    const scrollContainer = scrollContainerRef.current;
+
+    if (!scrollContainer) return;
+
+    scrollContainer.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
+      scrollContainer.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollPercentage]);
+  }, []);
+
   return (
-    <ScrollContainerP>
-      <ScrollSection visible={scrollPercentage >= 0 && scrollPercentage <= 25}>
-        Section 1
+    <ScrollContainerP ref={scrollContainerRef}>
+      <ScrollSection
+        visible={scrollPercentage >= 0 && scrollPercentage <= 33}
+        className="section__first"
+      >
+        <div className="section__first__content">
+          <h1> 1. </h1>
+          <h2>Create a LinkVault.</h2>
+          <p>With just a few prompts, you have your LinkVault.</p>
+        </div>
       </ScrollSection>
-      <ScrollSection visible={scrollPercentage > 25 && scrollPercentage <= 50}>
-        Section 2
+      <ScrollSection visible={scrollPercentage > 33 && scrollPercentage <= 66}>
+        <div className="section__first__content">
+          <h1> 2. </h1>
+          <h2>Fund with Digital Asset(s).</h2>
+          <p>With just a few prompts, you have your LinkVault.</p>
+        </div>
       </ScrollSection>
-      <ScrollSection visible={scrollPercentage > 50 && scrollPercentage <= 75}>
-        Section 3
+      <ScrollSection visible={scrollPercentage > 66 && scrollPercentage <= 100}>
+        <div className="section__first__content">
+          <h1> 3. </h1>
+          <h2>Share with love. </h2>
+          {/* <p>With just a few prompts, you have your LinkVault</p> */}
+        </div>
       </ScrollSection>
-      <ScrollProgress />
+      <ScrollProgress scrollPercentage={scrollPercentage} />
     </ScrollContainerP>
   );
 };
