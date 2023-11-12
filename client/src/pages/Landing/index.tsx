@@ -5,6 +5,7 @@ import ScrollContainer from "../../components/Scroll-Container";
 import SubFooter from "../../components/Footer/SubFooter";
 import Footer from "../../components/Footer/Footer";
 
+
 export const LandingPage = () => {
   return (
     <>
