@@ -1,6 +1,6 @@
 {
   "name": "link-vault",
-  "version": "1.0.2",
+  "version": "1.1.5",
   "description": "Integrating Linkvault: Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.",
   "main": "src/index.js",
   "scripts": {
