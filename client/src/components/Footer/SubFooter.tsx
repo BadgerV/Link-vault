@@ -1,5 +1,5 @@
 import { SubFooterContainer } from "./SubFooter.styles";
-import ShareImage from "/assets/png/share.png";
+
 const SubFooter = () => {
   return (
     <SubFooterContainer>
@@ -16,7 +16,7 @@ const SubFooter = () => {
           </div>
         </div>
         <div className="shareimg">
-          <img src={ShareImage} alt="share" srcset="" />
+          <img src={"/assets/png/share.png"} alt="share" />
         </div>
       </div>
     </SubFooterContainer>
