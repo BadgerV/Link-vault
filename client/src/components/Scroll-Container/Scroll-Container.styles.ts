@@ -9,7 +9,7 @@ type CustomScrollBarProps = {
 };
 
 export const ScrollContainerP = styled.div`
-  position: relative;
+  position:sticky;
   display: flex;
   flex-direction: column;
   width: 100%;
