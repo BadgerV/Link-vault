@@ -69,3 +69,65 @@ export const HeaderAddons = styled.div`
     }
   }
 `;
+
+export const HeaderDropdown = styled.div`
+  .dropdown {
+    right: 0rem;
+    top: 4.54rem;
+    position: absolute;
+    flex-direction: column;
+    filter: drop-shadow(0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1));
+    border-radius: 0rem 0rem 0.5rem 0.5rem;
+    display: none;
+    border: 0.05rem;
+    border-radius : 0.5rem;
+    z-index: 100;
+    width: 18.5rem;
+
+    &__item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.625rem 0.8rem;
+      background-color: #ffffff;
+      gap: 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      color: unset;
+
+      &:hover {
+        background: #ebebeb;
+      }
+
+      &__img {
+        width: 1.25rem;
+        height: 1.25rem;
+        overflow: hidden;
+        display: flex;
+        font-size: 14px;
+        align-items: center;
+        justify-content: center;
+        color: #959595;
+        img,
+        svg {
+          width: 1.25rem;
+          height: 1.25rem;
+          object-fit: cover;
+          filter: unset;
+        }
+      }
+      p {
+        font-family: var(--font-family-nista);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 0.9rem;
+        display: flex;
+        margin: unset;
+      }
+    }
+  }
+
+  &:hover .dropdown {
+    display: flex;
+  }
+`;

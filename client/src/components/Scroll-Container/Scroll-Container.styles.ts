@@ -24,6 +24,7 @@ export const ScrollContainerP = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
   margin-bottom: 2rem;
   padding-bottom: -3rem;
 `;
@@ -80,9 +81,8 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
 `;
 
 export const ScrollProgress = styled.div<CustomScrollBarProps>`
-
   position: absolute;
- top: 10;
+  top: 10;
   left: 50%;
   transform: translateX(-50%);
   width: 5px;
@@ -102,22 +102,22 @@ export const ScrollProgress = styled.div<CustomScrollBarProps>`
     border-radius: inherit;
     }
 
-        &::after {
-            content: '';
-            position: absolute;
-            top: ${props => props.scrollPercentage + "%"};
-            left: 50%;
-            transform: translateX(-50%);
-            color: #e53f71;
-            font-weight: bold;
-            width: 13px;
-            height: 13px;
-            box-shadow: 0 0 10px #e53f71; 
-            margin-top: -7px;
-            padding: 4px;
-            background-color: #e53f71; 
-            border-radius: 100%;
-            opacity: 0.8;
-          }
-      }
+  &::after {
+     content: '';
+     position: absolute;
+     top: ${props => props.scrollPercentage + "%"};
+     left: 50%;
+     transform: translateX(-50%);
+     color: #e53f71;
+     font-weight: bold;
+     width: 13px;
+     height: 13px;
+     box-shadow: 0 0 10px #e53f71; 
+     margin-top: -7px;
+     padding: 4px;
+     background-color: #e53f71; 
+     border-radius: 100%;
+     opacity: 0.8;
+     }
+    }
 `;

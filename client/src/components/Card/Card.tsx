@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { CardContainer } from "./Card.styles";
 
 interface CardProps {
