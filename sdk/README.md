@@ -15,7 +15,7 @@ npm install link-vault
 ### Importing the Package
 
 ```javascript
-import linkvault from 'link-vault';
+import linkvault from "link-vault";
 ```
 
 ### Creating a Vault
@@ -37,34 +37,33 @@ The `createVault` method generates a new Algorand account and provides a link to
 ### Getting Wallet Information
 
 ```javascript
-const url = 'https://linkvault.com.ng/vaultString'; // Replace with the actual link to the vault
+const url = "https://linkvault.com.ng/vaultString"; // Replace with the actual link to the vault
 
 try {
-    const vault = linkvault.getWallet(url);
+  const vault = linkvault.getWallet(url);
 
-    /**
-     * Result:
-     * {
-     *    vault: 'https://linkvault.com/vaultString',
-     *    keyPair: Uint8Array([...]),
-     *    address: 'Algorand Address'
-     *    balance: {Wallet Balances(amount, assets, nfts, minimumBalance)}
-     * }
-     */
+  /**
+   * Result:
+   * {
+   *    vault: 'https://linkvault.com/vaultString',
+   *    keyPair: Uint8Array([...]),
+   *    address: 'Algorand Address'
+   *    balance: {Wallet Balances(amount, assets, nfts, minimumBalance)}
+   * }
+   */
 } catch (error) {
-    console.error('Error Resolving vault:', error);
-    throw error;
+  console.error("Error Resolving vault:", error);
+  throw error;
 }
 ```
 
 The `getWallet` method takes a URL (link to the vault) and retrieves the associated wallet information, including the vault link, secret key pair, Algorand address and wallet balances.
 
-
 ### Example: Create and Fund a Linkvault with Algorand
 
 ```javascript
-import { createVault, getWallet } from 'link-vault';
-import algosdk from 'algosdk';
+import { createVault, getWallet } from "link-vault";
+import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
 const port = 443;
@@ -94,7 +93,7 @@ async function sendAlgoTokens() {
       firstRound: params.firstRound,
       lastRound: params.lastRound,
       genesisID: params.genesisID,
-      genesisHash: params.genesisHash,
+      genesisHash: params.genesisHash
     };
 
     const recoveredAccount = algosdk.mnemonicToSecretKey(senderMnemonic);
@@ -107,28 +106,26 @@ async function sendAlgoTokens() {
     console.log(`Transaction ID: ${txId}`);
 
     // Send the transaction to the Algorand network
-    const txHeaders = { 'Content-Type': 'application/x-binary' };
+    const txHeaders = { "Content-Type": "application/x-binary" };
     const sendResponse = await algodClient.sendRawTransaction(signedTxn.blob, txHeaders).do();
-    console.log('Transaction sent.');
+    console.log("Transaction sent.");
 
     // Wait for confirmation (you can check the confirmation status using the `txId`)
     const status = await algodClient.status().do();
-    console.log('Transaction Status:', status);
+    console.log("Transaction Status:", status);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
-
 ```
 
 It generates a new Linkvault as the recipient address, and sends Algos from a specified sender address using the provided mnemonic, logging the transaction ID and status.
 
-
 ### Example: Opt-In to an Algorand Standard Asset (ASA) with a link vault
 
 ```javascript
-import { createVault, getWallet } from 'link-vault';
-import algosdk from 'algosdk';
+import { createVault, getWallet } from "link-vault";
+import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
 const port = 443;
@@ -142,7 +139,7 @@ async function optInToASA() {
   try {
     // Fetch the suggested transaction parameters
     const params = await algodClient.getTransactionParams().do();
-    
+
     // Create a new Linkvault and retrieve wallet information
     const createdLinkvault = await linkvault.createVault();
     const linkvaultURL = createdLinkvault.vault;
@@ -158,7 +155,7 @@ async function optInToASA() {
       lastRound: params.lastRound,
       fee: 1000, // Transaction fee (microAlgos)
       genesisID: params.genesisID,
-      genesisHash: params.genesisHash,
+      genesisHash: params.genesisHash
     };
 
     // Sign and send the opt-in transaction
@@ -168,42 +165,38 @@ async function optInToASA() {
 
     const signedOptInTxn = algosdk.signTransaction(optInTxn, vaultSK);
     const txId = signedOptInTxn.txID().toString();
-    
+
     console.log(`Opt-In Transaction ID: ${txId}`);
 
-    const txHeaders = { 'Content-Type': 'application/x-binary' };
+    const txHeaders = { "Content-Type": "application/x-binary" };
     const sendResponse = await algodClient.sendRawTransaction(signedOptInTxn.blob, txHeaders).do();
-    console.log('Opt-In Transaction sent.');
+    console.log("Opt-In Transaction sent.");
 
     // Wait for confirmation (you can check the confirmation status using the `txId`)
     const status = await algodClient.status().do();
-    console.log('Transaction Status:', status);
+    console.log("Transaction Status:", status);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
 // Call the function to perform the opt-in
 optInToASA();
-
-
 ```
 
 It generates a new Linkvault as the recipient address, and sends Algos from a specified sender address using the provided mnemonic, logging the transaction ID and status.
 
-
 ### Example: Create and fund Linkvault with Algorand Standard Assets (ASAs) and NFTs
 
 ```javascript
-import { createVault, getWallet } from 'link-vault';
-import algosdk from 'algosdk';
+import { createVault, getWallet } from "link-vault";
+import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
 const port = 443;
 const algodServer = "https://mainnet-api.algonode.cloud/";
 
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
-
 
 // Define a function to send Algorand Standard Assets (ASAs) and NFTs
 async function sendASATokens() {
@@ -219,7 +212,6 @@ async function sendASATokens() {
     const senderAddress = "your_sender_address";
     const senderMnemonic = "your_sender_mnemonic";
 
-
     const txnParams = {
       from: senderAddress,
       to: recipientAddress,
@@ -229,9 +221,8 @@ async function sendASATokens() {
       firstRound: params.firstRound,
       lastRound: params.lastRound,
       genesisID: params.genesisID,
-      genesisHash: params.genesisHash,
+      genesisHash: params.genesisHash
     };
-
 
     const recoveredAccount = algosdk.mnemonicToSecretKey(senderMnemonic);
     const senderAccount = recoveredAccount.addr;
@@ -242,21 +233,19 @@ async function sendASATokens() {
     const txId = signedTxn.txID().toString();
     console.log(`ASA OR NFT Transaction ID: ${txId}`);
 
-    const txHeaders = { 'Content-Type': 'application/x-binary' };
+    const txHeaders = { "Content-Type": "application/x-binary" };
     const sendResponse = await algodClient.sendRawTransaction(signedTxn.blob, txHeaders).do();
-    console.log('ASA Transaction sent.');
+    console.log("ASA Transaction sent.");
 
     const status = await algodClient.status().do();
-    console.log('Transaction Status:', status);
+    console.log("Transaction Status:", status);
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 }
 
 // Call the function to perform the opt-in
 sendASATokens();
-
-
 ```
 
 It creates a recipient address using Linkvault's createVault function, and then sends ASAs or NFTs from a specified sender to the Linkvault address.
