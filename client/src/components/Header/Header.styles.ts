@@ -83,6 +83,9 @@ export const HeaderAddons = styled.div`
   }
 
   button {
+    > div {
+      gap: 0.5rem;
+    }
     @media screen and (max-width: 500px) {
       font-size: 0.8rem;
     }
