@@ -44,7 +44,7 @@ const ScrollContainer: React.FC = () => {
   return (
     <ScrollContainerP ref={scrollContainerRef}>
       <ScrollSection
-        visible={scrollPercentage >= 0 && scrollPercentage <= 33}
+        visible={scrollPercentage >= 0 && scrollPercentage <= 30}
         className="section__first"
       >
         <div className="section__first__content">
@@ -53,7 +53,7 @@ const ScrollContainer: React.FC = () => {
           <p>With just a few prompts, you have your LinkVault.</p>
         </div>
       </ScrollSection>
-      <ScrollSection visible={scrollPercentage > 33 && scrollPercentage <= 66}>
+      <ScrollSection visible={scrollPercentage > 40 && scrollPercentage <= 66}>
         <div className="section__first__content">
           <h1> 2. </h1>
           <h2>Fund with Digital Asset(s).</h2>
