@@ -3,24 +3,13 @@ import { HeaderContainer, LogoContainer, HeaderAddons, HeaderDropdown } from "./
 import { PeraWalletConnect } from "@perawallet/connect";
 import { setCurrentUser } from "../../stores/user/user.reducer";
 import { useDispatch } from "react-redux";
+import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { useEffect } from "react";
 
 const peraWallet = new PeraWalletConnect();
+const deflywallet = new DeflyWalletConnect();
 
 export const Header = () => {
-  //  useEffect(() => {
-  //     peraWallet.reconnectSession()
-  //     .then((accounts: string[] | null) => {
-  //         if (peraWallet?.connector) {
-  //             peraWallet?.connector.on("disconnect", () => {
-  //                 dispatch(setCurrentUser(undefined));
-  //                 peraWallet.disconnect();
-  //             });
-  //             dispatch(setCurrentUser(accounts![0]));
-  //         }
-  //     })
-  //  }, [])
-
   const dispatch = useDispatch();
 
   console.log(peraWallet);
@@ -32,6 +21,23 @@ export const Header = () => {
         peraWallet.connector.on("disconnect", () => {
           dispatch(setCurrentUser(undefined));
           peraWallet.disconnect();
+        });
+        dispatch(setCurrentUser(accounts![0]));
+      })
+      .catch(error => {
+        if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
+          console.log(error);
+        }
+      });
+  };
+
+  const deflyWalletConnect = () => {
+    deflywallet
+      .connect()
+      ?.then(accounts => {
+        deflywallet.connector.on("disconnect", () => {
+          dispatch(setCurrentUser(undefined));
+          deflywallet.disconnect();
         });
         dispatch(setCurrentUser(accounts![0]));
       })
@@ -64,7 +70,7 @@ export const Header = () => {
               </div>
               <p>Pera Wallet</p>
             </div>
-            <div className="dropdown__item">
+            <div className="dropdown__item" onClick={deflyWalletConnect}>
               <div className="dropdown__item__img">
                 <img src={"/assets/png/defly.png"} alt="defly" />
               </div>
