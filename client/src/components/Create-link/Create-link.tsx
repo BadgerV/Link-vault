@@ -5,6 +5,7 @@ import OptionLabel from "../Option-Label/Option-Label";
 import CustomButton from "../Button";
 import { useSelector } from "react-redux";
 import { createVault } from "link-vault";
+import { useNavigate } from "react-router-dom";
 
 interface OwnedAssets {
   assets: Asset[];
@@ -18,6 +19,7 @@ const CreateLink = () => {
   const [ownedAssets, setOwnedAssets] = useState<OwnedAssets>({ assets: [], nfts: [] });
   const address = useSelector((state: any) => state.currentUser?.currentUser);
   const [createdVault, setCreatedVault] = useState<any>(null);
+  const navigate = useNavigate();
 
   const AVAILABLE_ASSETS = async () => {
     const assets = await computeAssets(address);
@@ -62,11 +64,14 @@ const CreateLink = () => {
 
   const createEmptyLinkVault = async () => {
     const createdVault = await createVault();
-    console.log(createdVault, "created");
     if (createdVault.address) {
       setCreatedVault(createdVault);
     }
   };
+
+  // const createVaultAndFund = async () => {
+
+  // }
 
   return (
     <Card>

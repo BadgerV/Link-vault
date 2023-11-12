@@ -8,4 +8,4 @@ const router = express.Router();
 router.use("/payment", paymentRouter);
 router.use("/bill", billRouter);
 
-export {router}
+export { router };

@@ -5,12 +5,12 @@ import http from "http";
 import { PORT } from "./config/config";
 
 // import app
-import {app} from './app';
+import { app } from "./app";
 
 // creating server
 const server = http.createServer(app);
 
 //server listen
 server.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`)
-})
+  console.log(`Listening on port ${PORT}`);
+});
