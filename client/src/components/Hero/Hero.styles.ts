@@ -40,9 +40,9 @@ export const HeroSectionContent = styled.div`
   box-shadow: 0px 9px 14px 0px rgba(246, 191, 208, 0.5);
   width: 700px;
   padding: 20px;
-  @media screen and (max-width:768px){
-  margin:20px;
-} 
+  @media screen and (max-width: 768px) {
+    margin: 20px;
+  }
 
   .hero__header {
     ${flexRowBetween()};

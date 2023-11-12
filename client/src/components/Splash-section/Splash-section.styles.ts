@@ -18,7 +18,7 @@ export const SplashSectionContainer = styled.div`
     color: #3f1651;
     ${flexCenter()};
     flex-direction: column;
-    @media screen and (max-width : 550px) {
+    @media screen and (max-width: 550px) {
       font-size: 50px;
     }
 
@@ -27,12 +27,11 @@ export const SplashSectionContainer = styled.div`
       height: 90px;
       margin-left: -17px;
       margin-bottom: -10px;
-      @media screen and (max-width : 550px) {
-        width:45px;
+      @media screen and (max-width: 550px) {
+        width: 45px;
         margin-left: -14px;
         margin-bottom: -24px;
       }
-     
     }
 
     .vault- {
@@ -54,7 +53,7 @@ export const SplashSectionContainer = styled.div`
   .sub__text {
     font-size: var(--font-size-m);
     font-family: var(--font-family-nista);
-    @media screen and (max-width : 550px) {
+    @media screen and (max-width: 550px) {
       font-size: var(--font-size-s);
     }
   }
