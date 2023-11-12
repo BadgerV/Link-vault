@@ -19,7 +19,7 @@ const OptionLabel: React.FC<OptionLabelProps> = ({ option }: OptionLabelProps) =
         <img src={option.logo.svg} alt="logo" className="option__icon" />
         <p className="">{option.unit_name}</p>
       </div>
-      <p className="option__amount">{option.amount / 10 ** option.decimals}</p>
+      <p className="option__amount">{(option.amount / 10 ** option.decimals).toFixed(2)}</p>
     </OptionLabelContainer>
   );
 };

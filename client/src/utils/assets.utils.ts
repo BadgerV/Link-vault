@@ -6,37 +6,6 @@ const port = 443;
 const algodServer = "https://mainnet-api.algonode.cloud/";
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
 
-// const ownedAssets = {
-//   amount: 8447868,
-//   assets: [
-//     { amount: 0, "asset-id": 0, "is-frozen": false },
-//     { amount: 0, "asset-id": 31566704, "is-frozen": false },
-//     { amount: 0, "asset-id": 152246690, "is-frozen": false },
-//     { amount: 400000000, "asset-id": 226701642, "is-frozen": false },
-//     { amount: 0, "asset-id": 227358511, "is-frozen": false },
-//     { amount: 0, "asset-id": 268072134, "is-frozen": false },
-//     { amount: 0, "asset-id": 295134823, "is-frozen": false },
-//     { amount: 0, "asset-id": 297995609, "is-frozen": false },
-//     { amount: 0, "asset-id": 329110405, "is-frozen": false },
-//     { amount: 0, "asset-id": 330109984, "is-frozen": false },
-//     { amount: 0, "asset-id": 330279569, "is-frozen": false },
-//     { amount: 0, "asset-id": 358467807, "is-frozen": false },
-//     { amount: 0, "asset-id": 360407537, "is-frozen": false },
-//     { amount: 0, "asset-id": 361339277, "is-frozen": false },
-//     { amount: 0, "asset-id": 361770471, "is-frozen": false },
-//     { amount: 50000, "asset-id": 361806984, "is-frozen": false },
-//     { amount: 0, "asset-id": 361933739, "is-frozen": false },
-//     { amount: 0, "asset-id": 362976679, "is-frozen": false },
-//     { amount: 0, "asset-id": 363833896, "is-frozen": false },
-//     { amount: 0, "asset-id": 384184691, "is-frozen": false },
-//     { amount: 499881749, "asset-id": 392693339, "is-frozen": false },
-//     { amount: 0, "asset-id": 412677778, "is-frozen": false },
-//     { amount: 0, "asset-id": 435727273, "is-frozen": false }
-//   ],
-//   nfts: [],
-//   minimumBalance: 4140000
-// };
-
 export interface Asset {
   logo: {
     svg: string;

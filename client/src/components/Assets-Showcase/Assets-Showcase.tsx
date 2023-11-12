@@ -9,9 +9,10 @@ interface OwnedAssets {
     assets: Asset[];
     nfts: NFT[];
   };
+  params: boolean;
 }
 
-export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets }: OwnedAssets) => {
+export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets, params }: OwnedAssets) => {
   const dropdownRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const [showDropdownItems, setShowDropdownItems] = useState(false);
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
@@ -20,6 +21,7 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets }: OwnedAsse
   // handles the click event when clicked outside of dropdown
   useEffect(() => {
     const handleClickOutsideDropdownItem = (event: MouseEvent) => {
+      if (params) return;
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node) &&
@@ -35,17 +37,22 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets }: OwnedAsse
     };
   }, []);
 
+  useEffect(() => {
+    params ? setShowDropdownItems(true) : setShowDropdownItems(false);
+  }, [params]);
+
   const handleSelectAsset = (asset: Asset) => {
+    if (params) return;
     setSelectedAsset(asset);
     setShowDropdownItems(false);
   };
 
   const handleDropdown = () => {
-    if (!address) {
+    if (!params && !address) {
       alert("Please connect your wallet first");
       return;
     }
-    setShowDropdownItems(!showDropdownItems);
+    params ? setShowDropdownItems(true) : setShowDropdownItems(!showDropdownItems);
   };
 
   return (

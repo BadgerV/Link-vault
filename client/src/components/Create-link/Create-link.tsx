@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Card from "../Card";
 import { computeAssets, Asset, NFT } from "../../utils/assets.utils";
-import OptionLabel from "../Option-Label/Option-Label";
 import CustomButton from "../Button";
 import { useSelector } from "react-redux";
 import { createVault } from "link-vault";
@@ -83,7 +82,7 @@ const CreateLink = () => {
       {!createdVault ? (
         <Card>
           <h2>Create a linkVault</h2>
-          <AssetsShowcase ownedAssets={ownedAssets} />
+          <AssetsShowcase ownedAssets={ownedAssets} params={false} />
           <div className="link__amount">
             <h3>Amount</h3>
             <input
