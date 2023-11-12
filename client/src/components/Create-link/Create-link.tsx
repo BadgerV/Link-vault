@@ -3,6 +3,8 @@ import Card from "../Card";
 import { computeAssets, Asset, NFT } from "../../utils/assets.utils";
 import OptionLabel from "../Option-Label/Option-Label";
 import CustomButton from "../Button";
+import { useSelector } from "react-redux";
+import { createVault } from "link-vault";
 
 interface OwnedAssets {
   assets: Asset[];
@@ -14,9 +16,11 @@ const CreateLink = () => {
   const dropdownRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
   const [showDropdownItems, setShowDropdownItems] = useState(false);
   const [ownedAssets, setOwnedAssets] = useState<OwnedAssets>({ assets: [], nfts: [] });
+  const address = useSelector((state: any) => state.currentUser?.currentUser);
+  const [createdVault, setCreatedVault] = useState<any>(null);
 
   const AVAILABLE_ASSETS = async () => {
-    const assets = await computeAssets();
+    const assets = await computeAssets(address);
     setOwnedAssets(assets ?? { assets: [], nfts: [] });
   };
 
@@ -39,16 +43,29 @@ const CreateLink = () => {
   }, []);
 
   useEffect(() => {
+    if (!address) return;
     AVAILABLE_ASSETS();
-  }, []);
+  }, [address]);
 
   const handleDropdown = () => {
+    if (!address) {
+      alert("Please connect your wallet first");
+      return;
+    }
     setShowDropdownItems(!showDropdownItems);
   };
 
   const handleSelectAsset = (asset: Asset) => {
     setSelectedAsset(asset);
     setShowDropdownItems(false);
+  };
+
+  const createEmptyLinkVault = async () => {
+    const createdVault = await createVault();
+    console.log(createdVault, "created");
+    if (createdVault.address) {
+      setCreatedVault(createdVault);
+    }
   };
 
   return (
@@ -106,6 +123,9 @@ const CreateLink = () => {
           className="input__amount"
         />
       </div>
+      <p className="empty__link" onClick={createEmptyLinkVault}>
+        Create an empty link to fund later?
+      </p>
       <CustomButton variant="filled" type="button">
         Create
       </CustomButton>

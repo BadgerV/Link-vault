@@ -66,6 +66,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   html, 
   body {
+    font-family: var(--font-family-nista);
     height:100%; 
     padding:0; 
     margin:0; 

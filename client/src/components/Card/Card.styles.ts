@@ -15,6 +15,13 @@ export const CardContainer = styled.div`
   padding: 3rem;
   gap: 2rem;
 
+  .empty__link {
+    font-family: var(--font-family-nista);
+    font-size: var(--font-size-s);
+    color: #e53f71;
+    cursor: pointer;
+  }
+
   h2 {
     font-family: var(--font-family-nista);
     font-weight: 600;

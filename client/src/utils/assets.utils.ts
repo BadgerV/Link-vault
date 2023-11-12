@@ -1,35 +1,41 @@
+import algosdk from "algosdk";
 import { assets } from "../services/unprotected/assetsAPI";
 
-const ownedAssets = {
-  amount: 8447868,
-  assets: [
-    { amount: 0, "asset-id": 0, "is-frozen": false },
-    { amount: 0, "asset-id": 31566704, "is-frozen": false },
-    { amount: 0, "asset-id": 152246690, "is-frozen": false },
-    { amount: 400000000, "asset-id": 226701642, "is-frozen": false },
-    { amount: 0, "asset-id": 227358511, "is-frozen": false },
-    { amount: 0, "asset-id": 268072134, "is-frozen": false },
-    { amount: 0, "asset-id": 295134823, "is-frozen": false },
-    { amount: 0, "asset-id": 297995609, "is-frozen": false },
-    { amount: 0, "asset-id": 329110405, "is-frozen": false },
-    { amount: 0, "asset-id": 330109984, "is-frozen": false },
-    { amount: 0, "asset-id": 330279569, "is-frozen": false },
-    { amount: 0, "asset-id": 358467807, "is-frozen": false },
-    { amount: 0, "asset-id": 360407537, "is-frozen": false },
-    { amount: 0, "asset-id": 361339277, "is-frozen": false },
-    { amount: 0, "asset-id": 361770471, "is-frozen": false },
-    { amount: 50000, "asset-id": 361806984, "is-frozen": false },
-    { amount: 0, "asset-id": 361933739, "is-frozen": false },
-    { amount: 0, "asset-id": 362976679, "is-frozen": false },
-    { amount: 0, "asset-id": 363833896, "is-frozen": false },
-    { amount: 0, "asset-id": 384184691, "is-frozen": false },
-    { amount: 499881749, "asset-id": 392693339, "is-frozen": false },
-    { amount: 0, "asset-id": 412677778, "is-frozen": false },
-    { amount: 0, "asset-id": 435727273, "is-frozen": false }
-  ],
-  nfts: [],
-  minimumBalance: 4140000
-};
+const algodToken = ""; //API token
+const port = 443;
+const algodServer = "https://mainnet-api.algonode.cloud/";
+const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
+
+// const ownedAssets = {
+//   amount: 8447868,
+//   assets: [
+//     { amount: 0, "asset-id": 0, "is-frozen": false },
+//     { amount: 0, "asset-id": 31566704, "is-frozen": false },
+//     { amount: 0, "asset-id": 152246690, "is-frozen": false },
+//     { amount: 400000000, "asset-id": 226701642, "is-frozen": false },
+//     { amount: 0, "asset-id": 227358511, "is-frozen": false },
+//     { amount: 0, "asset-id": 268072134, "is-frozen": false },
+//     { amount: 0, "asset-id": 295134823, "is-frozen": false },
+//     { amount: 0, "asset-id": 297995609, "is-frozen": false },
+//     { amount: 0, "asset-id": 329110405, "is-frozen": false },
+//     { amount: 0, "asset-id": 330109984, "is-frozen": false },
+//     { amount: 0, "asset-id": 330279569, "is-frozen": false },
+//     { amount: 0, "asset-id": 358467807, "is-frozen": false },
+//     { amount: 0, "asset-id": 360407537, "is-frozen": false },
+//     { amount: 0, "asset-id": 361339277, "is-frozen": false },
+//     { amount: 0, "asset-id": 361770471, "is-frozen": false },
+//     { amount: 50000, "asset-id": 361806984, "is-frozen": false },
+//     { amount: 0, "asset-id": 361933739, "is-frozen": false },
+//     { amount: 0, "asset-id": 362976679, "is-frozen": false },
+//     { amount: 0, "asset-id": 363833896, "is-frozen": false },
+//     { amount: 0, "asset-id": 384184691, "is-frozen": false },
+//     { amount: 499881749, "asset-id": 392693339, "is-frozen": false },
+//     { amount: 0, "asset-id": 412677778, "is-frozen": false },
+//     { amount: 0, "asset-id": 435727273, "is-frozen": false }
+//   ],
+//   nfts: [],
+//   minimumBalance: 4140000
+// };
 
 export interface Asset {
   logo: {
@@ -54,13 +60,35 @@ export interface NFT {
   "is-frozen": boolean;
 }
 
-export const computeAssets = async () => {
+const accountBalances = async (address: string) => {
+  const accountInfo = await algodClient.accountInformation(address).do();
+  const assets: any = [];
+  const algorand = { amount: accountInfo.amount } as any;
+  algorand["asset-id"] = 0;
+  algorand["is-frozen"] = false;
+  assets.push(algorand, ...accountInfo.assets);
+
+  const balances = {
+    amount: accountInfo.amount,
+    assets: assets,
+    nfts: accountInfo["created-assets"],
+    minimumBalance: accountInfo["min-balance"]
+  };
+  console.log(balances, "balances");
+  return balances;
+};
+
+export const computeAssets = async (address: string) => {
   try {
+    if (!address) {
+      return;
+    }
     const assetsList: Record<string, Asset> | any = await assets.GET_ALL_ASSETS();
     if (!assetsList) {
       return;
     }
     const assetsArray = Object.values(assetsList);
+    const ownedAssets = await accountBalances(address);
     const matchingAssets: Asset[] = ownedAssets.assets
       .map((ownedAsset: OwnedAsset) => {
         const matchingAsset = assetsArray.find(

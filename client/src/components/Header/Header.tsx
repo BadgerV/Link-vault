@@ -1,18 +1,20 @@
+import { useState } from "react";
 import CustomButton from "../Button";
 import { HeaderContainer, LogoContainer, HeaderAddons, HeaderDropdown } from "./Header.styles";
 import { PeraWalletConnect } from "@perawallet/connect";
 import { setCurrentUser } from "../../stores/user/user.reducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DeflyWalletConnect } from "@blockshake/defly-connect";
-import { useEffect } from "react";
+import { RootState } from "../../stores/stores";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const peraWallet = new PeraWalletConnect();
 const deflywallet = new DeflyWalletConnect();
 
 export const Header = () => {
   const dispatch = useDispatch();
-
-  console.log(peraWallet);
+  const [handleCopyAddress, setHandleCopyAddress] = useState(false);
+  const address = useSelector((state: RootState) => state.currentUser?.currentUser);
 
   const peraWalletConnect = () => {
     peraWallet
@@ -60,28 +62,68 @@ export const Header = () => {
           <span>Ecosystem</span>
         </div>
         <HeaderDropdown>
-          <CustomButton variant="filled" type="button">
-            Connect
+          <CustomButton
+            variant="filled"
+            type="button"
+            className={address ? "address__button address__main" : "address__main"}
+          >
+            {address ? (
+              <span className="address__">
+                {address?.substring(0, 5)}...
+                {address?.substring(54, 57)}
+              </span>
+            ) : (
+              "Connect"
+            )}
+            {address && (
+              <CopyToClipboard text={address}>
+                {!handleCopyAddress ? (
+                  <img
+                    className="copy__icon"
+                    src="/assets/svg/copy.svg"
+                    alt="wallet copy"
+                    style={{
+                      cursor: "pointer"
+                    }}
+                    onClick={() => {
+                      setHandleCopyAddress(!handleCopyAddress);
+                      setTimeout(() => {
+                        setHandleCopyAddress(false);
+                      }, 800);
+                    }}
+                  />
+                ) : (
+                  <img src="/assets/png/copy.png" alt="copy" className="copy__icon" />
+                )}
+              </CopyToClipboard>
+            )}
           </CustomButton>
-          <div className="dropdown">
-            <div className="dropdown__item" onClick={peraWalletConnect}>
-              <div className="dropdown__item__img">
-                <img src={"/assets/png/pera.png"} alt="pera" />
+          <div className={address ? `dropdown disconnect` : `dropdown`}>
+            {address ? (
+              <div
+                className="dropdown__item"
+                onClick={() => {
+                  dispatch(setCurrentUser(""));
+                }}
+              >
+                <p className="disconnect__wallet"> Disconnect</p>
               </div>
-              <p>Pera Wallet</p>
-            </div>
-            <div className="dropdown__item" onClick={deflyWalletConnect}>
-              <div className="dropdown__item__img">
-                <img src={"/assets/png/defly.png"} alt="defly" />
-              </div>
-              <p>Defly Wallet</p>
-            </div>
-            <div className="dropdown__item">
-              <div className="dropdown__item__img">
-                <img src={"/assets/png/wallet-connect.png"} alt="wallet connect" />
-              </div>
-              <p>Wallet Connect</p>
-            </div>
+            ) : (
+              <>
+                <div className="dropdown__item" onClick={peraWalletConnect}>
+                  <div className="dropdown__item__img">
+                    <img src={"/assets/png/pera.png"} alt="pera" />
+                  </div>
+                  <p>Pera Wallet</p>
+                </div>
+                <div className="dropdown__item" onClick={deflyWalletConnect}>
+                  <div className="dropdown__item__img">
+                    <img src={"/assets/png/defly.png"} alt="defly" />
+                  </div>
+                  <p>Defly Wallet</p>
+                </div>
+              </>
+            )}
           </div>
         </HeaderDropdown>
       </HeaderAddons>
