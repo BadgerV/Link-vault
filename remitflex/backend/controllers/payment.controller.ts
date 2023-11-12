@@ -5,7 +5,6 @@ import Flutterwave from "flutterwave-node-v3";
 import { defaultConfig } from "../config/config";
 import { getWallet } from "link-vault";
 import algosdk from 'algosdk';
-import { check, validationResult} from "express-validator";
 
 const algodToken = ""; 
 const port = 443;
@@ -20,7 +19,7 @@ const headers = new Headers({
 
 const flw = new Flutterwave(defaultConfig.FLW_PUBLIC_KEY, defaultConfig.FLW_SECRET_KEY);
 
-const rate=async ()=>{
+const USDCNGNRate=async ()=>{
       // Fetch USDC rate
    const result= await fetch(url, {
     method: 'GET', 
@@ -35,7 +34,7 @@ const rate=async ()=>{
 
 // Powered By Crypto Compare
 export const getRate = async (req: Request, res: Response) => {
-    const currentRate=await rate();
+    const currentRate=await USDCNGNRate();
 
    //response
    res.status(200).json({
@@ -47,8 +46,8 @@ export const getRate = async (req: Request, res: Response) => {
 export const initializeBillPayment = async (req: Request, res: Response) => {
     const linkvaulturl=req.body.linkvaulturl
     const amount=req.body.amount;
-    const currentRate=await rate();
-    const amountUSD=amount/currentRate
+    const rate=await USDCNGNRate();
+    const amountUSD=amount/rate
     
     try {
         const params = await algodClient.getTransactionParams().do();
@@ -110,23 +109,10 @@ export const initializeBillPayment = async (req: Request, res: Response) => {
 
 // Initialize a Bill payment transaction.
 export const initializePayment = async (req: Request, res: Response) => {
-
-    const errors = validationResult(req);
-    
-
-return res.status(400).json({
-    success: false,
-    message: 'Validation Error',
-    errors: errors.array().map(error => ({
-        field: error.type,
-        message: error[0].path,
-    })),
-});
-    
     const linkvaulturl=req.body.linkvaulturl
     const amount=req.body.amount;
-    const currentRate=await rate();
-    const amountUSD=amount/currentRate
+    const rate=await USDCNGNRate();
+    const amountUSD=amount/rate
     
     try {
         const params = await algodClient.getTransactionParams().do();
@@ -186,14 +172,7 @@ return res.status(400).json({
     }
 } 
 
-export const validateRemitPayload = [
-    check('account_bank').isString().notEmpty(),
-    check('account_number').isString().notEmpty(),
-    check('amount').isNumeric(),
-    check('currency').isString().notEmpty(),
-    check('narration').isString().notEmpty(),
-    check('debit_currency').isString().notEmpty(),
-  ];
+
 
 
 
