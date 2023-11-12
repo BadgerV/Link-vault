@@ -1,15 +1,51 @@
 import CustomButton from "../Button";
 import { HeaderContainer, LogoContainer, HeaderAddons, HeaderDropdown } from "./Header.styles";
-import Logo from "/assets/svg/logo.svg";
-import PeraWalletIcon from "/assets/png/pera.png";
-import DeflyIcon from "/assets/png/defly.png";
-import WalletConnectIcon from "/assets/png/wallet-connect.png";
+import { PeraWalletConnect } from "@perawallet/connect";
+import { setCurrentUser } from "../../stores/user/user.reducer";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+const peraWallet = new PeraWalletConnect();
 
 export const Header = () => {
+  //  useEffect(() => {
+  //     peraWallet.reconnectSession()
+  //     .then((accounts: string[] | null) => {
+  //         if (peraWallet?.connector) {
+  //             peraWallet?.connector.on("disconnect", () => {
+  //                 dispatch(setCurrentUser(undefined));
+  //                 peraWallet.disconnect();
+  //             });
+  //             dispatch(setCurrentUser(accounts![0]));
+  //         }
+  //     })
+  //  }, [])
+
+  const dispatch = useDispatch();
+
+  console.log(peraWallet);
+
+  const peraWalletConnect = () => {
+    peraWallet
+      .connect()
+      ?.then(accounts => {
+        peraWallet.connector.on("disconnect", () => {
+          dispatch(setCurrentUser(undefined));
+          peraWallet.disconnect();
+        });
+        dispatch(setCurrentUser(accounts![0]));
+      })
+      .catch(error => {
+        if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
+          console.log(error);
+        }
+      });
+  };
+
   return (
     <HeaderContainer>
       <LogoContainer>
-        <img src={Logo} alt="logo" />
+        <img src={"/assets/svg/logo.svg"} alt="logo" />
         <h2>LinkVault</h2>
       </LogoContainer>
       <HeaderAddons>
@@ -22,21 +58,21 @@ export const Header = () => {
             Connect
           </CustomButton>
           <div className="dropdown">
-            <div className="dropdown__item">
+            <div className="dropdown__item" onClick={peraWalletConnect}>
               <div className="dropdown__item__img">
-                <img src={PeraWalletIcon} alt="pera" />
+                <img src={"/assets/png/pera.png"} alt="pera" />
               </div>
               <p>Pera Wallet</p>
             </div>
             <div className="dropdown__item">
               <div className="dropdown__item__img">
-                <img src={DeflyIcon} alt="defly" />
+                <img src={"/assets/png/defly.png"} alt="defly" />
               </div>
               <p>Defly Wallet</p>
             </div>
             <div className="dropdown__item">
               <div className="dropdown__item__img">
-                <img src={WalletConnectIcon} alt="wallet connect" />
+                <img src={"/assets/png/wallet-connect.png"} alt="wallet connect" />
               </div>
               <p>Wallet Connect</p>
             </div>

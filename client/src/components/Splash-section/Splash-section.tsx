@@ -1,7 +1,5 @@
 import { SplashImageContainer, SplashSectionContainer } from "./Splash-section.styles";
 import CustomButton from "../Button";
-import Logo from "/assets/svg/logo.svg";
-import SplashImage from "/assets/png/splash.png";
 import Sponsors from "../Sponsors/Sponsors";
 
 export const SplashSection = () => {
@@ -9,7 +7,7 @@ export const SplashSection = () => {
     <SplashSectionContainer>
       <h1>
         <span>
-          The Link <img src={Logo} alt="logo" className="logo-splash" /> is{" "}
+          The Link <img src={"/assets/svg/logo.svg"} alt="logo" className="logo-splash" /> is{" "}
         </span>
         <span>
           {" "}
@@ -20,7 +18,7 @@ export const SplashSection = () => {
       <CustomButton variant="filled" type="button">
         Create a LinkVault
       </CustomButton>
-      <SplashImageContainer src={SplashImage} alt="splash" />
+      <SplashImageContainer src={"/assets/png/splash.png"} alt="splash" />
       <Sponsors />
     </SplashSectionContainer>
   );

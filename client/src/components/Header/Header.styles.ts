@@ -73,14 +73,14 @@ export const HeaderAddons = styled.div`
 export const HeaderDropdown = styled.div`
   .dropdown {
     right: 0rem;
-    top: 4.54rem;
+    top: 4.3rem;
     position: absolute;
     flex-direction: column;
     filter: drop-shadow(0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.1));
     border-radius: 0rem 0rem 0.5rem 0.5rem;
     display: none;
     border: 0.05rem;
-    border-radius : 0.5rem;
+    border-radius: 0.5rem;
     z-index: 100;
     width: 18.5rem;
 

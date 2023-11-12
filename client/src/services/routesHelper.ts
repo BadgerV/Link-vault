@@ -1,9 +1,9 @@
-const NODE_ENV = import.meta.env.MODE;
-const REACT_APP_DEV_API_URL = import.meta.env.VITE_APP_DEV_API_URL;
-const REACT_APP_API_URL = import.meta.env.VITE_APP_API_URL;
-const REACT_APP_DEV_CLIENT_URL = import.meta.env.VITE_APP_DEV_CLIENT_URL;
-const REACT_APP_CLIENT_URL = import.meta.env.VITE_APP_CLIENT_URL;
-const REACT_APP_DEV_ASSETS_URL = import.meta.env.VITE_APP_DEV_ASSETS_URL;
+const NODE_ENV = process.env.MODE;
+const REACT_APP_DEV_API_URL = process.env.REACT_APP_DEV_API_URL;
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_DEV_CLIENT_URL = process.env.REACT_APP_DEV_CLIENT_URL;
+const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
+const REACT_APP_DEV_ASSETS_URL = process.env.REACT_APP_DEV_ASSETS_URL;
 
 let host = "";
 

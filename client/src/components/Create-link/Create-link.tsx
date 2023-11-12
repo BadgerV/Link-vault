@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Card from "../Card";
 import { computeAssets, Asset, NFT } from "../../utils/assets.utils";
-import DropdownIcon from "/assets/svg/dropdown.svg";
 import OptionLabel from "../Option-Label/Option-Label";
 import CustomButton from "../Button";
 
@@ -73,7 +72,7 @@ const CreateLink = () => {
               "Algorand standard assets"
             )}
           </span>
-          <img src={DropdownIcon} alt="dropdown" className="dropdown__icon" />
+          <img src={"/assets/svg/dropdown.svg"} alt="dropdown" className="dropdown__icon" />
         </div>
         {showDropdownItems && (
           <div className="owned__assets">

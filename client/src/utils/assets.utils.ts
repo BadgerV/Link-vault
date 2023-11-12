@@ -70,7 +70,7 @@ export const computeAssets = async () => {
           return null;
         }
 
-        return { ...matchingAsset, amount: ownedAsset.amount };
+        return { ...(matchingAsset as Asset), amount: ownedAsset.amount };
       })
       .filter(asset => asset !== null) as Asset[];
 
@@ -82,7 +82,7 @@ export const computeAssets = async () => {
         if (!matchingNFT) {
           return null;
         }
-        return { ...matchingNFT, amount: ownedNFT.amount };
+        return { ...(matchingNFT as NFT), amount: ownedNFT.amount };
       })
       .filter(nft => nft !== null) as NFT[];
 
