@@ -64,17 +64,16 @@ export const protectedDelete = async (route: string) => {
 };
 
 export const unProtectedGet = async (route: string) => {
-    return authAxiosWithAnyURL
-      .get(route)
-      .then((res: { data: Array<string> }) => {
-        return res.data;
-      })
-      .catch((error: { response: { status: number } }) => {
-        if (error.response && error.response.status === 401) {
-          clientURL = `${clientRoute}/`;
-        } else {
-          return error;
-        }
-      });
-  };
-  
+  return authAxiosWithAnyURL
+    .get(route)
+    .then((res: { data: Array<string> }) => {
+      return res.data;
+    })
+    .catch((error: { response: { status: number } }) => {
+      if (error.response && error.response.status === 401) {
+        clientURL = `${clientRoute}/`;
+      } else {
+        return error;
+      }
+    });
+};

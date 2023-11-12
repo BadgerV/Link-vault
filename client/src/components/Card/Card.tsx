@@ -1,9 +1,12 @@
+import React, { ReactNode } from "react";
 import { CardContainer } from "./Card.styles";
 
-const Card = () => {
-    return (
-
-    )
+interface CardProps {
+  children: ReactNode;
 }
+
+const Card: React.FC<CardProps> = ({ children }) => {
+  return <CardContainer>{children}</CardContainer>;
+};
 
 export default Card;

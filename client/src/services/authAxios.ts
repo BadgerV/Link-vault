@@ -5,5 +5,5 @@ export const authAxios = axios.create({
 });
 
 export const authAxiosWithAnyURL = axios.create({
-    withCredentials: false
+  withCredentials: false
 });
