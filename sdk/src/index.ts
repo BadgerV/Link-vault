@@ -1,6 +1,7 @@
 import algosdk from "algosdk";
 import { ed25519 } from "@noble/curves/ed25519";
 import B58 from "./base58";
+import { Buffer } from "buffer";
 
 const algodToken = ""; //API token
 const port = 443;
@@ -8,7 +9,7 @@ const algodServer = "https://mainnet-api.algonode.cloud/";
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
 
 const b58 = new B58();
-const vaultUrl = "https://linkvault.com.ng/?#";
+const vaultUrl = "https://linkvault.com.ng/l#";
 
 async function accountBalances(address: string) {
   const accountInfo = await algodClient.accountInformation(address).do();
@@ -24,7 +25,6 @@ async function accountBalances(address: string) {
     nfts: accountInfo["created-assets"],
     minimumBalance: accountInfo["min-balance"]
   };
-  console.log(balances, "balances");
   return balances;
 }
 
@@ -59,7 +59,7 @@ const createVault = async () => {
   }
 };
 
-const getWallet = async (linkvault: string) => {
+const getVault = async (linkvault: string) => {
   try {
     const vault = linkvault.replace(vaultUrl, "");
 
@@ -72,7 +72,7 @@ const getWallet = async (linkvault: string) => {
     // const keypair = new Uint8Array([...privateKey, ...publicKey]);
     linkvault = `${vaultUrl}${vault}`;
 
-    const balances = accountBalances(address);
+    const balances = await accountBalances(address);
 
     const wallet = {
       address,
@@ -80,10 +80,12 @@ const getWallet = async (linkvault: string) => {
       keypair: { privateKey, publicKey },
       balances
     };
+    console.log(wallet);
     return wallet;
   } catch (err) {
-    console.error("Vault could not be resolved");
+    console.error("Vault could not be resolved", err);
   }
 };
 
-export { getWallet, createVault };
+
+export { getVault, createVault };
