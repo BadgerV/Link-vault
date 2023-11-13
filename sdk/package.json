@@ -1,10 +1,6 @@
 {
   "name": "link-vault",
-<<<<<<< HEAD
   "version": "1.2.8",
-=======
-  "version": "1.1.5",
->>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472
   "description": "Integrating Linkvault: Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.",
   "main": "src/index.js",
   "scripts": {
