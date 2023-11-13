@@ -1,21 +1,13 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-    width: 80% !important;'
-    width: 800px;
-    display: flex;
-    justify-content: center;
-    align-items:center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 `;
-export const Name = styled.p`
-  font-family: Sora-SemiBold;
-  font-size: 2.1em;
-  background: linear-gradient(to left, #84e681, #409099);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  margin-bottom: 1.2rem;
-`;
+
 export const Title = styled.p`
   font-family: Sora-SemiBold;
   font-size: 1.5em;
@@ -85,7 +77,6 @@ export const DataField = styled.div`
 export const Top = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 3rem;
 `;
 export const ButtonImage = styled.img`
   cursor: pointer;
@@ -97,6 +88,8 @@ export const ButtonWrap = styled.div`
   margin: auto;
   width: 100%;
   gap: 1rem;
+  display: flex;
+  flex-direction: column;
 `;
 export const TopData = styled.div`
   display: flex;

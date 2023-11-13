@@ -5,14 +5,12 @@ import Hero from "../../components/Hero/Hero";
 
 const LandingPage: () => JSX.Element = () => {
   return (
-    <div className="landing">
-      <div className="bg">
-        <Header />
-        <Hero />
-        <Body />
-        <Footer />
-      </div>
-    </div>
+    <>
+      <Header />
+      <Hero />
+      <Body />
+      <Footer />
+    </>
   );
 };
 

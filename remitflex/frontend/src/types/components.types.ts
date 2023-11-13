@@ -18,6 +18,7 @@ export interface ButtonPropType {
   onClick?: () => void;
   border?: string;
   background?: string;
+  className?: string;
 }
 
 export type TransactionType = {
