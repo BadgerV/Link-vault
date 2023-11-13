@@ -20,6 +20,4 @@ paymentRouter.get("/banks" ,getBanks);
 //resolve accounts
 paymentRouter.post("/account", resolveAccount);
 
-
-
 export default paymentRouter;

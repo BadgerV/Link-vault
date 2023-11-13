@@ -252,8 +252,13 @@ It creates a recipient address using Linkvault's createVault function, and then 
 
 ## Package Information
 
+<<<<<<< HEAD
 - **Package Name**: Link Vault
 - **Version**: 1.2.8
+=======
+- **Package Name**: link-vault
+- **Version**: 1.1.5
+>>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472
 - **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
 - **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)

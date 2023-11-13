@@ -11,7 +11,7 @@ const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
 const b58 = new B58();
 const vaultUrl = "https://linkvault.com.ng/l#";
 
-async function accountBalances(address: string) {
+const accountBalances = async (address: string) => {
   const accountInfo = await algodClient.accountInformation(address).do();
   const assets: any = [];
   const algorand = { amount: accountInfo.amount } as any;
@@ -26,7 +26,7 @@ async function accountBalances(address: string) {
     minimumBalance: accountInfo["min-balance"]
   };
   return balances;
-}
+};
 
 const getPublicKey = (priv: Uint8Array): Uint8Array => {
   const privateKeyString = Buffer.from(priv).toString("hex");
