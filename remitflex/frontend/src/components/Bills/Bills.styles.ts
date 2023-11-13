@@ -60,7 +60,7 @@ export const ProductsTopLeft = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
   width: 40%;
-  font-family: Sora-Regular;
+  font-family: var(--font-family-nista);
   font-style: normal;
   font-weight: 700;
 

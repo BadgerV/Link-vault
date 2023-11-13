@@ -28,7 +28,7 @@ export const ButtonComponent = styled.button<ButtonWrapperProps>`
   width: 100%;
   text-align: center;
   cursor: pointer;
-  font-family: "Sora-Regular", sans-serif;
+  font-family: var(--font-family-nista);
   border: ${props => (props.border ? props.border : "none")};
   padding: 5px;
 
@@ -38,5 +38,15 @@ export const ButtonComponent = styled.button<ButtonWrapperProps>`
   &:hover {
     background: ${props =>
       props.background ? props.background : "linear-gradient(to right, #409099, #84E681)"};
+  }
+
+  &.disabled-state {
+    background: #ebebeb;
+    cursor: not-allowed;
+    border: solid 1px grey;
+
+    p {
+      color: black;
+    }
   }
 `;

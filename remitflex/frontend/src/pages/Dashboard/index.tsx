@@ -1,14 +1,12 @@
 import Header from "../../components/Header";
-import Transactions from "../../components/Transactions/Transactions";
+import Services from "../../components/Services/Services";
 
 const Dashboard = () => {
   return (
-    <div className="landing">
+    <>
       <Header />
-      <div className="transactions">
-        <Transactions />
-      </div>
-    </div>
+      <Services />
+    </>
   );
 };
 

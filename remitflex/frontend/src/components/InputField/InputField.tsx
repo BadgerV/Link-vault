@@ -36,8 +36,8 @@ const InputField: React.FC<InputPropTypes> = ({
           onChange={onChange}
           disabled={disabled}
         />
-        {isPassword &&
-          null
+        {
+          isPassword && null
           // <Show onClick = {() => setShow(!show)}>
           //     {/* {!show ? <EyeIcon/> : <HiOutlineEyeOff size = {24}/>} */}
           // </Show>

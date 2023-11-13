@@ -47,13 +47,6 @@ const Header: React.FC = () => {
               />
             </CopyToClipboard>
           )}
-          {address && (
-            <div className="dropDownConnect__items">
-              <div className="dropDownConnect_item" onClick={handleDisconnect}>
-                <p>Disconnect</p>
-              </div>
-            </div>
-          )}
         </HeaderConnectWallet>
       )}
     </LogoWrapper>

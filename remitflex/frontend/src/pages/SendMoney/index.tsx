@@ -5,7 +5,7 @@ import { DivWrapper } from "../../components/BillHeader/BillHeader.styles";
 import { MidSection } from "../../components/Body/Body.styles";
 import Button from "../../components/Button/Button";
 import Header from "../../components/Header";
-import { FeeWrapper, MiniForm, Rate } from "../../components/Hero/Hero.styles";
+// import { FeeWrapper, MiniForm, Rate } from "../../components/Hero/Hero.styles";
 import InputField from "../../components/InputField/InputField";
 import { BtnDiv } from "../../components/InputField/InputField.styles";
 
@@ -45,9 +45,7 @@ const SendMoney = () => {
             />
             <MidSection>
               <img src="/assets/svg/toggle.svg" onClick={toggleBtn} alt="toggle" />
-              <div className="rate">
-                <Rate> 1 USD = 780 NGN</Rate>
-              </div>
+              <div className="rate">{/* <Rate> 1 USD = 780 NGN</Rate> */}</div>
             </MidSection>
             <InputField
               label={"Recipient gets"}
@@ -63,7 +61,7 @@ const SendMoney = () => {
               type={""}
             />
 
-            <div className="feediv">
+            {/* <div className="feediv">
               <FeeWrapper>
                 <p> Fee</p>
                 <span className="span">0 USD</span>
@@ -84,7 +82,7 @@ const SendMoney = () => {
                 <p> Recipient gets</p>
                 <span className="span">0 USD</span>
               </FeeWrapper>
-            </div>
+            </div> */}
             <BtnDiv>
               <Button onClick={onNavigate} title={"Proceed"} />
             </BtnDiv>

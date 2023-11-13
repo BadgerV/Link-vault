@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Image = styled.img`
   position: relative;
-  top: 1.7rem;
   width: 30px;
   height: 35.5px;
 `;
@@ -11,11 +10,16 @@ export const LogoWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  padding: 2rem;
 
   .link-wrapper {
     display: flex;
-    gap: 0.5rem;
     text-decoration: none;
+    gap: 0.5rem;
+
+    p {
+      margin-top:;
+    }
   }
 `;
 export const HeaderTextsDiv = styled.div`
