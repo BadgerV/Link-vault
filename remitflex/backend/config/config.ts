@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 // import relevant types
 import { defaultConfigTypes } from "../types/config.types";
 
-export const isProd: boolean = process.env.NODE_ENV === "production";
-export const isDevelopment: boolean = process.env.NODE_ENV === "development";
+export const isProd: boolean = process.env.ENGINE_ENV === "production";
+export const isDevelopment: boolean = process.env.ENGINE_ENV === "development";
 export const PORT: number = parseInt(process.env.PORT || "8000", 10);
 
 dotenv.config();
