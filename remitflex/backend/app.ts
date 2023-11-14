@@ -7,11 +7,7 @@ import path from "path";
 import dotenv from "dotenv";
 
 // importing routes
-<<<<<<< HEAD
-import {router} from "./routes/router";
-=======
 import { router } from "./routes/router";
->>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472
 
 // importing cors settings
 import { corsSettings } from "./config/config";
@@ -33,8 +29,3 @@ app.options("*", cors(corsSettings));
 
 // routes
 app.use("/api/v1", router);
-<<<<<<< HEAD
-
-
-=======
->>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472

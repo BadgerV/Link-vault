@@ -3,7 +3,7 @@ import { clientRoute } from "./routesHelper";
 
 let clientURL: Location | string = window.location;
 
-export const protectedPost = async (route: string, payload: string) => {
+export const protectedPost = async (route: string, payload: any) => {
   return authAxios
     .post(route, payload)
     .then((res: { data: Array<string> }) => {
@@ -22,6 +22,7 @@ export const protectedGet = async (route: string) => {
   return authAxios
     .get(route)
     .then((res: { data: Array<string> }) => {
+      console.log(res.data);
       return res.data;
     })
     .catch((error: { response: { status: number } }) => {

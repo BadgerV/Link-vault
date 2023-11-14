@@ -3,7 +3,7 @@ export interface InputPropTypes {
   name: string;
   value: string | number | undefined;
   placeholder: string;
-  onChange: () => void;
+  onChange: () => any;
   leftIcon: React.ReactElement;
   rightIcon: React.ReactElement;
   disabled: boolean;
