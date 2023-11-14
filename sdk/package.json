@@ -1,6 +1,6 @@
 {
   "name": "link-vault",
-  "version": "1.1.5",
+  "version": "1.2.8",
   "description": "Integrating Linkvault: Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.",
   "main": "src/index.js",
   "scripts": {
@@ -21,6 +21,8 @@
   "homepage": "https://github.com/Samuellyworld/Link-vault/tree/main/sdk#readme",
   "dependencies": {
     "@noble/curves": "^1.2.0",
+    "algosdk": "^2.7.0",
+    "buffer": "^6.0.3",
     "typescript": "^5.2.2"
   }
 }

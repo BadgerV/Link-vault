@@ -40,7 +40,7 @@ The `createVault` method generates a new Algorand account and provides a link to
 const url = "https://linkvault.com.ng/vaultString"; // Replace with the actual link to the vault
 
 try {
-  const vault = linkvault.getWallet(url);
+  const vault = linkvault.getVault(url);
 
   /**
    * Result:
@@ -57,12 +57,12 @@ try {
 }
 ```
 
-The `getWallet` method takes a URL (link to the vault) and retrieves the associated wallet information, including the vault link, secret key pair, Algorand address and wallet balances.
+The `getVault` method takes a URL (link to the vault) and retrieves the associated wallet information, including the vault link, secret key pair, Algorand address and wallet balances.
 
 ### Example: Create and Fund a Linkvault with Algorand
 
 ```javascript
-import { createVault, getWallet } from "link-vault";
+import { createVault, getVault } from "link-vault";
 import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
@@ -124,7 +124,7 @@ It generates a new Linkvault as the recipient address, and sends Algos from a sp
 ### Example: Opt-In to an Algorand Standard Asset (ASA) with a link vault
 
 ```javascript
-import { createVault, getWallet } from "link-vault";
+import { createVault, getVault } from "link-vault";
 import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
@@ -143,7 +143,7 @@ async function optInToASA() {
     // Create a new Linkvault and retrieve wallet information
     const createdLinkvault = await linkvault.createVault();
     const linkvaultURL = createdLinkvault.vault;
-    const vault = getWallet(linkvaultURL);
+    const vault = getVault(linkvaultURL);
 
     // Set up the opt-in transaction parameters
     const optInTxn = {
@@ -189,7 +189,7 @@ It generates a new Linkvault as the recipient address, and sends Algos from a sp
 ### Example: Create and fund Linkvault with Algorand Standard Assets (ASAs) and NFTs
 
 ```javascript
-import { createVault, getWallet } from "link-vault";
+import { createVault, getVault } from "link-vault";
 import algosdk from "algosdk";
 
 const algodToken = ""; // Replace with your API token
@@ -252,8 +252,13 @@ It creates a recipient address using Linkvault's createVault function, and then 
 
 ## Package Information
 
+<<<<<<< HEAD
+- **Package Name**: Link Vault
+- **Version**: 1.2.8
+=======
 - **Package Name**: link-vault
 - **Version**: 1.1.5
+>>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472
 - **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
 - **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)
