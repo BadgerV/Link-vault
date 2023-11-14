@@ -4,6 +4,7 @@ export const FooterContainer = styled.div`
   height: 20rem;
   padding-top: 2rem;
   background-image: url("/assets/png/foot.png");
+  background-size: cover;
   display: flex;
   color: white;
   flex-direction: column;

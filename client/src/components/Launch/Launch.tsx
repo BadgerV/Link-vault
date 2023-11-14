@@ -12,8 +12,9 @@ const LaunchVault = () => {
   const address = useSelector((state: any) => state.currentUser?.currentUser);
   const [ownedAssets, setOwnedAssets] = useState<any>({ assets: [], nfts: [] });
   const [vaultNobleLink, setVaultNobleLink] = useState<any>(null);
-
+  const [showDropdownItems, setShowDropdownItems] = useState(false);
   const location = useLocation();
+
   console.log(location);
   const navigate = useNavigate();
   const getVaultNobleLink = async () => {
@@ -38,9 +39,6 @@ const LaunchVault = () => {
       if (!result) navigate("/");
       console.log(result, "result");
     })();
-
-    //     console.log(vaultNobleLink)
-    //    if(!vaultNobleLink) navigate('/');
   }, []);
 
   useEffect(() => {
@@ -59,7 +57,12 @@ const LaunchVault = () => {
         </CustomButton>
       </div>
       <div className="launch__body">
-        <AssetsShowcase ownedAssets={ownedAssets} params={true} />
+        <AssetsShowcase
+          ownedAssets={ownedAssets}
+          params={true}
+          setShowDropdownItems={setShowDropdownItems}
+          showDropdownItems={showDropdownItems}
+        />
         <div className="buttons__container">
           <CustomButton variant="filled" type="button" className="deposit__button">
             Deposit

@@ -1,8 +1,10 @@
 import { SplashImageContainer, SplashSectionContainer } from "./Splash-section.styles";
 import CustomButton from "../Button";
 import Sponsors from "../Sponsors/Sponsors";
+import { useNavigate } from "react-router-dom";
 
 export const SplashSection = () => {
+  const navigate = useNavigate();
   return (
     <SplashSectionContainer>
       <h1>
@@ -15,7 +17,7 @@ export const SplashSection = () => {
         </span>
       </h1>
       <p className="sub__text">Non-custodial algorand wallets via a Link. </p>
-      <CustomButton variant="filled" type="button">
+      <CustomButton variant="filled" type="button" onClick={() => navigate("/create")}>
         Create a LinkVault
       </CustomButton>
       <SplashImageContainer src={"/assets/png/splash.png"} alt="splash" />

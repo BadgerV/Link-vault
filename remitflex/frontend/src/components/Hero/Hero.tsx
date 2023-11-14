@@ -6,10 +6,12 @@ const Hero = () => {
   return (
     <HeroContainer>
       <div className="hero__left">
-        <h3>Send money & <br className="break" /> pay bills in Africa</h3>
+        <h3>
+          Send money & <br className="break" /> pay bills in Africa
+        </h3>
         <p className="scan">Scan your LinkVault to get started</p>
         <div className="btnGo">
-        <Button title="Go to App" />
+          <Button title="Go to App" />
         </div>
 
         <p className="powered">

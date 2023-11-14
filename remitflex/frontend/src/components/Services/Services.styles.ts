@@ -82,11 +82,10 @@ export const ButtonImage = styled.img`
   cursor: pointer;
   height: 200px !important;
   width: 420px !important;
-  @media screen and (max-width:500px){
-    width:100%;
+  @media screen and (max-width: 500px) {
+    width: 100%;
     padding: 2rem 2rem;
   }
- 
 `;
 export const ButtonWrap = styled.div`
   display: flex;

@@ -159,9 +159,9 @@ async function optInToASA() {
     };
 
     // Sign and send the opt-in transaction
-     const sk = await vault.keypair.privateKey;
+    const sk = await vault.keypair.privateKey;
     const pk = await vault.keypair.publicKey;
-    const vaultSK = new Uint8Array(await sk.length + await pk.length);
+    const vaultSK = new Uint8Array((await sk.length) + (await pk.length));
 
     vaultSK.set(await sk, 0);
     vaultSK.set(await pk, await sk.length);
@@ -230,15 +230,15 @@ async function sendASATokens() {
     const recoveredAccount = algosdk.mnemonicToSecretKey(senderMnemonic);
     const senderAccount = recoveredAccount.addr;
 
-     const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
-      txnParams.from,          // sender's address
-      txnParams.to,            // recipient's address
-      undefined,               // closeRemainderTo
-      undefined,   
-      txnParams.amount,  // amount of assets to send
+    const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+      txnParams.from, // sender's address
+      txnParams.to, // recipient's address
+      undefined, // closeRemainderTo
       undefined,
-      txnParams.assetIndex,    // asset index
-      txnParams.suggestedParams 
+      txnParams.amount, // amount of assets to send
+      undefined,
+      txnParams.assetIndex, // asset index
+      txnParams.suggestedParams
     );
     const signedTxn = algosdk.signTransaction(txn, recoveredAccount.sk);
 
