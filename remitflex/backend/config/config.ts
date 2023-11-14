@@ -30,7 +30,7 @@ export const corsSettings: CorsSettings = isProd
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
-      'http://localhost:9000',
+      "http://localhost:9000",
       "http://localhost:5173",
       "https://www.test.google.com"
     ],
@@ -44,4 +44,5 @@ export const defaultConfig: defaultConfigTypes = {
   FLW_SECRET_KEY: String(process.env.FLW_SECRET_KEY),
   MERCHANT_ADDRESS: String(process.env.MERCHANT_ADDRESS),
   CC_API_KEY: String(process.env.CC_API_KEY),
+  ASSET_ID:Number(process.env.ASSET_ID)
 };
