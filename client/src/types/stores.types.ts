@@ -10,9 +10,11 @@ export interface PersistConfigType {
 // types config types
 export interface UserActionType {
   SET_CURRENT_USER: string;
+  SET_WALLET_TYPE: string;
 }
 
 // current user Type
 export interface CurrentType {
   currentUser: string | undefined;
+  walletType: string | undefined;
 }

@@ -17,7 +17,7 @@ export const SendContainer = styled.div`
   .account__name {
     font-size: 0.8rem;
     margin-top: -0.6rem;
-    color : green;
+    color: green;
   }
   .amount__info {
     border-radius: 5px;
@@ -119,8 +119,6 @@ export const SendContainer = styled.div`
       }
     }
   }
-
-
 `;
 
 export const SendHeader = styled.div`

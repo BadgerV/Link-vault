@@ -35,6 +35,7 @@ export const HeaderContainer = styled.div`
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
   @media screen and (max-width: 500px) {
     width: 2rem;
   }
@@ -74,6 +75,9 @@ export const HeaderAddons = styled.div`
     font-family: var(--font-family-nista);
     ${flexCenter()};
     gap: 0.5rem;
+    color: #e53f71;
+    cursor: pointer;
+
     @media screen and (max-width: 500px) {
       font-size: 0.8rem;
     }

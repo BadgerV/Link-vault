@@ -19,8 +19,8 @@ import { commaFormat } from "../../utils/addons";
 const ConvertMoneyToLocalCurrency = () => {
   const [switchBtn, setSwitchBtn] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const [banksOptions, setBanksOptions] = useState([])
-  const [account, setAccount] = useState<any>(null)
+  const [banksOptions, setBanksOptions] = useState([]);
+  const [account, setAccount] = useState<any>(null);
   const [currentRate, setCurrentRate] = useState<any>(null);
   const [data, setData] = useState({
     amount: "",
@@ -31,46 +31,45 @@ const ConvertMoneyToLocalCurrency = () => {
     youPay: "",
     rate: "",
     fee: "",
-    transferTime: "",
-  })
+    transferTime: ""
+  });
   const navigate = useNavigate();
-
 
   useEffect(() => {
     (async () => {
-      const localBanks: any = await banks.getAllLocalBanks()
+      const localBanks: any = await banks.getAllLocalBanks();
       const TRANSFORMED_BANK_OPTIONS = localBanks?.data?.data?.map((item: any) => ({
         value: item.id,
         label: item.name,
         option: item
       }));
-      setBanksOptions(TRANSFORMED_BANK_OPTIONS)
-    })()
-  }, [])
-  useMemo(()  => { 
-    (async ()=> {
-      const data:any = await paymentControl.getNGNrate();
+      setBanksOptions(TRANSFORMED_BANK_OPTIONS);
+    })();
+  }, []);
+  useMemo(() => {
+    (async () => {
+      const data: any = await paymentControl.getNGNrate();
       setCurrentRate(data?.rate);
-      console.log(data, "rate")
+      console.log(data, "rate");
       // setCurrentRate(rate?.data?.data?)
-    })()
-  }, [])
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {
-      if(account) return
+      if (account) return;
       if (data.accountNumber.length > 7) {
         const body = {
           account_number: data.accountNumber,
           account_bank: data.bankName.code
-        }
-        const account = await banks.resolveAccount(body)
-        setAccount(account?.data?.data.account_name)
+        };
+        const account = await banks.resolveAccount(body);
+        setAccount(account?.data?.data.account_name);
 
-        console.log(account, "account")
+        console.log(account, "account");
       }
     })();
-  }, [data.accountNumber])
+  }, [data.accountNumber]);
   const handleNextStep = () => {
     setCurrentStep(prevStep => prevStep + 1);
   };
@@ -89,24 +88,24 @@ const ConvertMoneyToLocalCurrency = () => {
     setData({
       ...data,
       [e.target.name]: e.target.value
-    })
+    });
     // if(e.target.name === 'accountNumber' && e.target.value.length > 7) {
     //   await resolveUserNameBankName()
     // }
-    console.log(e.target.value)
-  }
+    console.log(e.target.value);
+  };
 
   const handleSendMoneyOnclick = () => {
     if (data.youPay) {
-      handleNextStep()
+      handleNextStep();
     }
-  }
+  };
 
   const handleRecipientDetailsOnclick = () => {
     if (data.bankName && account && data.reason) {
-      handleNextStep()
+      handleNextStep();
     }
-  }
+  };
 
   //  const resolveUserNameBankName = async () => {
   //   console.
@@ -202,17 +201,17 @@ const ConvertMoneyToLocalCurrency = () => {
               <div className="amount__paid">
                 <div className="init__header">
                   <span>Amount to Pay</span>
-                  <span>$ {commaFormat(data.youPay) || '0'}</span>
+                  <span>$ {commaFormat(data.youPay) || "0"}</span>
                 </div>
                 <div className="init__header">
                   <span>Recipient gets</span>
-                  <span>₦{commaFormat((data.youPay * currentRate).toFixed(2))|| '0'}</span>
+                  <span>₦{commaFormat((data.youPay * currentRate).toFixed(2)) || "0"}</span>
                 </div>
                 <Button
                   title="Proceed"
                   onClick={handleSendMoneyOnclick}
-                  className={!(data.youPay) ? "disabled-state" : ""}
-                // onClick={handleOnclick}
+                  className={!data.youPay ? "disabled-state" : ""}
+                  // onClick={handleOnclick}
                 />
               </div>
             </div>
@@ -226,10 +225,12 @@ const ConvertMoneyToLocalCurrency = () => {
               <Select
                 options={banksOptions}
                 placeholder="Select Bank"
-                onChange={(e: any) => setData({
-                  ...data,
-                  bankName: e.option
-                })}
+                onChange={(e: any) =>
+                  setData({
+                    ...data,
+                    bankName: e.option
+                  })
+                }
                 styles={customStyles}
               />
               <InputField
@@ -312,13 +313,10 @@ const ConvertMoneyToLocalCurrency = () => {
                 <div className="amount__paid">
                   <div className="init__header">
                     <span>You Pay</span>
-                    <span>${(data?.youPay)}</span>
+                    <span>${data?.youPay}</span>
                   </div>
                 </div>
-                <Button
-                  title="Proceed"
-                  onClick={handleNextStep}
-                />
+                <Button title="Proceed" onClick={handleNextStep} />
               </div>
             </div>
           </div>

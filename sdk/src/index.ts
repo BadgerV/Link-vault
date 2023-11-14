@@ -87,5 +87,4 @@ const getVault = async (linkvault: string) => {
   }
 };
 
-
 export { getVault, createVault };

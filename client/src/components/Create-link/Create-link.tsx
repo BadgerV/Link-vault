@@ -31,22 +31,22 @@ const CreateLink = () => {
   };
 
   // handles the click event when clicked outside of dropdown
-  useEffect(() => {
-    const handleClickOutsideDropdownItem = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node) &&
-        event.target instanceof Element
-      ) {
-        setShowDropdownItems(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutsideDropdownItem = (event: MouseEvent) => {
+  //     if (
+  //       dropdownRef.current &&
+  //       !dropdownRef.current.contains(event.target as Node) &&
+  //       event.target instanceof Element
+  //     ) {
+  //       setShowDropdownItems(false);
+  //     }
+  //   };
 
-    document.addEventListener("click", handleClickOutsideDropdownItem);
-    return () => {
-      document.removeEventListener("click", handleClickOutsideDropdownItem);
-    };
-  }, []);
+  //   document.addEventListener("click", handleClickOutsideDropdownItem);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutsideDropdownItem);
+  //   };
+  // }, []);
 
   useEffect(() => {
     if (!address) return;
@@ -82,7 +82,14 @@ const CreateLink = () => {
       {!createdVault ? (
         <Card>
           <h2>Create a linkVault</h2>
-          <AssetsShowcase ownedAssets={ownedAssets} params={false} />
+          <AssetsShowcase
+            ownedAssets={ownedAssets}
+            params={false}
+            handleSelectAsset={handleSelectAsset}
+            selectedAsset={selectedAsset}
+            showDropdownItems={showDropdownItems}
+            setShowDropdownItems={setShowDropdownItems}
+          />
           <div className="link__amount">
             <h3>Amount</h3>
             <input

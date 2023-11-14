@@ -1,6 +1,12 @@
 // importing relevant modules
 import express from "express";
-import { getRate, initializeBillPayment, initializePayment, getBanks, resolveAccount} from "../controllers/payment.controller";
+import {
+  getRate,
+  initializeBillPayment,
+  initializePayment,
+  getBanks,
+  resolveAccount
+} from "../controllers/payment.controller";
 
 // creating 'mock-up' payment route
 const paymentRouter = express.Router();
@@ -12,10 +18,10 @@ paymentRouter.get("/rate", getRate);
 paymentRouter.post("/bill", initializeBillPayment);
 
 // Initialize new payment.
-paymentRouter.post("/remit" ,initializePayment);
+paymentRouter.post("/remit", initializePayment);
 
 //get banks
-paymentRouter.get("/banks" ,getBanks);
+paymentRouter.get("/banks", getBanks);
 
 //resolve accounts
 paymentRouter.post("/account", resolveAccount);
