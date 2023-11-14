@@ -5,11 +5,17 @@ export const VaultContainer = styled.div`
   flex-direction: column;
   width: 500px;
   margin: auto;
+  @media screen and (max-width:500px){
+    width:350px;
+  }
 
   h3 {
     font-family: var(--font-family-geom);
     font-size: 30px;
     margin: auto;
+    @media screen and (max-width:500px){
+      font-size:20px;
+    }
   }
 
   .vault__cont {

@@ -6,12 +6,14 @@ const Hero = () => {
   return (
     <HeroContainer>
       <div className="hero__left">
-        <h3>Send money & pay bills in Africa</h3>
-        <p>Scan your LinkVault to get started</p>
+        <h3>Send money & <br className="break" /> pay bills in Africa</h3>
+        <p className="scan">Scan your LinkVault to get started</p>
+        <div className="btnGo">
         <Button title="Go to App" />
+        </div>
 
         <p className="powered">
-          powered by <img src="/assets/link-vault.png" alt="powered" />
+          powered by <img className="powerImg" src="/assets/link-vault.png" alt="powered" />
         </p>
       </div>
       <div className="hero__right">
