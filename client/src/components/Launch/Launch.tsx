@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { LaunchContainer } from "./Lauch.styles";
 import CustomButton from "../Button";
-import { getWallet } from "link-vault";
+import { getVault} from "link-vault";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { computeAssets } from "../../utils/assets.utils";
@@ -20,7 +20,7 @@ const LaunchVault = () => {
   const getVaultNobleLink = async () => {
     const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}${location.hash}`;
     console.log(nobleCurveKey, "ok");
-    const res = await getWallet(nobleCurveKey);
+    const res = await getVault(nobleCurveKey);
     console.log(res);
     setVaultNobleLink(res.address);
     return res;
