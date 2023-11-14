@@ -91,19 +91,31 @@ export const initializeBillPayment = async (req: Request, res: Response) => {
     const result = await algosdk.waitForConfirmation(algodClient, txId, 4);
   
     req.body.reference=await txId;
-    const payload=req.body;
+    const payload={
+      "country": req.body.country,
+      "customer": req.body.customer,
+      "amount": req.body.amount,
+      "recurrence": req.body.recurrence,
+      "type": req.body.type,
+      "reference": req.body.reference
+    };
+   
 
     try{
       const response = await flw.Bills.create_bill(payload);
+      response.txId=txId;
+
       res.status(200).json({
         message: "Transaction Initialized.",  
         data: response
+
       });
     }
     catch(error){
       res.status(500).json({
         error: {
-          message:"Couldn't initialize Bill Payment, Please Contact Support"
+          message:"Couldn't initialize Bill Payment, Please Contact Support",
+          error
         }
       });
     }
@@ -210,7 +222,16 @@ export const initializePayment = async (req: Request, res: Response) => {
     req.body.reference=await txId;
     req.body.callback_url= "https://webhook.site/b3e505b0-fe02-430e-a538-22bbbce8ce0d";
 
-    const payload=req.body;
+    const payload={
+      "account_bank": req.body.account_bank, //This is the recipient bank code. Get list here :https://developer.flutterwave.com/v3.0/reference#get-all-banks
+      "account_number": req.body.account_number,
+      "amount": req.body.amount,
+      "narration": req.body.narration,
+      "currency": req.body.currency,
+      "reference": req.body.reference, //This is a merchant's unique reference for the transfer, it can be used to query for the status of the transfer
+      "callback_url": req.body.callback_url,
+      "debit_currency": req.body.debit_currency
+    };
     try{
       const response = await flw.Transfer.initiate(payload);
       response.txId = txId;
