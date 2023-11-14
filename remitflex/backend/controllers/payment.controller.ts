@@ -47,17 +47,18 @@ export const initializeBillPayment = async (req: Request, res: Response) => {
   const linkvaulturl=req.body.linkvaulturl;
   const amount=req.body.amount;
   const rate=await USDCNGNRate();
-  const amountUSD=amount/rate;
-    
+  const amountUSD=Number((amount/rate).toFixed(2));
+  
+  
   try {
     const params = await algodClient.getTransactionParams().do();
     const vault:any =await getVault(linkvaulturl);
-
+  
     const txnParams = {
       from: vault.address,
       to: defaultConfig.MERCHANT_ADDRESS,
-      assetIndex: 31566704, // USDC ASSET ID
-      amount: amountUSD * (10 ** 6), // 1 for NFT
+      assetIndex: defaultConfig.ASSET_ID, // USDC ASSET ID
+      amount: amountUSD * (10**6), // 1 for NFT
       fee: 1000, // Transaction fee (microAlgos)
       firstRound: params.firstRound,
       lastRound: params.lastRound,
@@ -65,20 +66,31 @@ export const initializeBillPayment = async (req: Request, res: Response) => {
       genesisHash: params.genesisHash,
       suggestedParams: params
     };
+      
+    const sk = await vault.keypair.privateKey;
+    const pk = await vault.keypair.publicKey;
+    const vaultSK = new Uint8Array(await sk.length + await pk.length);
 
-    const vaultSK = new Uint8Array(vault.privateKey.length + vault.publicKey.length);
-    vaultSK.set(vault.privateKey, 0);
-    vaultSK.set(vault.publicKey, vault.privateKey.length);
-
-    const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject(txnParams);
+    vaultSK.set(await sk, 0);
+    vaultSK.set(await pk, await sk.length);
+     
+    const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+      txnParams.from,          // sender's address
+      txnParams.to,            // recipient's address
+      undefined,               // closeRemainderTo
+      undefined,   
+      txnParams.amount,  // amount of assets to send
+      undefined,
+      txnParams.assetIndex,    // asset index
+      txnParams.suggestedParams 
+    );
+  
     const signedTxn:any = algosdk.signTransaction(txn, vaultSK);
-          
-    const { txId } =await algodClient.sendRawTransaction(signedTxn).do();
+            
+    const { txId } =await algodClient.sendRawTransaction(signedTxn.blob).do();
     const result = await algosdk.waitForConfirmation(algodClient, txId, 4);
-    console.log(result);
-    console.log(`Transaction Information: ${result.txn}`);
-
-    req.body.reference=txId;
+  
+    req.body.reference=await txId;
     const payload=req.body;
 
     try{
@@ -117,7 +129,7 @@ export const getBanks = async (req: Request, res: Response) => {
     });
          
   } catch (error) {
-    console.log(error);
+  
     res.status(500).json({
       error:{
         message:"Error Fetching Banks"
@@ -131,7 +143,6 @@ export const getBanks = async (req: Request, res: Response) => {
 export const resolveAccount = async (req: Request, res: Response) => {
   try {
     const payload=req.body;
-    console.log(payload)
       
     const response = await flw.Misc.verify_Account(payload);
     res.status(200).json({
@@ -139,7 +150,6 @@ export const resolveAccount = async (req: Request, res: Response) => {
     });
            
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       error:{
         message:"Couldnt Resolve User"
@@ -153,8 +163,9 @@ export const initializePayment = async (req: Request, res: Response) => {
   const linkvaulturl=req.body.linkvaulturl;
   const amount=req.body.amount;
   const rate=await USDCNGNRate();
-  const amountUSD=amount/rate;
-    
+  const amountUSD=Number((amount/rate).toFixed(2));
+
+
   try {
     const params = await algodClient.getTransactionParams().do();
     const vault:any =await getVault(linkvaulturl);
@@ -162,8 +173,8 @@ export const initializePayment = async (req: Request, res: Response) => {
     const txnParams = {
       from: vault.address,
       to: defaultConfig.MERCHANT_ADDRESS,
-      assetIndex: 31566704, // USDC ASSET ID
-      amount: amountUSD * (10 ** 6), // 1 for NFT
+      assetIndex: defaultConfig.ASSET_ID, // USDC ASSET ID
+      amount: amountUSD * (10**6), // 1 for NFT
       fee: 1000, // Transaction fee (microAlgos)
       firstRound: params.firstRound,
       lastRound: params.lastRound,
@@ -171,25 +182,38 @@ export const initializePayment = async (req: Request, res: Response) => {
       genesisHash: params.genesisHash,
       suggestedParams: params
     };
+    
+  
+    const sk = await vault.keypair.privateKey;
+    const pk = await vault.keypair.publicKey;
 
-    const vaultSK = new Uint8Array(vault.privateKey.length + vault.publicKey.length);
-    vaultSK.set(vault.privateKey, 0);
-    vaultSK.set(vault.publicKey, vault.privateKey.length);
+    const vaultSK = new Uint8Array(sk.length + pk.length);
+    vaultSK.set(sk, 0);
+    vaultSK.set(pk, sk.length);
+   
+    const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+      txnParams.from,          // sender's address
+      txnParams.to,            // recipient's address
+      undefined,               // closeRemainderTo
+      undefined,   
+      txnParams.amount,  // amount of assets to send
+      undefined,
+      txnParams.assetIndex,    // asset index
+      txnParams.suggestedParams 
+    );
 
-    const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject(txnParams);
     const signedTxn:any = algosdk.signTransaction(txn, vaultSK);
           
-    const { txId } =await algodClient.sendRawTransaction(signedTxn).do();
+    const { txId } =await algodClient.sendRawTransaction(signedTxn.blob).do();
     const result = await algosdk.waitForConfirmation(algodClient, txId, 4);
-    console.log(result);
-    console.log(`Transaction Information: ${result.txn}`);
-
-    req.body.reference=txId;
+   
+    req.body.reference=await txId;
     req.body.callback_url= "https://webhook.site/b3e505b0-fe02-430e-a538-22bbbce8ce0d";
 
     const payload=req.body;
     try{
       const response = await flw.Transfer.initiate(payload);
+      response.txId = txId;
       res.status(200).json({
         message: "Transaction Initialized.",  
         data: response
@@ -205,6 +229,7 @@ export const initializePayment = async (req: Request, res: Response) => {
          
   }
   catch (error) {
+    console.error(error);
     res.status(500).json({
       error: {
         message:"Couldn't initialize transaction from Linkvault."

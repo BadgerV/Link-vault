@@ -5,4 +5,5 @@ export interface defaultConfigTypes {
   FLW_SECRET_KEY: string;
   MERCHANT_ADDRESS: string;
   CC_API_KEY: string;
+  ASSET_ID: number;
 }

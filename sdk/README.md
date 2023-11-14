@@ -159,9 +159,12 @@ async function optInToASA() {
     };
 
     // Sign and send the opt-in transaction
-    const vaultSK = new Uint8Array(vault.privateKey.length + vault.publicKey.length);
-    vaultSK.set(vault.privateKey, 0);
-    vaultSK.set(vault.publicKey, vault.privateKey.length);
+     const sk = await vault.keypair.privateKey;
+    const pk = await vault.keypair.publicKey;
+    const vaultSK = new Uint8Array(await sk.length + await pk.length);
+
+    vaultSK.set(await sk, 0);
+    vaultSK.set(await pk, await sk.length);
 
     const signedOptInTxn = algosdk.signTransaction(optInTxn, vaultSK);
     const txId = signedOptInTxn.txID().toString();
@@ -169,7 +172,7 @@ async function optInToASA() {
     console.log(`Opt-In Transaction ID: ${txId}`);
 
     const txHeaders = { "Content-Type": "application/x-binary" };
-    const sendResponse = await algodClient.sendRawTransaction(signedOptInTxn.blob, txHeaders).do();
+    const sendResponse = await algodClient.sendRawTransaction(signedOptInTxn.blob).do();
     console.log("Opt-In Transaction sent.");
 
     // Wait for confirmation (you can check the confirmation status using the `txId`)
@@ -227,14 +230,23 @@ async function sendASATokens() {
     const recoveredAccount = algosdk.mnemonicToSecretKey(senderMnemonic);
     const senderAccount = recoveredAccount.addr;
 
-    const txn = new algosdk.Transaction.AssetTransfer(txnParams);
+     const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+      txnParams.from,          // sender's address
+      txnParams.to,            // recipient's address
+      undefined,               // closeRemainderTo
+      undefined,   
+      txnParams.amount,  // amount of assets to send
+      undefined,
+      txnParams.assetIndex,    // asset index
+      txnParams.suggestedParams 
+    );
     const signedTxn = algosdk.signTransaction(txn, recoveredAccount.sk);
 
     const txId = signedTxn.txID().toString();
     console.log(`ASA OR NFT Transaction ID: ${txId}`);
 
     const txHeaders = { "Content-Type": "application/x-binary" };
-    const sendResponse = await algodClient.sendRawTransaction(signedTxn.blob, txHeaders).do();
+    const sendResponse = await algodClient.sendRawTransaction(signedTxn.blob).do();
     console.log("ASA Transaction sent.");
 
     const status = await algodClient.status().do();
@@ -252,13 +264,8 @@ It creates a recipient address using Linkvault's createVault function, and then 
 
 ## Package Information
 
-<<<<<<< HEAD
-- **Package Name**: Link Vault
-- **Version**: 1.2.8
-=======
 - **Package Name**: link-vault
-- **Version**: 1.1.5
->>>>>>> a13d179c441fab8b1ecb7e06056aabb4854a5472
+- **Version**: 1.2.8
 - **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
 - **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)
