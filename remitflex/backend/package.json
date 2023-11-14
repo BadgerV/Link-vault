@@ -5,11 +5,10 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tsc",
-    "start": "node ./dist/server.js",
+    "build": "tsc",
     "dist": "tsc -p .",
     "dev": "nodemon server.ts"
-  },
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Samuellyworld/Link-vault.git"
