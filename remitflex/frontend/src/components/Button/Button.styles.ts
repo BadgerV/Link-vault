@@ -30,7 +30,7 @@ export const ButtonComponent = styled.button<ButtonWrapperProps>`
   cursor: pointer;
   font-family: var(--font-family-nista);
   border: ${props => (props.border ? props.border : "none")};
-  padding: 5px;
+  padding: 10px 5px;
 
   p {
     color: ${props => (props.color ? props.color : "#fff")};

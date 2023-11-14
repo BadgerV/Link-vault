@@ -18,20 +18,24 @@ interface CorsSettings {
 
 export const corsSettings: CorsSettings = isProd
   ? {
-      credentials: true,
-      origin: ["https://google.com"],
-      methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
-    }
+    credentials: true,
+    origin: ["https://google.com", "https://linkvault.com.ng",
+      "https://www.linkvault.com.ng", "https://remitflex.com",
+      "https://www.remitflex.com"
+    ],
+    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
+  }
   : {
-      credentials: true,
-      origin: [
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:5173",
-        "https://www.test.google.com"
-      ],
-      methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
-    };
+    credentials: true,
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      'http://localhost:9000',
+      "http://localhost:5173",
+      "https://www.test.google.com"
+    ],
+    methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"]
+  };
 
 // defaultConfig object - this contains any config strings || numbers
 export const defaultConfig: defaultConfigTypes = {
@@ -40,5 +44,4 @@ export const defaultConfig: defaultConfigTypes = {
   FLW_SECRET_KEY: String(process.env.FLW_SECRET_KEY),
   MERCHANT_ADDRESS: String(process.env.MERCHANT_ADDRESS),
   CC_API_KEY: String(process.env.CC_API_KEY),
-  DATABASE_URL: String(process.env.DATABASE_URL)
 };

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm start --w @link-vault/server",
-    "heroku-postbuild": "npm run build  --w @link-vault/server",
+    "start" : "cd remitflex/backend && node dist/server.js",
+    "heroku-postbuild": "cd remitflex/backend && npm install && npm run build",
     "server": "npm run dev --w @link-vault/server",
     "client": "npm start --w @link-vault/client",
     "dev": "npm run server && npm run client",

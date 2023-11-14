@@ -4,11 +4,12 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
 `;
 export const InputContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   align-items: center;
   border-radius: 5.468px;
   border: 1.094px solid #a9a9a9;
@@ -18,7 +19,6 @@ export const InputContainer = styled.div`
 export const Label = styled.p`
   font-weight: 400;
   font-size: 13px;
-  padding-left: 10px;
   opacity: 0.6;
   padding-top: 10px;
   font-family: var(--font-family-nista);

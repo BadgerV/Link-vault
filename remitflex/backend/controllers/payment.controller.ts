@@ -131,6 +131,7 @@ export const getBanks = async (req: Request, res: Response) => {
 export const resolveAccount = async (req: Request, res: Response) => {
   try {
     const payload=req.body;
+    console.log(payload)
       
     const response = await flw.Misc.verify_Account(payload);
     res.status(200).json({

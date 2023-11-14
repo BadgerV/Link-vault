@@ -35,6 +35,7 @@ const InputField: React.FC<InputPropTypes> = ({
           placeholder={placeholder}
           onChange={onChange}
           disabled={disabled}
+          type={type}
         />
         {
           isPassword && null
