@@ -14,6 +14,10 @@ export const SendContainer = styled.div`
   padding: 2rem 0rem;
   gap: 3rem;
 
+  .algo__link {
+    color: #409099;
+  }
+
   .account__name {
     font-size: 0.8rem;
     margin-top: -0.6rem;

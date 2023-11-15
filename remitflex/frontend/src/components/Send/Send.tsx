@@ -15,6 +15,7 @@ import { paymentControl } from "../../services/protected/paymentAPI";
 import Select from "react-select";
 import { customStyles } from "../../utils/customSelectorHelper";
 import { commaFormat } from "../../utils/addons";
+import { useSelector } from "react-redux";
 
 const ConvertMoneyToLocalCurrency = () => {
   const [switchBtn, setSwitchBtn] = useState(false);
@@ -22,6 +23,10 @@ const ConvertMoneyToLocalCurrency = () => {
   const [banksOptions, setBanksOptions] = useState([]);
   const [account, setAccount] = useState<any>(null);
   const [currentRate, setCurrentRate] = useState<any>(null);
+  const vault = useSelector((state: any) => state.currentUser?.currentVault);
+  const [txId, setTxId] = useState<any>(null);
+
+  // console.log(linkVaultUrl, "linkVaultUrl");
   const [data, setData] = useState({
     amount: "",
     recipient: "",
@@ -106,6 +111,28 @@ const ConvertMoneyToLocalCurrency = () => {
       handleNextStep();
     }
   };
+   
+  console.log(data);
+  const remitPayment  = async () => {
+    // add a loading spinner
+    console.log(vault)
+    const body = {
+      linkvaulturl : vault?.linkvault,
+      account_bank: data.bankName.code,
+      amount: parseFloat((data.youPay))*currentRate,
+      account_number: data.accountNumber,
+      currency: "NGN",
+      narration: data.reason,
+      debit_currency: "NGN",
+    };
+    console.log(body, "body");
+    const payment = await paymentControl.remitPayment(body);
+    setTxId(payment?.data?.txId)
+    console.log(payment, "payment");
+
+    handleNextStep()
+
+  }
 
   //  const resolveUserNameBankName = async () => {
   //   console.
@@ -176,7 +203,7 @@ const ConvertMoneyToLocalCurrency = () => {
               <InputField
                 label={"Recipient Gets"}
                 name={"recipient"}
-                value={commaFormat((data.youPay * currentRate).toFixed(2))}
+                value={commaFormat(((data.youPay) * currentRate).toFixed(2)) ?? "0"}
                 placeholder={""}
                 onChange={handleOnChange}
                 leftIcon={switchBtn ? renderDollar() : renderNaira()}
@@ -205,7 +232,7 @@ const ConvertMoneyToLocalCurrency = () => {
                 </div>
                 <div className="init__header">
                   <span>Recipient gets</span>
-                  <span>₦{commaFormat((data.youPay * currentRate).toFixed(2)) || "0"}</span>
+                  <span>₦{commaFormat((parseFloat(data.youPay) * currentRate).toFixed(2)) || "0"}</span>
                 </div>
                 <Button
                   title="Proceed"
@@ -316,7 +343,7 @@ const ConvertMoneyToLocalCurrency = () => {
                     <span>${data?.youPay}</span>
                   </div>
                 </div>
-                <Button title="Proceed" onClick={handleNextStep} />
+                <Button title="Proceed" onClick={remitPayment} />
               </div>
             </div>
           </div>
@@ -332,6 +359,7 @@ const ConvertMoneyToLocalCurrency = () => {
                 navigate("/dashboard");
               }}
             />
+            <p>View transaction on <a className="algo__link" href={`https://algoexplorer.io/tx/${txId}`} target="_blank">algoexplorer</a></p>
           </div>
         )}
       </div>
