@@ -14,12 +14,13 @@ import { PeraWalletConnect } from "@perawallet/connect";
 import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { setCurrentUser } from "../../stores/user/user.reducer";
 import { setWalletType } from "../../stores/user/user.reducer";
+import PopUp from "../Popup/Popup";
 interface OwnedAssets {
   assets: Asset[];
   nfts: NFT[];
 }
 
-const peraWallet= new PeraWalletConnect();
+const peraWallet = new PeraWalletConnect();
 const deflywallet = new DeflyWalletConnect();
 
 const CreateLink = () => {
@@ -35,10 +36,11 @@ const CreateLink = () => {
   const [amount, setAmount] = useState(null);
   const [isVaultResolved, setIsVaultResolved] = useState(false);
   const dispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState(false);
 
   const AVAILABLE_ASSETS = async () => {
     const assets = await computeAssets(address);
-    console.log(assets, 'assets');
+    console.log(assets, "assets");
     setOwnedAssets(assets ?? { assets: [], nfts: [] });
   };
 
@@ -123,37 +125,36 @@ const CreateLink = () => {
     const createdVault = await createVault();
     if (createdVault.address) {
       setCreatedVault(createdVault);
-      setIsVaultResolved(true)
+      setIsVaultResolved(true);
     }
   };
 
   const createVaultAndFund = async () => {
-     const createdVault = await createVault();
-     if(createdVault.address) {
+    const createdVault = await createVault();
+    if (createdVault.address) {
       const checkIfAlgo = ownedAssets.assets.find((asset: Asset) => Number(selectedAsset.id) === 0);
-      if(checkIfAlgo) {
-        await sendTransaction (
-          amount, 
+      if (checkIfAlgo) {
+        await sendTransaction(
+          amount,
           address,
           createdVault.address,
-           walletType === "pera" ? peraWallet : deflywallet
-        )
+          walletType === "pera" ? peraWallet : deflywallet
+        );
+        setIsVaultResolved(true);
+        setCreatedVault(createdVault);
+      } else {
+        await sendAmountToASA(
+          amount,
+          address,
+          selectedAsset,
+          createdVault,
+          walletType === "pera" ? peraWallet : deflywallet
+        );
         setIsVaultResolved(true);
         setCreatedVault(createdVault);
       }
-       else {
-            await sendAmountToASA(
-              amount,
-              address,
-              selectedAsset,
-              createdVault,
-              walletType === "pera" ? peraWallet : deflywallet
-            )
-            setIsVaultResolved(true);
-            setCreatedVault(createdVault);
-      }
-     }
-  }
+    }
+  };
 
   return (
     <>
@@ -174,7 +175,7 @@ const CreateLink = () => {
               type="number"
               placeholder={selectedAsset ? `0 ${selectedAsset.unit_name}` : "0"}
               className="input__amount"
-              onChange= {(e) => setAmount(e.target.value)}
+              onChange={e => setAmount(e.target.value)}
             />
           </div>
           <p className="empty__link" onClick={createEmptyLinkVault}>
@@ -225,6 +226,21 @@ const CreateLink = () => {
             <QRCode value={createdVault?.vault} />
           </div>
         </CreatedLinkContainer>
+      )}
+      {showPopup && (
+        <PopUp isOpen={showPopup} onClose={() => setShowPopup(false)}>
+          <div className="popup__modal">
+            <h2>Select withdrawal mode</h2>
+            <div className="popup__first">
+              <h3>via the connected wallet</h3>
+              <p>Asset will be sent to the connected algorand wallet</p>
+            </div>
+            <div className="popup__second">
+              <h3>via Remit flex</h3>
+              <p>Make remittances and pay over 18,000 bill categories in africa</p>
+            </div>
+          </div>
+        </PopUp>
       )}
     </>
   );

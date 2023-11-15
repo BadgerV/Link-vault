@@ -67,7 +67,11 @@ export const computeAssets = async (address: string) => {
           return null;
         }
 
-        return { ...(matchingAsset as Asset), amount: ownedAsset.amount };
+        return {
+          ...(matchingAsset as Asset),
+          amount: ownedAsset.amount,
+          minimumBalance: ownedAssets.minimumBalance
+        };
       })
       .filter(asset => asset !== null) as Asset[];
 
@@ -79,7 +83,11 @@ export const computeAssets = async (address: string) => {
         if (!matchingNFT) {
           return null;
         }
-        return { ...(matchingNFT as NFT), amount: ownedNFT.amount };
+        return {
+          ...(matchingNFT as NFT),
+          amount: ownedNFT.amount,
+          minimumBalance: ownedAssets.minimumBalance
+        };
       })
       .filter(nft => nft !== null) as NFT[];
 

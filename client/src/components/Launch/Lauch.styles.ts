@@ -8,6 +8,61 @@ export const LaunchContainer = styled.div`
   margin: auto;
   gap: 1rem;
 
+  .popup__modal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+
+    .deposit {
+      font-size: 1rem;
+      margin-top: 1rem;
+      font-family: var(--font-family-nista);
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--vault-black);
+      font-family: var(--font-family-geom);
+      margin-bottom: 1rem;
+    }
+
+    .popup__container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-direction: column;
+      width: 100%;
+      border: solid 1px var(--vault-primary);
+      border-radius: 6px;
+      padding: 1rem;
+      gap: 2rem;
+
+      h3 {
+        font-size: 1rem;
+      }
+    }
+
+    .popup__first,
+    .popup__second {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.5rem;
+      border: solid 1px var(--vault-primary);
+      border-radius: 6px;
+      cursor: pointer;
+      background: aliceblue;
+      &:hover {
+        background: #7d648c;
+        color: white;
+      }
+    }
+  }
+
   .owned__assets {
     position: unset;
     width: 100%;
