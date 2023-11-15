@@ -15,6 +15,7 @@ import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { setCurrentUser } from "../../stores/user/user.reducer";
 import { setWalletType } from "../../stores/user/user.reducer";
 import PopUp from "../Popup/Popup";
+import { errorToast, successToast } from "../../utils/customToast";
 interface OwnedAssets {
   assets: Asset[];
   nfts: NFT[];
@@ -110,7 +111,7 @@ const CreateLink = () => {
 
   const handleDropdown = () => {
     if (!address) {
-      alert("Please connect your wallet first");
+       errorToast("Please connect your wallet");
       return;
     }
     setShowDropdownItems(!showDropdownItems);
@@ -125,11 +126,18 @@ const CreateLink = () => {
     const createdVault = await createVault();
     if (createdVault.address) {
       setCreatedVault(createdVault);
+      successToast("Link created successfully");
       setIsVaultResolved(true);
     }
   };
 
   const createVaultAndFund = async () => {
+    if(!address) return errorToast("Please connect your wallet");
+    if (!selectedAsset) return errorToast("Please select a token you want to fund your vault with");
+    if(!amount) return errorToast("Please enter an amount to fund your vault with");
+    if(selectedAsset.minimumBalance < 200000) return errorToast(`You need a minimum of ${selectedAsset.minimumBalance/10**6} ALGO to fund your vault`);
+    if(selectedAsset.amount < amount) return errorToast(`You do not have sufficient balance to make this transaction`);
+
     const createdVault = await createVault();
     if (createdVault.address) {
       const checkIfAlgo = ownedAssets.assets.find((asset: Asset) => Number(selectedAsset.id) === 0);
@@ -138,10 +146,12 @@ const CreateLink = () => {
           amount,
           address,
           createdVault.address,
-          walletType === "pera" ? peraWallet : deflywallet
+          walletType === "pera" ? peraWallet : deflywallet,
+          selectedAsset
         );
         setIsVaultResolved(true);
         setCreatedVault(createdVault);
+        successToast("Link created successfully");
       } else {
         await sendAmountToASA(
           amount,
@@ -152,10 +162,11 @@ const CreateLink = () => {
         );
         setIsVaultResolved(true);
         setCreatedVault(createdVault);
+        successToast("Link created successfully");
       }
     }
   };
-
+   console.log(createdVault, "createdVault");
   return (
     <>
       {!isVaultResolved ? (
@@ -189,7 +200,9 @@ const CreateLink = () => {
         <CreatedLinkContainer>
           <img src="/assets/svg/link-created.svg" alt="link created" />
           <h2> Link Created!</h2>
-          <p className="link__address">{`${createdVault?.vault.substring(0, 36)}...`}</p>
+          <a href={createdVault?.vault} target="_blank">
+          <p className="link__address">{`${createdVault?.vault.substring(0, 36)}...`}</p>  
+          </a>
           <div className="buttons__container">
             <CopyToClipboard text={createdVault?.vault}>
               <CustomButton

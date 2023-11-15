@@ -9,6 +9,13 @@ export const AssetsShowcaseContainer = styled.div`
   .link__container {
     width: 100%;
   }
+  .params-select {
+    color : black !important;
+  }
+  .unset-params {
+    color : unset;
+  }
+
   .link__types {
     border: solid 1px var(--vault-primary);
     border-radius: 10px;
@@ -16,11 +23,13 @@ export const AssetsShowcaseContainer = styled.div`
     justify-content: space-between;
     width: 100%;
     padding: 1rem 1rem;
+    cursor: pointer;
 
     .link-span {
       font-family: var(--font-family-nista);
       font-size: var(--font-size-s);
       color: #bfb1c5;
+      cursor: pointer;
     }
 
     .asset-selected {

@@ -8,6 +8,7 @@ import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { RootState } from "../../stores/stores";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useNavigate, useLocation } from "react-router-dom";
+import { errorToast, infoToast, successToast } from "../../utils/customToast";
 
 const peraWallet = new PeraWalletConnect();
 const deflywallet = new DeflyWalletConnect();
@@ -69,9 +70,11 @@ export const Header = () => {
           dispatch(setCurrentUser(undefined));
           dispatch(setWalletType(""));
           peraWallet.disconnect();
+          infoToast("Wallet disconnected");
         });
         dispatch(setCurrentUser(accounts![0]));
         dispatch(setWalletType("pera"));
+        successToast("Successfully connected to Pera Wallet")
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -88,9 +91,11 @@ export const Header = () => {
           dispatch(setCurrentUser(undefined));
           dispatch(setWalletType(""));
           deflywallet.disconnect();
+          infoToast("Wallet Disconnected");
         });
         dispatch(setCurrentUser(accounts![0]));
         dispatch(setWalletType("defly"));
+        successToast("Successfully connected to Defly Wallet")
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -117,9 +122,11 @@ export const Header = () => {
       </LogoContainer>
       <HeaderAddons>
         {location.pathname === "/" ? (
+          <a href="https://www.npmjs.com/package/link-vault" target="_blank">
           <div className="header__addons__items">
             <span>Documentation</span>
           </div>
+        </a>
         ) : null}
 
         <HeaderDropdown>

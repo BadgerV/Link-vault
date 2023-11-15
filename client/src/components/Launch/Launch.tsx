@@ -10,6 +10,7 @@ import PopUp from "../Popup";
 import QRCode from "qrcode.react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { claimVault } from "../../utils/integration";
+import { LoadingState } from "../LoadingState/LoadingState";
 
 const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
@@ -23,36 +24,47 @@ const LaunchVault = () => {
   const [showDepositPopup, setShowDepositPopup] = useState(false);
   const walletType = useSelector((state: any) => state.currentUser?.walletType);
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
 
   console.log(location);
   const navigate = useNavigate();
   const getVaultNobleLink = async () => {
+    setIsLoading(true);
     const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}`;
     console.log(nobleCurveKey, "ok");
     const res = await getVault(nobleCurveKey);
     console.log(res);
     setVaultNobleLink(res);
+    setIsLoading(false);
     return res;
   };
 
   const AVAILABLE_ASSETS = async () => {
+    setIsLoading(true);
     const assets = await computeAssets(vaultNobleLink.address);
     console.log(assets, "assets");
     setOwnedAssets(assets ?? { assets: [], nfts: [] });
+
+    setIsLoading(false);
   };
 
   // const vaultLink =
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
       const result = await getVaultNobleLink();
       if (!result) navigate("/");
       console.log(result, "result");
     })();
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     if (!vaultNobleLink) return;
     AVAILABLE_ASSETS();
+    setIsLoading(false);
+  
   }, [vaultNobleLink]);
 
   // console.log(params)
@@ -60,37 +72,44 @@ const LaunchVault = () => {
     await claimVault(vaultNobleLink, address, walletType, ownedAssets);
   };
 
+  
+
   return (
     <LaunchContainer>
-      <div className="launch__header">
-        <h3>Welcome,</h3>
-      </div>
-      <div className="launch__body">
-        <AssetsShowcase
-          ownedAssets={ownedAssets}
-          params={true}
-          setShowDropdownItems={setShowDropdownItems}
-          showDropdownItems={showDropdownItems}
-        />
-        <div className="buttons__container">
-          <CustomButton
-            variant="filled"
-            type="button"
-            className="deposit__button"
-            onClick={() => setShowDepositPopup(true)}
-          >
-            Deposit
-          </CustomButton>
-          <CustomButton
-            variant="filled"
-            type="button"
-            className="claim__button"
-            onClick={() => setShowPopup(true)}
-          >
-            Claim
-          </CustomButton>
+      {
+        isLoading ? <LoadingState width={500} height={'50vh'}/> :
+        <div className="launch__">
+        <div className="launch__header">
+          <h3>Welcome,</h3>
         </div>
-      </div>
+        <div className="launch__body">
+          <AssetsShowcase
+            ownedAssets={ownedAssets}
+            params={true}
+            setShowDropdownItems={setShowDropdownItems}
+            showDropdownItems={showDropdownItems}
+          />
+          <div className="buttons__container">
+            <CustomButton
+              variant="filled"
+              type="button"
+              className="deposit__button"
+              onClick={() => setShowDepositPopup(true)}
+            >
+              Deposit
+            </CustomButton>
+            <CustomButton
+              variant="filled"
+              type="button"
+              className="claim__button"
+              onClick={() => setShowPopup(true)}
+            >
+              Claim
+            </CustomButton>
+          </div>
+        </div>
+        </div> 
+      }
       {showPopup && (
         <PopUp isOpen={showPopup} onClose={() => setShowPopup(false)}>
           <div className="popup__modal">
@@ -105,9 +124,13 @@ const LaunchVault = () => {
                   href={`https://remitflex.com/app${location.pathname}${location.hash}`}
                   target="_blank"
                 >
-                  <h3>via Remit flex</h3>
+                  <h3>via remit flex</h3>
                   <p>Make remittances and pay over 18,000 bill categories in africa</p>
                 </a>
+              </div>
+              <div className="popup__third">
+                  <h3>via gift card</h3>
+                  <p>Make remittances and pay over 18,000 bill categories in africa</p>
               </div>
             </div>
           </div>
@@ -116,7 +139,7 @@ const LaunchVault = () => {
       {showDepositPopup && (
         <PopUp isOpen={showDepositPopup} onClose={() => setShowDepositPopup(false)}>
           <div className="popup__modal">
-            <h2 className="deposit">deposit asset via vault wallet address</h2>
+            <h2 className="deposit">Deposit asset via vault wallet address</h2>
             <div className="popup__container noble__link">
               <QRCode value={vaultNobleLink.address} />
 

@@ -5,6 +5,7 @@ export const OptionLabelContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   padding: 0.4rem 0rem;
+  cursor: pointer;
 
   .option-label__left {
     ${flexCenter()};
