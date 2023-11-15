@@ -122,7 +122,7 @@ export const Header = () => {
       </LogoContainer>
       <HeaderAddons>
         {location.pathname === "/" ? (
-          <a href="https://www.npmjs.com/package/link-vault" target="_blank">
+          <a href="https://www.npmjs.com/package/link-vault" target="_blank" className="target__blank">
           <div className="header__addons__items">
             <span>Documentation</span>
           </div>
