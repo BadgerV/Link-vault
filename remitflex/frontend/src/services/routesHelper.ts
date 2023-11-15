@@ -1,4 +1,4 @@
-const ENGINE_ENV = import.meta.env.MODE;
+const ENGINE_ENV = import.meta.env.VITE_APP_ENGINE_ENV;
 const REACT_APP_DEV_API_URL = import.meta.env.VITE_APP_DEV_API_URL;
 const REACT_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 const REACT_APP_DEV_CLIENT_URL = import.meta.env.VITE_APP_DEV_CLIENT_URL;
