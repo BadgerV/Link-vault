@@ -11,6 +11,7 @@ import QRCode from "qrcode.react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { claimVault } from "../../utils/integration";
 import { LoadingState } from "../LoadingState/LoadingState";
+import { successToast } from "../../utils/customToast";
 
 const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
@@ -70,6 +71,8 @@ const LaunchVault = () => {
   // console.log(params)
   const handleClaim = async () => {
     await claimVault(vaultNobleLink, address, walletType, ownedAssets);
+    successToast('successfully claimed asset');
+    setShowPopup(false);
   };
 
   
@@ -130,7 +133,7 @@ const LaunchVault = () => {
               </div>
               <div className="popup__third">
                   <h3>via gift card</h3>
-                  <p>Make remittances and pay over 18,000 bill categories in africa</p>
+                  <p>Claim into your gift card</p>
               </div>
             </div>
           </div>
