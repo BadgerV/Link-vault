@@ -45,7 +45,7 @@ const LaunchVault = () => {
   useEffect(() => {
     (async () => {
       const result = await getVaultNobleLink();
-      // if (!result) navigate("/");
+      if (!result) navigate("/");
       console.log(result, "result");
     })();
   }, []);
