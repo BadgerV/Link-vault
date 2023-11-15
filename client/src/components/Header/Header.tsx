@@ -1,20 +1,65 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomButton from "../Button";
 import { HeaderContainer, LogoContainer, HeaderAddons, HeaderDropdown } from "./Header.styles";
 import { PeraWalletConnect } from "@perawallet/connect";
-import { setCurrentUser } from "../../stores/user/user.reducer";
+import { setCurrentUser, setWalletType } from "../../stores/user/user.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { DeflyWalletConnect } from "@blockshake/defly-connect";
 import { RootState } from "../../stores/stores";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const peraWallet = new PeraWalletConnect();
 const deflywallet = new DeflyWalletConnect();
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
   const address = useSelector((state: RootState) => state.currentUser?.currentUser);
+  const walletType = useSelector((state: RootState) => state.currentUser?.walletType);
+  const location = useLocation();
+
+  const peraWalletReconnect = () => {
+    peraWallet
+      .reconnectSession()
+      .then(accounts => {
+        console.log(accounts);
+        if (accounts.length) {
+          dispatch(setCurrentUser(accounts[0]));
+          dispatch(setWalletType("pera"));
+        }
+        peraWallet.connector.on("disconnect", () => {
+          dispatch(setCurrentUser(undefined));
+          dispatch(setWalletType(""));
+          peraWallet.disconnect();
+        });
+      })
+      .catch(e => console.log(e));
+  };
+  const deflyWalletReconnect = () => {
+    deflywallet
+      .reconnectSession()
+      .then(accounts => {
+        if (accounts.length) {
+          dispatch(setCurrentUser(accounts[0]));
+          dispatch(setWalletType("defly"));
+        }
+        deflywallet.connector.on("disconnect", () => {
+          dispatch(setCurrentUser(undefined));
+          dispatch(setWalletType(""));
+          deflywallet.disconnect();
+        });
+      })
+      .catch(e => console.log(e));
+  };
+  useEffect(() => {
+    if (walletType === "pera") {
+      peraWalletReconnect();
+    } else if (walletType === "defly") {
+      deflyWalletReconnect();
+    }
+  }, []);
 
   const peraWalletConnect = () => {
     peraWallet
@@ -22,9 +67,11 @@ export const Header = () => {
       ?.then(accounts => {
         peraWallet.connector.on("disconnect", () => {
           dispatch(setCurrentUser(undefined));
+          dispatch(setWalletType(""));
           peraWallet.disconnect();
         });
         dispatch(setCurrentUser(accounts![0]));
+        dispatch(setWalletType("pera"));
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -39,9 +86,11 @@ export const Header = () => {
       ?.then(accounts => {
         deflywallet.connector.on("disconnect", () => {
           dispatch(setCurrentUser(undefined));
+          dispatch(setWalletType(""));
           deflywallet.disconnect();
         });
         dispatch(setCurrentUser(accounts![0]));
+        dispatch(setWalletType("defly"));
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -50,17 +99,29 @@ export const Header = () => {
       });
   };
 
+  const disconnectWallet = () => {
+    if (walletType === "pera") {
+      peraWallet.disconnect();
+    } else if (walletType === "defly") {
+      deflywallet.disconnect();
+    }
+    dispatch(setCurrentUser(undefined));
+    dispatch(setWalletType(""));
+  };
+
   return (
     <HeaderContainer>
-      <LogoContainer>
+      <LogoContainer onClick={() => navigate("/")}>
         <img src={"/assets/svg/logo.svg"} alt="logo" />
         <h2>LinkVault</h2>
       </LogoContainer>
       <HeaderAddons>
-        <div className="header__addons__items">
-          <span>Documentation</span>
-          <span>Ecosystem</span>
-        </div>
+        {location.pathname === "/" ? (
+          <div className="header__addons__items">
+            <span>Documentation</span>
+          </div>
+        ) : null}
+
         <HeaderDropdown>
           <CustomButton
             variant="filled"
@@ -100,12 +161,7 @@ export const Header = () => {
           </CustomButton>
           <div className={address ? `dropdown disconnect` : `dropdown`}>
             {address ? (
-              <div
-                className="dropdown__item"
-                onClick={() => {
-                  dispatch(setCurrentUser(""));
-                }}
-              >
+              <div className="dropdown__item" onClick={disconnectWallet}>
                 <p className="disconnect__wallet"> Disconnect</p>
               </div>
             ) : (

@@ -10,12 +10,23 @@ interface OwnedAssets {
     nfts: NFT[];
   };
   params: boolean;
+  handleSelectAsset?: (asset: Asset) => void;
+  selectedAsset?: any;
+  showDropdownItems: boolean;
+  setShowDropdownItems: any;
 }
 
-export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets, params }: OwnedAssets) => {
+export const AssetsShowcase: React.FC<OwnedAssets> = ({
+  ownedAssets,
+  params,
+  handleSelectAsset,
+  selectedAsset,
+  showDropdownItems,
+  setShowDropdownItems
+}: OwnedAssets) => {
   const dropdownRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  const [showDropdownItems, setShowDropdownItems] = useState(false);
-  const [selectedAsset, setSelectedAsset] = useState<any>(null);
+  // const [showDropdownItems, setShowDropdownItems] = useState(false);
+  // const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const address = useSelector((state: any) => state.currentUser?.currentUser);
 
   // handles the click event when clicked outside of dropdown
@@ -41,11 +52,11 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({ ownedAssets, params }: O
     params ? setShowDropdownItems(true) : setShowDropdownItems(false);
   }, [params]);
 
-  const handleSelectAsset = (asset: Asset) => {
-    if (params) return;
-    setSelectedAsset(asset);
-    setShowDropdownItems(false);
-  };
+  // const handleSelectAsset = (asset: Asset) => {
+  //   if (params) return;
+  //   setSelectedAsset(asset);
+  //   setShowDropdownItems(false);
+  // };
 
   const handleDropdown = () => {
     if (!params && !address) {

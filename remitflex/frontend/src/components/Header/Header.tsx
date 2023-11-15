@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -9,8 +9,8 @@ import { WalletStatus } from "./WalletStatus";
 
 const Header: React.FC = () => {
   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
-  const dispatch = useDispatch();
-  const address = useSelector((state: RootState) => state.currentUser?.currentUser);
+  const vault = useSelector((state: RootState) => state.currentUser?.currentVault);
+  console.log(vault, "address");
 
   const handleCopyClick = () => {
     setHandleCopyAddress(true);
@@ -19,10 +19,14 @@ const Header: React.FC = () => {
     }, 800);
   };
 
-  const handleDisconnect = () => {
-    localStorage.clear();
-    dispatch(setCurrentUser(""));
-  };
+  useEffect(() => {
+    if (!vault?.address) return;
+  }, [vault?.address]);
+
+  // const handleDisconnect = () => {
+  //   localStorage.clear();
+  //   dispatch(setCurrentUser(""));
+  // };
 
   return (
     <LogoWrapper>
@@ -33,13 +37,13 @@ const Header: React.FC = () => {
           Remit<span>flex</span>
         </Text>
       </Link>
-      {address && (
+      {vault?.address && (
         <HeaderConnectWallet>
-          <WalletStatus address={address} />
-          {!address ? (
+          <WalletStatus address={vault?.address} />
+          {!vault.address ? (
             <img className="connect" src="/assets/copywallet.png" alt="connect wallet" />
           ) : (
-            <CopyToClipboard text={address} onCopy={handleCopyClick}>
+            <CopyToClipboard text={vault.address} onCopy={handleCopyClick}>
               <img
                 src={handleCopyAddress ? "/assets/copy.png" : "/assets/copy.svg"}
                 alt={handleCopyAddress ? "copy" : "wallet copy"}

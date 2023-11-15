@@ -14,12 +14,13 @@ const AppRouter = () => {
     <Suspense fallback={<CustomHashLoader color="#409099" size={60} />}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/app/:vaultKey" element={<VaultPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="pay-bills" element={<Bills />} />
         <Route path="/send-money" element={<SendMoney />} />
         <Route path="/send-money/details" element={<Details />} />
         <Route path="/send-money/pay" element={<PaymentMethod />} />
-        <Route path="/vault" element={<VaultPage />} />
+        <Route path="/app" element={<VaultPage />} />
       </Routes>
     </Suspense>
   );

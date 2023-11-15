@@ -1,14 +1,5 @@
 import { useState } from "react";
-import {
-  Background,
-  ButtonImage,
-  ButtonWrap,
-  LogoText,
-  Main,
-  PaperImg,
-  TextStyle,
-  TextWrap
-} from "./Footer.styles";
+import { Main } from "./Footer.styles";
 
 const Footer = () => {
   const [popup, setPopUp] = useState(false);
@@ -18,18 +9,23 @@ const Footer = () => {
   };
   return (
     <Main>
-      <Background>
-        <img src="/assets/home.png" alt="home" />
-        <TextWrap>
-          <TextStyle>What are you waiting for?, Get started!</TextStyle>
-          <ButtonWrap>
-            <ButtonImage src="/assets/sendmoney.png" />
-            <ButtonImage src="/assets/paybills.png" onClick={togglePopup} />
-          </ButtonWrap>
-          <LogoText>© Remitflex2023</LogoText>
-        </TextWrap>
-        <PaperImg src="/assets/paperplane.png" alt="home" />
-      </Background>
+      <div>
+        <div className="contain">
+          <h3>What are you waiting for?</h3>
+          <h3>Get started!</h3>
+
+          <div className="Goto">Go to App</div>
+          <div className="end">
+            <p>© Remitflex2023</p>
+          </div>
+          <div className="paper">
+            <img src="/assets/paperplane.png" alt="" />
+          </div>
+          <div className="home">
+            <img src="/assets/home.png" alt="" />
+          </div>
+        </div>
+      </div>
     </Main>
   );
 };

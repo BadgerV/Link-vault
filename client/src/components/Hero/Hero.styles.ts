@@ -3,7 +3,7 @@ import { flexCenter, flexRowBetween } from "../../styles/__mixins";
 
 export const HeroContainer = styled.div`
   background: rgba(254, 247, 249, 0.5);
-  height: 100vh;
+  height: 50vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -16,7 +16,7 @@ export const HeroContainer = styled.div`
 
 export const HeroSection = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   scroll-snap-align: start;
   transition: white 0.3s ease; /* Add a smooth background color transition */
   ${flexCenter()};
