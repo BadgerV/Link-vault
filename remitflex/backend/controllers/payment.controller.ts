@@ -51,6 +51,7 @@ export const initializeBillPayment = async (req: Request, res: Response) => {
   try {
     const params = await algodClient.getTransactionParams().do();
     const vault: any = await getVault(linkvaulturl);
+    console.log(defaultConfig.ASSET_ID, vault)
 
     const txnParams = {
       from: vault.address,
@@ -170,7 +171,8 @@ export const initializePayment = async (req: Request, res: Response) => {
   try {
     const params = await algodClient.getTransactionParams().do();
     const vault: any = await getVault(linkvaulturl);
-
+    console.log(defaultConfig.ASSET_ID, vault)
+    
     const txnParams = {
       from: vault.address,
       to: defaultConfig.MERCHANT_ADDRESS,
