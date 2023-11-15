@@ -6,7 +6,6 @@ import { USER_ACTION_TYPES } from "./user.action";
 // initial state
 const initialState: CurrentType = {
   currentVault: null,
-  rewards: null,
   bills: null
 };
 
