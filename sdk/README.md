@@ -262,10 +262,77 @@ sendASATokens();
 
 It creates a recipient address using Linkvault's createVault function, and then sends ASAs or NFTs from a specified sender to the Linkvault address.
 
+
+
+### Example: Claim a Linkvault to Algorand wallet withdrawing all ALGOs, (ASAs) and NFTs
+
+```javascript
+async function claimVault(recipientAddress = defaultConfig.MERCHANT_ADDRESS) {
+  const params = await algodClient.getTransactionParams().do();
+  const vault = await getVault(linkvaulturl);
+
+  // Get the entire balance of the vault
+  const balance = await algodClient.accountInformation(vault.address).do();
+
+  // Extract private and public keys from the vault
+  const sk = await vault.keypair.privateKey;
+  const pk = await vault.keypair.publicKey;
+
+  // Concatenate private and public keys to create a Uint8Array
+  const vaultSK = new Uint8Array([...sk, ...pk]);
+
+  // Create an asset transfer transaction for each ASA
+  const assetTransferTxns = balance.assets.map((asset) => {
+    return algosdk.makeAssetTransferTxnWithSuggestedParams(
+      vault.address,            // sender's address
+      recipientAddress,         // recipient's address for the ASA
+      recipientAddress,         // closeRemainderTo (close to recipient's address)
+      undefined,
+      asset.amount,              // amount of the ASA to send
+      undefined,
+      asset.assetidx,            // asset index
+      params
+    );
+  });
+
+  // Create a payment transaction for Algos
+  const algoTransferTxn = algosdk.makePaymentTxnWithSuggestedParams(
+    vault.address,                   // sender's address
+    recipientAddress,                // recipient's address for Algos
+    balance.amount,                  // use the entire Algo balance
+    undefined,
+    undefined,
+    params
+  );
+
+  // Combine all transactions into a single group
+  const groupedTxns = [algoTransferTxn, ...assetTransferTxns];
+
+  // Sign all transactions in the group
+  const signedTxns = groupedTxns.map((txn) => algosdk.signTransaction(txn, vaultSK));
+
+  // Combine all signed transactions into a single blob
+  const signedTxnBlob = algosdk.concatArrays(...signedTxns.map((st) => st.blob));
+
+  // Send the signed transaction group to the Algorand node
+  const { txId } = await algodClient.sendRawTransaction(signedTxnBlob).do();
+
+  // Wait for transaction confirmation
+  const result = await algosdk.waitForConfirmation(algodClient, txId, 4);
+
+  return result;
+}
+
+// Example usage:
+const recipient = 'some_other_address'; // You can pass the recipient address as a parameter
+const result = await claimVault(recipient);
+```
+
+
 ## Package Information
 
 - **Package Name**: link-vault
-- **Version**: 1.2.8
+- **Version**: 1.3.0
 - **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
 - **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)

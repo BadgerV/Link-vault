@@ -9,7 +9,7 @@ const algodServer = "https://mainnet-api.algonode.cloud/";
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, port);
 
 const b58 = new B58();
-const vaultUrl = "https://linkvault.com.ng/l#";
+const vaultUrl = "https://linkvault.com.ng/lnv";
 
 const accountBalances = async (address: string) => {
   const accountInfo = await algodClient.accountInformation(address).do();
