@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 import { getVault } from "link-vault";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../store/user/user.reducer";
-const REACT_APP_CLIENT_URL = import.meta.env.VITE_APP_CLIENT_URL as string;
+const REACT_APP_CLIENT_URL = import.meta.env.VITE_APP_ENGINE_VAULT as string;
 
 const VaultScanner: React.FC = () => {
   const [data, setData] = useState(null);
