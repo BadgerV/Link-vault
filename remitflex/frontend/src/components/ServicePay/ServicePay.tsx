@@ -49,6 +49,7 @@ const PayBill = () => {
     const category = location.state
     const [currentRate, setCurrentRate] = useState<any>(null);
     const [txId, setTxId] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     // dispatch
     const dispatch = useDispatch();
@@ -93,6 +94,7 @@ const PayBill = () => {
     // handle payment
     const handlePay = async (e: React.FormEvent<HTMLFormElement> | any) => {
         e.preventDefault()
+        setIsLoading(true)
         // const usdAmount : string | number = amount[0] === 0 ? (nairaAmount/750).toFixed(2)  : (result?.amount/750).toFixed(2)
         // const naira = amount[0] === 0 ? nairaAmount : result?.amount
         const customer = category === "electricity" || category === "cable" ? meter : `+${phone}`
@@ -108,6 +110,7 @@ const PayBill = () => {
         const ans : any=  await paymentControl.billPayment(body);
         // add loading spinner or state
         console.log(ans, "ans")
+        setIsLoading(false)
         setTxId(ans?.data?.txId)
 
         //  if(!bills[0]?.label_name || !customer) {
@@ -147,7 +150,10 @@ const PayBill = () => {
     }
     return (
         <PayBillContainer>
-            {!bills ? <Spinner /> :
+            {
+                isLoading ? <Spinner /> :
+            
+            !bills ? <Spinner /> :
                 !txId ? 
                 <PayBillInnerContainer>
                     <PayBillHeader>{
@@ -229,7 +235,7 @@ const PayBill = () => {
                                     value={amount[2] === 0 ? undefined : result?.amount}
                                     min={category === "electricity" ? 1000 : undefined}
                                     onChange={(e) => setNairaAmount(e.target.value)}
-                                    placeholder="N0"
+                                    placeholder="₦ 0.00"
                                 />
                                 <PayBillAmountIn>
                                     <PayBillAmountInText>Amount in</PayBillAmountInText>
@@ -259,7 +265,8 @@ const PayBill = () => {
                 />
                 <p>View transaction on <a className="algo__link" href={`https://algoexplorer.io/tx/${txId}`} target="_blank">algoexplorer</a></p>
               </div>
-            }
+            
+        }
         </PayBillContainer>
     )
 }

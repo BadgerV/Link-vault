@@ -16,6 +16,7 @@ import Select from "react-select";
 import { customStyles } from "../../utils/customSelectorHelper";
 import { commaFormat } from "../../utils/addons";
 import { useSelector } from "react-redux";
+import Spinner from "../Spinner/Spinner";
 
 const ConvertMoneyToLocalCurrency = () => {
   const [switchBtn, setSwitchBtn] = useState(false);
@@ -25,6 +26,7 @@ const ConvertMoneyToLocalCurrency = () => {
   const [currentRate, setCurrentRate] = useState<any>(null);
   const vault = useSelector((state: any) => state.currentUser?.currentVault);
   const [txId, setTxId] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log(linkVaultUrl, "linkVaultUrl");
   const [data, setData] = useState({
@@ -114,6 +116,7 @@ const ConvertMoneyToLocalCurrency = () => {
    
   console.log(data);
   const remitPayment  = async () => {
+    setIsLoading(true)
     // add a loading spinner to button
     console.log(vault)
     const body = {
@@ -127,8 +130,10 @@ const ConvertMoneyToLocalCurrency = () => {
     };
     console.log(body, "body");
     const payment = await paymentControl.remitPayment(body);
+    setIsLoading(false)
     setTxId(payment?.data?.txId)
     console.log(payment, "payment");
+
 
     handleNextStep()
 
@@ -173,7 +178,9 @@ const ConvertMoneyToLocalCurrency = () => {
         </StepContainer>
       )}
 
-      <div className="position__step">
+      {
+        isLoading ? <Spinner /> :
+        <div className="position__step">
         {currentStep === 1 && (
           <div className="send__money">
             <p className="send-head"> Send Money</p>
@@ -244,6 +251,7 @@ const ConvertMoneyToLocalCurrency = () => {
             </div>
           </div>
         )}
+
 
         {currentStep === 2 && (
           <div className="send__money">
@@ -363,6 +371,9 @@ const ConvertMoneyToLocalCurrency = () => {
           </div>
         )}
       </div>
+
+      }
+
     </SendContainer>
   );
 };
