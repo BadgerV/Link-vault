@@ -75,7 +75,7 @@ const LaunchVault = () => {
     setShowPopup(false);
     setTimeout(() => {
       window.location.reload();
-    }, 2000)
+    }, 3200)
 
   };
 
