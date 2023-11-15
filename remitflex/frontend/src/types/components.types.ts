@@ -19,6 +19,7 @@ export interface ButtonPropType {
   border?: string;
   background?: string;
   className?: string;
+  type?: "button" | "submit" | "reset";
 }
 
 export type TransactionType = {
@@ -30,6 +31,9 @@ export type TransactionType = {
   status: string;
 };
 
+
 export interface WalletStatusType {
   address: string | undefined;
 }
+
+export type DropdownSelectType = [string, React.Dispatch<React.SetStateAction<string>>]

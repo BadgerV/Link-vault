@@ -19,13 +19,13 @@ import Select from "react-select";
 
 // import utils objects
 import { customStyles, options, services } from "../../../src/utils/customSelectorHelper";
-import { Link } from "react-router-dom";
 import * as billAPI from "../../services/protected/billsAPI";
 
 // use navigate
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { setBills } from "../../store/user/user.reducer";
 // import { alert, close } from "../../store/alert/alert.modal.reducer";
 
 const Bills = () => {
@@ -41,17 +41,32 @@ const Bills = () => {
     //    dispatch(alert("Connect Wallet ⛔️"));
     //    return setTimeout(() => {
     //       dispatch(close(""))
-    //    }, 1000)
+    //    }, 1000)  // add loading state
     // }
     //   setCategory(category)
     //  await getBills(selectedOption?.value, category, Navigate, dispatch);
-    const res = await billAPI.bills.getCategories();
+    if(category === 'false') return
+    console.log({
+      country : selectedOption.value,
+      category : category
+     })
+    const res = await billAPI.billings.getCategories( {
+      country : selectedOption.value,
+      category : category
+     });
+    if(res) {
+      dispatch(setBills(res.data))
+      console.log(res, "data")
+      Navigate('/services/pay' , {state : category})
+
+    }
     console.log(res, "response");
   };
 
   // useEffect(() => {
   //     console.log(category)
   // })
+  console.log(services)
 
   return (
     <ProductsContainer>

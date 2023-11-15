@@ -1,6 +1,6 @@
 import * as paymentRoute from "../apiRoutes/paymentRoutes";
 import { protectedGet, protectedPost } from "../apiHelper";
-import { IRemitPayment } from "../../types/services.types";
+import { IRemitPayment, IBillPayment } from "../../types/services.types";
 
 export const paymentControl = {
   getNGNrate: async () => {
@@ -9,7 +9,7 @@ export const paymentControl = {
   remitPayment: async (remit : IRemitPayment ) => {
     return await protectedPost(paymentRoute.remitPayment, remit);
   },
-  billPayment: async (bill : any) => {
+  billPayment: async (bill : IBillPayment) => {
     return await protectedPost(paymentRoute.billPayment, bill);
   }
 };

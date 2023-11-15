@@ -7,7 +7,8 @@ const Button: React.FC<ButtonPropType> = ({
   background,
   color,
   border,
-  className
+  className,
+  type,
 }) => {
   return (
     <ButtonWrapper>
@@ -17,6 +18,7 @@ const Button: React.FC<ButtonPropType> = ({
         onClick={onClick}
         color={color}
         className={className}
+        type={type === "submit" ? "submit" : "button"}
       >
         <p>{title}</p>
       </ButtonComponent>

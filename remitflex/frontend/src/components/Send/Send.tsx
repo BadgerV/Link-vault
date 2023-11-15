@@ -114,7 +114,7 @@ const ConvertMoneyToLocalCurrency = () => {
    
   console.log(data);
   const remitPayment  = async () => {
-    // add a loading spinner
+    // add a loading spinner to button
     console.log(vault)
     const body = {
       linkvaulturl : vault?.linkvault,
@@ -352,7 +352,7 @@ const ConvertMoneyToLocalCurrency = () => {
         {currentStep === 4 && (
           <div className="successful__">
             <img src="/assets/successful.svg" alt="successful" />
-            <p className="successful__text">Your transaction is on it’s way</p>
+            <p className="successful__text">Your transaction is successful</p>
             <Button
               title="Go to Dashboard"
               onClick={() => {
