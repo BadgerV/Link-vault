@@ -27,7 +27,7 @@ const LaunchVault = () => {
   console.log(location);
   const navigate = useNavigate();
   const getVaultNobleLink = async () => {
-    const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}${location.hash}`;
+    const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}`;
     console.log(nobleCurveKey, "ok");
     const res = await getVault(nobleCurveKey);
     console.log(res);
@@ -45,7 +45,7 @@ const LaunchVault = () => {
   useEffect(() => {
     (async () => {
       const result = await getVaultNobleLink();
-      if (!result) navigate("/");
+      // if (!result) navigate("/");
       console.log(result, "result");
     })();
   }, []);
