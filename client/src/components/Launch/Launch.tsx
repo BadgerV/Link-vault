@@ -70,9 +70,14 @@ const LaunchVault = () => {
 
   // console.log(params)
   const handleClaim = async () => {
-    await claimVault(vaultNobleLink, address, walletType, ownedAssets);
+   const vault :any= await claimVault(vaultNobleLink, address, walletType, ownedAssets);
+   if(vault) {
     successToast('successfully claimed asset');
     setShowPopup(false);
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000)
+   }
   };
 
   
