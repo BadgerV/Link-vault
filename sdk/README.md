@@ -332,7 +332,7 @@ const result = await claimVault(recipient);
 ## Package Information
 
 - **Package Name**: link-vault
-- **Version**: 1.2.8
+- **Version**: 1.3.0
 - **Author**: David Kazeem and Samuel Tosin
 - **License**: ISC
 - **GitHub Repository**: [linkvault-package](https://github.com/Samuellyworld/Link-vault/tree/main/sdk)
