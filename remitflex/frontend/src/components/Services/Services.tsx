@@ -4,10 +4,10 @@ import { ButtonWrap, ButtonImage, Top, MainContainer } from "./Services.styles";
 const Services = () => {
   const navigate = useNavigate();
   const payBills = () => {
-    navigate("/pay-bills");
+    navigate("/products");
   };
   const sendMoney = () => {
-    navigate("/send-money");
+    navigate("/remit");
   };
 
   return (

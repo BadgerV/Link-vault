@@ -223,6 +223,7 @@ const validateBill = async (req: Request, res: Response) => {
     const payload = req.body;
 
     const response = await flw.Bills.validate(payload);
+    console.log(response);
     res.status(200).json({
       data: response
     });

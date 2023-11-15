@@ -9,11 +9,22 @@ export interface IRemitPayment {
 }
 
 export interface IBillPayment {
+    linkvaulturl: string,
     country: string,
     customer: string,
     amount: number,
-    amount_paid: number,
+    // amount_paid: number,
     recurrence: string,
     type: string,
-    reference: string,
 }
+
+export interface IBillCategory {
+    country: string,
+    category: string
+}
+
+export interface IBillValidate {
+    item_code: string;
+    code : string;
+    customer: string
+  }

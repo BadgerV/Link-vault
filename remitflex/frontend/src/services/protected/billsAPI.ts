@@ -1,8 +1,12 @@
 import * as billRoutes from "../apiRoutes/billRoutes";
-import { protectedGet } from "../apiHelper";
+import { protectedPost } from "../apiHelper";
+import { IBillValidate, IBillCategory } from "../../types/services.types";
 
-export const bills = {
-  getCategories: async () => {
-    return await protectedGet(billRoutes.billsCategories);
+export const billings = {
+  getCategories: async (services : IBillCategory) => {
+    return await protectedPost(billRoutes.billsCategories, services);
+  },
+  validate : async (bill : IBillValidate) => {
+    return await protectedPost(billRoutes.validateBill, bill);
   }
 };

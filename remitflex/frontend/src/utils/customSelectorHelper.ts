@@ -19,6 +19,7 @@ export const customStyles: any = {
     paddingLeft: "25px", // add left padding to accommodate icon
     width: "100%",
     border: "1px solid black",
+    fontFamily: "var(--font-family-nista)",
     fontSize: "0.8rem",
     cursor: "pointer",
     boxShadow: state.isFocused ? "none" : "none",
@@ -47,7 +48,8 @@ export const customStyles: any = {
     background: state.isSelected ? "#eee" : "white", // highlight selected option
     color: "black",
     fontSize: "0.8rem",
-    cursor: "pointer"
+    cursor: "pointer",
+    fontFamily: "var(--font-family-nista)",
   }),
   optionLabel: (provided: any, state: any) => ({
     ...provided,

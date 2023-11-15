@@ -55,5 +55,6 @@ export const VaultContainer = styled.div`
     align-items: center;
     width: 300px;
     height: 300px;
+    // border-radius : 10px;
   }
 `;
