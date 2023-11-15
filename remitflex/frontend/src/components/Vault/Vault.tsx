@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { VaultContainer } from "./Vault.styles";
 import { useNavigate } from "react-router-dom";
 import { QrReader } from "react-qr-reader";
@@ -6,12 +6,34 @@ import Button from "../Button/Button";
 import { getVault } from "link-vault";
 import { useDispatch } from "react-redux";
 import { setCurrentUser } from "../../store/user/user.reducer";
+const REACT_APP_CLIENT_URL = import.meta.env.VITE_APP_CLIENT_URL as string;
 
 const VaultScanner: React.FC = () => {
   const [data, setData] = useState(null);
   const [startScan, setStartScan] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  console.log(REACT_APP_CLIENT_URL, "REACT_APP_CLIENT_URL");
+
+  const getVaultNobleLink = async () => {
+    const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}${location.hash}`.replace(
+      "/app",
+      ""
+    );
+    console.log(nobleCurveKey, "ok");
+    const res = await getVault(nobleCurveKey);
+    console.log(res, "res");
+    setData(res.linkvault);
+    setCurrentUser(res);
+    return res;
+  };
+
+  useEffect(() => {
+    (async () => {
+      await getVaultNobleLink();
+    })();
+  }, []);
 
   const handleStart = () => {
     setStartScan(true);
@@ -30,7 +52,7 @@ const VaultScanner: React.FC = () => {
       alert("Invalid LinkVault URL");
       return;
     } else {
-      dispatch(setCurrentUser(linkWallet.address));
+      dispatch(setCurrentUser(linkWallet));
       navigate("/dashboard");
     }
   };
@@ -50,6 +72,7 @@ const VaultScanner: React.FC = () => {
                 console.info(error);
               }
             }}
+            //@ts-ignore
             style={{ width: "100%" } as any}
           />
         ) : (

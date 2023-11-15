@@ -59,6 +59,7 @@ const LaunchVault = () => {
   const handleClaim = async () => {
     await claimVault(vaultNobleLink, address, walletType, ownedAssets);
   };
+
   return (
     <LaunchContainer>
       <div className="launch__header">
@@ -100,8 +101,13 @@ const LaunchVault = () => {
                 <p>Asset will be sent to the connected algorand wallet</p>
               </div>
               <div className="popup__second">
-                <h3>via Remit flex</h3>
-                <p>Make remittances and pay over 18,000 bill categories in africa</p>
+                <a
+                  href={`https://remitflex.com/app${location.pathname}${location.hash}`}
+                  target="_blank"
+                >
+                  <h3>via Remit flex</h3>
+                  <p>Make remittances and pay over 18,000 bill categories in africa</p>
+                </a>
               </div>
             </div>
           </div>
