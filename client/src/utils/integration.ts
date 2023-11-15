@@ -15,7 +15,7 @@ export const sendTransaction = async (amount, address, linkVaultAddress, signerW
   if(!amount) return errorToast("Please enter an amount to fund your vault with");
   if(selectedAsset.minimumBalance < 200000) return errorToast(`You need a minimum of ${selectedAsset.minimumBalance/10**6} ALGO to fund your vault`);
   if(selectedAsset.amount < amount) return errorToast(`You do not have sufficient balance to make this transaction`);
-  
+
   const suggestedParams = await algodClient.getTransactionParams().do();
 
   console.log(linkVaultAddress);
@@ -45,7 +45,7 @@ export const claimVault = async (vault, address, signerWalletType, storedAssets)
         const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
           from: vault.address,
           to: address,
-          amount: asset.amount - asset.minimumBalance - 100000,
+          amount:asset.amount - asset.minimumBalance - 300000,
           suggestedParams: suggestedParams
         });
         console.log(asset.amount - asset.minimumBalance - 100000);
