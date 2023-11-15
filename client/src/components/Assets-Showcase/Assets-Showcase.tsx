@@ -3,6 +3,7 @@ import { Asset, NFT } from "../../utils/assets.utils";
 import OptionLabel from "../Option-Label";
 import { AssetsShowcaseContainer } from "./Assets-Showcase.styles";
 import { useSelector } from "react-redux";
+import { errorToast } from "../../utils/customToast";
 
 interface OwnedAssets {
   ownedAssets: {
@@ -59,8 +60,9 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
   // };
 
   const handleDropdown = () => {
+    if(params) return;
     if (!params && !address) {
-      alert("Please connect your wallet first");
+      errorToast("Please connect your wallet");
       return;
     }
     params ? setShowDropdownItems(true) : setShowDropdownItems(!showDropdownItems);
@@ -73,7 +75,7 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
           className={`link__types ${showDropdownItems ? "link__active" : ""} `}
           onClick={handleDropdown}
         >
-          <span className={`link-span ${selectedAsset ? "asset-selected" : ""}`}>
+          <span className={`link-span ${params ? "params-select" : "unset-params"} ${selectedAsset ? "asset-selected" : ""}`}>
             {selectedAsset ? (
               <div className="selected__link">
                 <div className="selected__link__item">
@@ -86,7 +88,7 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
               "Algorand standard assets"
             )}
           </span>
-          <img src={"/assets/svg/dropdown.svg"} alt="dropdown" className="dropdown__icon" />
+          { !params &&  <img src={"/assets/svg/dropdown.svg"} alt="dropdown" className="dropdown__icon" /> }
         </div>
         {showDropdownItems && (
           <div className="owned__assets">
@@ -96,7 +98,9 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
                 <div
                   className="owned__assets__item"
                   key={i}
-                  onClick={() => handleSelectAsset(asset)}
+                  onClick={() => {
+                       if(params) return
+                     handleSelectAsset(asset)}}
                 >
                   <OptionLabel key={i} option={asset} />
                 </div>

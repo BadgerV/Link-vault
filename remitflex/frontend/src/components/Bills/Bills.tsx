@@ -26,10 +26,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { setBills } from "../../store/user/user.reducer";
+import Spinner from "../Spinner/Spinner";
 // import { alert, close } from "../../store/alert/alert.modal.reducer";
 
 const Bills = () => {
   const address = useSelector((state: RootState) => state.currentUser?.currentUser);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
   // const [category, setCategory] = useState("")
   const dispatch = useDispatch();
@@ -37,6 +39,7 @@ const Bills = () => {
   const Navigate = useNavigate();
   // sort bill payments and link
   const payService = async (category: string) => {
+    setIsLoading(true);
     // if(!address) {
     //    dispatch(alert("Connect Wallet ⛔️"));
     //    return setTimeout(() => {
@@ -57,10 +60,12 @@ const Bills = () => {
     if(res) {
       dispatch(setBills(res.data))
       console.log(res, "data")
+      setIsLoading(false);
       Navigate('/services/pay' , {state : category})
 
     }
     console.log(res, "response");
+
   };
 
   // useEffect(() => {
@@ -70,6 +75,9 @@ const Bills = () => {
 
   return (
     <ProductsContainer>
+      {
+        isLoading ? <Spinner /> :
+      
       <ProductsMiniContainer>
         <ProductsTop>
           <ProductsTopLeft>What bill do you want to pay?</ProductsTopLeft>
@@ -100,6 +108,7 @@ const Bills = () => {
           </ProductsBox>
         </ProductsBoxesContainer>
       </ProductsMiniContainer>
+}
     </ProductsContainer>
   );
 };

@@ -1,5 +1,6 @@
 import algosdk from "algosdk";
 import { getVault } from "link-vault";
+import { errorToast } from "./customToast";
 
 // constants
 const ALGODTOKEN = ""; //API token
@@ -8,7 +9,13 @@ const ALGODSERVER = "https://mainnet-api.algonode.cloud/";
 
 export const algodClient = new algosdk.Algodv2(ALGODTOKEN, ALGODSERVER, PORT);
 
-export const sendTransaction = async (amount, address, linkVaultAddress, signerWalletType) => {
+export const sendTransaction = async (amount, address, linkVaultAddress, signerWalletType, selectedAsset) => {
+  if(!address) return errorToast("Please connect your wallet");
+  if (!selectedAsset) return errorToast("Please select a token you want to fund your vault with");
+  if(!amount) return errorToast("Please enter an amount to fund your vault with");
+  if(selectedAsset.minimumBalance < 200000) return errorToast(`You need a minimum of ${selectedAsset.minimumBalance/10**6} ALGO to fund your vault`);
+  if(selectedAsset.amount < amount) return errorToast(`You do not have sufficient balance to make this transaction`);
+  
   const suggestedParams = await algodClient.getTransactionParams().do();
 
   console.log(linkVaultAddress);
@@ -93,7 +100,7 @@ export const sendAmountToASA = async (
   const algoOptInTxn = [{ txn: algoTxn, signers: [address] }];
   const algoSignedTxn = await signerWalletType.signTransaction([algoOptInTxn]);
   const algoTxId = await algodClient.sendRawTransaction(algoSignedTxn).do();
-
+  console.log(algoTxId, "algoTxId");
   if (algoTxId) {
     const vault = await getVault(linkVault.vault);
     console.log(vault, "vault");
@@ -129,8 +136,6 @@ export const sendAmountToASA = async (
             return asaTxId;
           }
         });
-    } else {
-      alert("Vault not found");
-    }
+    } 
   }
 };

@@ -8,6 +8,27 @@ export const LaunchContainer = styled.div`
   margin: auto;
   gap: 1rem;
 
+  .launch__ {
+    width: 500px !important;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .popup__third {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: solid 1px var(--vault-primary);
+    border-radius: 6px;
+    cursor: not-allowed;
+    background: whitesmoke;
+    opacity: 0.5;
+
+  }
+
   .popup__modal {
     display: flex;
     flex-direction: column;
@@ -55,17 +76,17 @@ export const LaunchContainer = styled.div`
       border: solid 1px var(--vault-primary);
       border-radius: 6px;
       cursor: pointer;
-      background: aliceblue;
+      background:#e53f7124;
       &:hover {
-        background: #7d648c;
+        background: #e53f71;
         color: white;
       }
     }
   }
 
   .owned__assets {
-    position: unset;
-    width: 100%;
+    position: unset !important;
+    width: 100% !important;
     max-height: 14rem;
   }
 
