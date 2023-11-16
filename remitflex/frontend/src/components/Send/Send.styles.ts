@@ -15,15 +15,15 @@ export const SendContainer = styled.div`
   gap: 3rem;
 
   @media screen and (max-width: 700px) {
-   width: 90%;
+    width: 90%;
   }
   @media screen and (max-width: 400px) {
-     width : 95%;
+    width: 95%;
   }
 
   @media screen and (max-width: 380px) {
-      width : 100%;
-      padding : 0rem 0.8rem;
+    width: 100%;
+    padding: 0rem 0.8rem;
   }
 
   .algo__link {

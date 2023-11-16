@@ -15,7 +15,7 @@ export const BodyText = styled.div`
     justify-content: center;
     align-items: center;
     width: 96%;
-    margin:unset;
+    margin: unset;
     padding: 0.5rem 0.5rem;
   }
 `;

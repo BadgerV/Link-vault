@@ -126,8 +126,6 @@ const ConvertMoneyToLocalCurrency = () => {
     handleNextStep();
   };
 
-
-
   return (
     <SendContainer>
       {currentStep < 4 && (
@@ -230,7 +228,7 @@ const ConvertMoneyToLocalCurrency = () => {
                     title="Proceed"
                     onClick={handleSendMoneyOnclick}
                     className={!data.youPay ? "disabled-state" : ""}
-                  // onClick={handleOnclick}
+                    // onClick={handleOnclick}
                   />
                 </div>
               </div>
@@ -317,7 +315,9 @@ const ConvertMoneyToLocalCurrency = () => {
                     <div className="init__header">
                       <span>Recipient gets</span>
 
-                      <span>₦{commaFormat((parseFloat(data.youPay) ?? 0 * currentRate).toFixed(2))}</span>
+                      <span>
+                        ₦{commaFormat((parseFloat(data.youPay) ?? 0 * currentRate).toFixed(2))}
+                      </span>
                     </div>
                     <div className="init__header">
                       <span>Transfer time</span>

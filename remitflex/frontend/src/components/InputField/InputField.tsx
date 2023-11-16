@@ -1,12 +1,5 @@
-
 import { InputPropTypes } from "../../types/components.types";
-import {
-  Container,
-  ErrorText,
-  Input,
-  InputContainer,
-  Label,
-} from "./InputField.styles";
+import { Container, ErrorText, Input, InputContainer, Label } from "./InputField.styles";
 
 const InputField: React.FC<InputPropTypes> = ({
   name,
@@ -20,7 +13,6 @@ const InputField: React.FC<InputPropTypes> = ({
   error,
   type
 }) => {
-
   return (
     <Container>
       <Label>{label}</Label>
@@ -34,9 +26,7 @@ const InputField: React.FC<InputPropTypes> = ({
           disabled={disabled}
           type={type}
         />
-        {
-          isPassword && null
-        }
+        {isPassword && null}
       </InputContainer>
       {error && <ErrorText>{error}</ErrorText>}
     </Container>

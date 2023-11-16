@@ -23,7 +23,7 @@ import * as billAPI from "../../services/protected/billsAPI";
 
 // use navigate
 import { useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setBills } from "../../store/user/user.reducer";
 import Spinner from "../Spinner/Spinner";
 // import { alert, close } from "../../store/alert/alert.modal.reducer";
