@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { RootState } from "../../store/store";
-import { setCurrentUser } from "../../store/user/user.reducer";
 import { HeaderConnectWallet, Image, LogoWrapper, Text } from "./Header.styles";
 import { WalletStatus } from "./WalletStatus";
 
 const Header: React.FC = () => {
   const [handleCopyAddress, setHandleCopyAddress] = useState(false);
   const vault = useSelector((state: RootState) => state.currentUser?.currentVault);
-  console.log(vault, "address");
 
   const handleCopyClick = () => {
     setHandleCopyAddress(true);
@@ -23,10 +21,6 @@ const Header: React.FC = () => {
     if (!vault?.address) return;
   }, [vault?.address]);
 
-  // const handleDisconnect = () => {
-  //   localStorage.clear();
-  //   dispatch(setCurrentUser(""));
-  // };
 
   return (
     <LogoWrapper>

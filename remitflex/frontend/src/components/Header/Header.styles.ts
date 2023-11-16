@@ -79,7 +79,7 @@ export const HeaderConnectWallet = styled.button`
   }
 
   span {
-    font-family: Sora-Regular;
+    font-family: var(--font-family-nista);
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
