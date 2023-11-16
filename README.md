@@ -31,8 +31,7 @@ To onboard more users across Africa, we need to look at building products in cry
 ## 🔄 Architectural Flow.
 
 Link vault & remitflex Architectural flow
-![image](https://i.postimg.cc/2SR0npYn/Blank-diagram-1.jpg)
-![image](https://i.postimg.cc/gjrHPtX8/Blank-diagram.jpg)
+![image](https://i.postimg.cc/KYDDf8vB/18bd5b8766eeeffa23cf4d64e99ad462.jpg)
 
 ## 🤖 Tools & Technologies
 
