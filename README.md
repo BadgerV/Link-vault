@@ -1,6 +1,6 @@
 ## LinkVault
 
-[SolPayPLus](https://linkvault.com.ng/) stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
+[LinkVault](https://linkvault.com.ng/) stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
 
 Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.
 
