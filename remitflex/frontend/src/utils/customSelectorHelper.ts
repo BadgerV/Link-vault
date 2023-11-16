@@ -51,7 +51,7 @@ export const customStyles: any = {
     cursor: "pointer",
     fontFamily: "var(--font-family-nista)"
   }),
-  optionLabel: (provided: any, state: any) => ({
+  optionLabel: (provided: any) => ({
     ...provided,
     paddingLeft: "10px" // add left padding to space out label from icon
   }),
