@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { RootState } from "../../store/store";
@@ -20,7 +20,6 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (!vault?.address) return;
   }, [vault?.address]);
-
 
   return (
     <LogoWrapper>

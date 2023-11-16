@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { CustomHashLoader } from "../components/HashLoader/Hashloader";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -18,11 +18,11 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/app/:vaultKey" element={<VaultPage />} />
-        <Route path="/dashboard" element={ vault ? <Dashboard /> : <VaultPage/> } />
-        <Route path="/products" element={ vault ? <Bills /> : <VaultPage/> } />
-        <Route path="/remit" element={ vault ? <SendMoney /> : <VaultPage /> } />
+        <Route path="/dashboard" element={vault ? <Dashboard /> : <VaultPage />} />
+        <Route path="/products" element={vault ? <Bills /> : <VaultPage />} />
+        <Route path="/remit" element={vault ? <SendMoney /> : <VaultPage />} />
         <Route path="/app" element={<VaultPage />} />
-        <Route path="/services/pay" element={ vault ? <ServicePay /> : <VaultPage/> } />
+        <Route path="/services/pay" element={vault ? <ServicePay /> : <VaultPage />} />
       </Routes>
     </Suspense>
   );
