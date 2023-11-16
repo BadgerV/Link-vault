@@ -1,4 +1,4 @@
-## LinkVault
+## 🚂 LinkVault.
 
 [LinkVault](https://linkvault.com.ng/) stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
 
@@ -72,9 +72,9 @@ docker-compose up  --build
 
 ## 👨🏼‍🍳 Team.
 
-- [David Kazeem](https://github.com/davonjagah)
-- [Samuel Tosin](https://github.com/Samuellyworld)
-- [Ikuesan Emmanuel](https://ng.linkedin.com/in/ikuesan-emmanuel-7b312b165)
+- [David Kazeem](https://github.com/davonjagah) [Software Engineer]
+- [Samuel Tosin](https://github.com/Samuellyworld) [Software Engineer]
+- [Ikuesan Emmanuel](https://ng.linkedin.com/in/ikuesan-emmanuel-7b312b165) [Lead Designer]
 
 ## 🔗 Links.
 
