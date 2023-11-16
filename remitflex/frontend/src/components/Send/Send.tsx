@@ -373,6 +373,7 @@ const ConvertMoneyToLocalCurrency = () => {
                   className="algo__link"
                   href={`https://algoexplorer.io/tx/${txId}`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   algoexplorer
                 </a>

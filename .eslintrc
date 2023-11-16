@@ -13,7 +13,7 @@
     "rules": {
       "no-unused-vars": "warn",
       "no-undef": "warn",
-      "no-extra-semi": "error",
+      "no-extra-semi": "warn",
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "indent": ["warn", 2],
