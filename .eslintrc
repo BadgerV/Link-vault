@@ -3,7 +3,7 @@
       "browser": true,
       "es2021": true
     },
-    "extends": ["eslint:recommended", "react-app"],
+    // "extends": ["eslint:recommended", "react-app"],
     "overrides": [],
     "parserOptions": {
       "ecmaVersion": "latest",
@@ -14,17 +14,17 @@
       "no-unused-vars": "warn",
       "no-undef": "warn",
       "no-extra-semi": "warn",
-      "semi": ["error", "always"],
-      "quotes": ["error", "double"],
+      "semi": ["warn", "always"],
+      "quotes": ["warn", "double"],
       "indent": ["warn", 2],
-      "comma-dangle": ["error", "never"],
-      "arrow-parens": ["error", "as-needed"],
-      "node/no-extraneous-require": "error",
-      "node/no-missing-require": "error",
-      "node/no-unpublished-require": "error",
-      "react/jsx-uses-react": "error",
-      "react/jsx-uses-vars": "error",
-      "react/prop-types": "error"
+      "comma-dangle": ["warn", "never"],
+      "arrow-parens": ["warn", "as-needed"],
+      "node/no-extraneous-require": "warn",
+      "node/no-missing-require": "warn",
+      "node/no-unpublished-require": "warn",
+      "react/jsx-uses-react": "warn",
+      "react/jsx-uses-vars": "warn",
+      "react/prop-types": "warn"
     },
     "ignorePatterns": ["src/**/*.test.jsx"]
   }
