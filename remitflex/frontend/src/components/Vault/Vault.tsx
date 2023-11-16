@@ -15,6 +15,7 @@ const VaultScanner: React.FC = () => {
   const dispatch = useDispatch();
 
   const getVaultNobleLink = async () => {
+    //eslint-disable-next-line
     const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}${location.hash}`.replace(
       "/app",
       ""
