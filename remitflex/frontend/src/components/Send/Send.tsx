@@ -28,7 +28,6 @@ const ConvertMoneyToLocalCurrency = () => {
   const [txId, setTxId] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  // console.log(linkVaultUrl, "linkVaultUrl");
   const [data, setData] = useState({
     amount: "",
     recipient: "",
@@ -57,8 +56,6 @@ const ConvertMoneyToLocalCurrency = () => {
     (async () => {
       const data: any = await paymentControl.getNGNrate();
       setCurrentRate(data?.rate);
-      console.log(data, "rate");
-      // setCurrentRate(rate?.data?.data?)
     })();
   }, []);
 
@@ -71,9 +68,8 @@ const ConvertMoneyToLocalCurrency = () => {
           account_bank: data.bankName.code
         };
         const account = await banks.resolveAccount(body);
+        //@ts-ignore
         setAccount(account?.data?.data.account_name);
-
-        console.log(account, "account");
       }
     })();
   }, [data.accountNumber]);
@@ -96,10 +92,6 @@ const ConvertMoneyToLocalCurrency = () => {
       ...data,
       [e.target.name]: e.target.value
     });
-    // if(e.target.name === 'accountNumber' && e.target.value.length > 7) {
-    //   await resolveUserNameBankName()
-    // }
-    console.log(e.target.value);
   };
 
   const handleSendMoneyOnclick = () => {
@@ -114,11 +106,9 @@ const ConvertMoneyToLocalCurrency = () => {
     }
   };
 
-  console.log(data);
   const remitPayment = async () => {
     setIsLoading(true);
     // add a loading spinner to button
-    console.log(vault);
     const body = {
       linkvaulturl: vault?.linkvault,
       account_bank: data.bankName.code,
@@ -128,24 +118,13 @@ const ConvertMoneyToLocalCurrency = () => {
       narration: data.reason,
       debit_currency: "NGN"
     };
-    console.log(body, "body");
     const payment = await paymentControl.remitPayment(body);
     setIsLoading(false);
+    //@ts-ignore
     setTxId(payment?.data?.txId);
-    console.log(payment, "payment");
 
     handleNextStep();
   };
-
-  //  const resolveUserNameBankName = async () => {
-  //   console.
-  //   const body = {
-  //     account_number: data.accountNumber,
-  //     account_bank: data.bankName.id
-  //   }
-  //      const account = await banks.resolveAccount(body)
-  //      console.log(account, "account")
-  //  }
 
   return (
     <SendContainer>
@@ -189,6 +168,7 @@ const ConvertMoneyToLocalCurrency = () => {
                   name={"youPay"}
                   value={data.youPay}
                   placeholder={""}
+                  //@ts-ignore
                   onChange={handleOnChange}
                   leftIcon={switchBtn ? renderNaira() : renderDollar()}
                   rightIcon={<></>}
@@ -209,8 +189,10 @@ const ConvertMoneyToLocalCurrency = () => {
                 <InputField
                   label={"Recipient Gets"}
                   name={"recipient"}
+                  // @ts-ignore
                   value={commaFormat((data.youPay * currentRate).toFixed(2)) ?? "0"}
                   placeholder={""}
+                  //@ts-ignore
                   onChange={handleOnChange}
                   leftIcon={switchBtn ? renderDollar() : renderNaira()}
                   rightIcon={<></>}
@@ -273,6 +255,7 @@ const ConvertMoneyToLocalCurrency = () => {
                   name={"accountNumber"}
                   value={data.accountNumber}
                   placeholder={""}
+                  //@ts-ignore
                   onChange={handleOnChange}
                   leftIcon={<></>}
                   rightIcon={<></>}
@@ -287,6 +270,7 @@ const ConvertMoneyToLocalCurrency = () => {
                   name={"reason"}
                   value={data.reason}
                   placeholder={""}
+                  //@ts-ignore
                   onChange={handleOnChange}
                   leftIcon={<></>}
                   rightIcon={<></>}
@@ -330,7 +314,10 @@ const ConvertMoneyToLocalCurrency = () => {
                     </div>
                     <div className="init__header">
                       <span>Recipient gets</span>
-                      <span>₦{commaFormat((data.youPay * currentRate).toFixed(2))}</span>
+
+                      <span>
+                        ₦{commaFormat((parseFloat(data.youPay) ?? 0 * currentRate).toFixed(2))}
+                      </span>
                     </div>
                     <div className="init__header">
                       <span>Transfer time</span>

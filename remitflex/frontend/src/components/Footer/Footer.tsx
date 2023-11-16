@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Main } from "./Footer.styles";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
-  const [popup, setPopUp] = useState(false);
+  const navigate = useNavigate();
 
-  const togglePopup = () => {
-    setPopUp(!popup);
-  };
   return (
     <Main>
       <div>
@@ -14,7 +11,9 @@ const Footer = () => {
           <h3>What are you waiting for?</h3>
           <h3>Get started!</h3>
 
-          <div className="Goto">Go to App</div>
+          <div className="Goto" onClick={() => navigate("/app")}>
+            Go to App
+          </div>
           <div className="end">
             <p>© Remitflex2023</p>
           </div>

@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
 `;
 
 export const Title = styled.p`
-  font-family: Sora-SemiBold;
+  font-family: var(--font-family-geom);
   font-size: 1.5em;
   background: linear-gradient(to left, #84e681, #409099);
   background-clip: text;
@@ -84,7 +84,7 @@ export const ButtonImage = styled.img`
   width: 420px !important;
   @media screen and (max-width: 500px) {
     width: 100%;
-    padding: 2rem 2rem;
+    padding: 0rem 1rem;
   }
 `;
 export const ButtonWrap = styled.div`

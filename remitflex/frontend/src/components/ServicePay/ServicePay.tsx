@@ -6,9 +6,7 @@ import {
   PayBillAmountIn,
   PayBillAmountInText,
   PayBillAmoutCont,
-  PayBillButton,
   PayBillButtonDiv,
-  PayBillButtonTwo,
   PayBillContainer,
   PayBillForm,
   PayBillGroup,
@@ -16,7 +14,6 @@ import {
   PayBillInnerContainer,
   PayBillInput,
   PayBillLabel,
-  PayBillPrice,
   PayBillSQLInText
 } from "./ServicePay.styles";
 
@@ -44,7 +41,7 @@ import { RootState } from "../../store/store";
 import { billings } from "../../services/protected/billsAPI";
 
 // import useDispatch
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Spinner from "../Spinner/Spinner";
 import Button from "../Button/Button";
@@ -59,20 +56,15 @@ const PayBill = () => {
   const [txId, setTxId] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  // dispatch
-  const dispatch = useDispatch();
   const vault = useSelector((state: RootState) => state?.currentUser?.currentVault);
 
   // selector
   const bills = useSelector((state: RootState) => state?.currentUser?.bills);
-  console.log(bills, "bills");
 
   useMemo(() => {
     (async () => {
       const data: any = await paymentControl.getNGNrate();
       setCurrentRate(data?.rate);
-      console.log(data, "rate");
-      // setCurrentRate(rate?.data?.data?)
     })();
   }, []);
   const billsName: any = bills?.map((bill: any) => ({
@@ -92,8 +84,6 @@ const PayBill = () => {
 
   const [meter, setMeter]: any = useState("");
 
-  //    console.log(result, amount)
-  // use state initial values
   const [phone, setPhone]: DropdownSelectType = useState("");
 
   // handle payment
@@ -114,7 +104,6 @@ const PayBill = () => {
     };
     const ans: any = await paymentControl.billPayment(body);
     // add loading spinner or state
-    console.log(ans, "ans");
     setIsLoading(false);
     setTxId(ans?.data?.txId);
 
@@ -129,25 +118,23 @@ const PayBill = () => {
 
   // handle customer name
   const handleCustomerName = async (e: any) => {
-    console.log(selectedOption, "option");
     //   setCustomerName(e.target.value)
     setMeter(e.target.value);
-    console.log({
-      item_code: result?.item_code,
-      code: result?.biller_code,
-      customer: e.target.value
-    });
+
     const response = await billings.validate({
+      //@ts-ignore
       item_code: result?.item_code,
+      //@ts-ignore
       code: result?.biller_code,
+
       customer: e.target.value
     });
     if (response) {
+      //@ts-ignore
       setCustomerName(response?.data.name);
-      console.log(response, "response");
     }
-    //    await getCustomerName(e.target.value,result?.biller_code, setCustomerName, result?.item_code )
   };
+
   return (
     <PayBillContainer>
       {isLoading ? (
@@ -174,11 +161,15 @@ const PayBill = () => {
             </PayBillGroup>
             <PayBillGroup>
               <PayBillLabel>
-                {bills[0]?.label_name === "SmartCard Number"
-                  ? "Smart Card Number"
-                  : bills[0]?.label_name === "Meter Number"
-                  ? "Meter Number"
-                  : "Phone Number"}
+                {
+                  //@ts-ignore
+                  bills[0]?.label_name === "SmartCard Number"
+                    ? "Smart Card Number"
+                    : //@ts-ignore
+                    bills[0]?.label_name === "Meter Number"
+                    ? "Meter Number"
+                    : "Phone Number"
+                }
               </PayBillLabel>
               {category === "electricity" || category === "cable" ? (
                 <div>
@@ -200,7 +191,8 @@ const PayBill = () => {
                 </div>
               ) : (
                 <PhoneInput
-                  country={bills[0]?.country.toLowerCase()}
+                  country={//@ts-ignore
+                  bills[0]?.country.toLowerCase()}
                   regions={"africa"}
                   value={phone}
                   onChange={phone => setPhone(phone)}
@@ -242,7 +234,12 @@ const PayBill = () => {
               <PayBillAmoutCont>
                 <PayBillInput
                   type={"number"}
-                  value={amount[2] === 0 ? undefined : result?.amount}
+                  value={
+                    amount[2] === 0
+                      ? undefined
+                      : //@ts-ignore
+                        result?.amount
+                  }
                   min={category === "electricity" ? 1000 : undefined}
                   onChange={e => setNairaAmount(e.target.value)}
                   placeholder="₦ 0.00"
@@ -255,7 +252,8 @@ const PayBill = () => {
                       ? "0.00"
                       : amount[2] === 0
                       ? (nairaAmount / currentRate).toFixed(2)
-                      : (result?.amount / 750).toFixed(2)}
+                      : //@ts-ignore
+                        (result?.amount / 750).toFixed(2)}
                   </PayBillSQLInText>
                 </PayBillAmountIn>
               </PayBillAmoutCont>
