@@ -278,7 +278,12 @@ const PayBill = () => {
           />
           <p>
             View transaction on{" "}
-            <a className="algo__link" href={`https://algoexplorer.io/tx/${txId}`} target="_blank">
+            <a
+              className="algo__link"
+              href={`https://algoexplorer.io/tx/${txId}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               algoexplorer
             </a>
           </p>

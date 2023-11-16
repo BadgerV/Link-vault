@@ -218,7 +218,7 @@ const CreateLink = () => {
         <CreatedLinkContainer>
           <img src="/assets/svg/link-created.svg" alt="link created" />
           <h2> Link Created!</h2>
-          <a href={createdVault?.vault} target="_blank">
+          <a href={createdVault?.vault} target="_blank" rel="noreferrer">
             <p className="link__address">{`${createdVault?.vault.substring(0, 36)}...`}</p>
           </a>
           <div className="buttons__container">

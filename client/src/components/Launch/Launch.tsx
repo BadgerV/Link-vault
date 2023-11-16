@@ -120,6 +120,7 @@ const LaunchVault = () => {
                 <a
                   href={`https://remitflex.com/app${location.pathname}${location.hash}`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <h3>via remit flex</h3>
                   <p>Make remittances and pay over 18,000 bill categories in africa</p>

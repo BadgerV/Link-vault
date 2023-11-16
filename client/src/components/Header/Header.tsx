@@ -125,6 +125,7 @@ export const Header = () => {
             href="https://www.npmjs.com/package/link-vault"
             target="_blank"
             className="target__blank"
+            rel="noreferrer"
           >
             <div className="header__addons__items">
               <span>Documentation</span>
