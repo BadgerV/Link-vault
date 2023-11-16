@@ -1,4 +1,4 @@
-import { TransactionType } from "../types/components.types";
+
 
 export const ProductsArray = [
   {

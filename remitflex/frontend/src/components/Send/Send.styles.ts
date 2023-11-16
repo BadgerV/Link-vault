@@ -14,6 +14,18 @@ export const SendContainer = styled.div`
   padding: 2rem 0rem;
   gap: 3rem;
 
+  @media screen and (max-width: 700px) {
+   width: 90%;
+  }
+  @media screen and (max-width: 400px) {
+     width : 95%;
+  }
+
+  @media screen and (max-width: 380px) {
+      width : 100%;
+      padding : 0rem 0.8rem;
+  }
+
   .algo__link {
     color: #409099;
   }
@@ -68,6 +80,7 @@ export const SendContainer = styled.div`
   .position__step {
     display: flex;
     margin-right: auto;
+    width: 100%;
   }
 
   .init__header {
@@ -111,6 +124,10 @@ export const SendContainer = styled.div`
       gap: 1rem;
       margin-top: 1rem;
 
+      @media screen and (max-width: 500px) {
+        width: 90%;
+      }
+
       .rate {
         display: flex;
         justify-content: space-between;
@@ -145,6 +162,9 @@ export const StepContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  @media screen and (max-width: 500px) {
+    margin: auto;
+  }
 `;
 
 export const StepDiv = styled.div<ActiveProps>`

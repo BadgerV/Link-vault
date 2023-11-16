@@ -1,5 +1,5 @@
 // importing relevant types
-import { CustomStylesType, OptionsType, ServiceType } from "../types/utils.types";
+import { OptionsType, ServiceType } from "../types/utils.types";
 
 // options
 export const options: OptionsType[] = [

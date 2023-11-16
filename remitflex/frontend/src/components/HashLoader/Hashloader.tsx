@@ -2,9 +2,10 @@ import { HashLoader } from "react-spinners";
 import styled from "styled-components";
 
 const HashLoaderDiv = styled.div`
-  position: absolute;
-  top: 50% !important;
-  left: 50%;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 `;
 interface CustomHashLoaderProps {
   color?: string;

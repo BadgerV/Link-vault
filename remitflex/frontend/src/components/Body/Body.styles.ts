@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Header = styled.div`
-  width: 40%;
+  width: 100%;
   margin: auto;
 `;
 export const BodyText = styled.div`
@@ -9,6 +9,14 @@ export const BodyText = styled.div`
   margin-left: 2rem;
   @media screen and (max-width: 450px) {
     margin-left: 1.2rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    margin:unset;
+    padding: 0.5rem 0.5rem;
   }
 `;
 export const Container = styled.div`

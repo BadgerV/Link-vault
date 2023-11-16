@@ -14,16 +14,12 @@ const VaultScanner: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(REACT_APP_CLIENT_URL, "REACT_APP_CLIENT_URL");
-
   const getVaultNobleLink = async () => {
     const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}${location.hash}`.replace(
       "/app",
       ""
     );
-    console.log(nobleCurveKey, "ok");
     const res = await getVault(nobleCurveKey);
-    console.log(res, "res");
     setData(res.linkvault);
     setCurrentUser(res);
     return res;
@@ -45,9 +41,7 @@ const VaultScanner: React.FC = () => {
 
   const handleOnclick = async () => {
     if (!data) return;
-    console.log(data, "data");
     const linkWallet = await getVault(data);
-    console.log(linkWallet, "linkWallet");
     if (!linkWallet) {
       alert("Invalid LinkVault URL");
       return;
@@ -66,7 +60,6 @@ const VaultScanner: React.FC = () => {
             onResult={(result: any, error: any) => {
               if (result) {
                 setData(result?.text);
-                console.log(result?.text);
               }
 
               if (error) {

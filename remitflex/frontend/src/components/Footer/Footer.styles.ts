@@ -8,7 +8,7 @@ export const Main = styled.div`
   .contain {
     position: relative;
     width: 650px;
-    font-family: Sora;
+    font-family: var(--font-family-nista);
     color: white;
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@ export const Main = styled.div`
     font-size: 30px;
     font-weight: 700;
     line-height: 2.5rem;
-    font-family: Sora-Regular, sans-serif;
+    font-family: var(--font-family-nista);
     @media screen and (max-width: 500px) {
       font-size: 20px;
       ine-height: 1.7rem;
