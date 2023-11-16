@@ -41,7 +41,6 @@ const CreateLink = () => {
 
   const AVAILABLE_ASSETS = async () => {
     const assets = await computeAssets(address);
-    console.log(assets, "assets");
     setOwnedAssets(assets ?? { assets: [], nfts: [] });
   };
 
@@ -67,7 +66,6 @@ const CreateLink = () => {
     peraWallet
       .reconnectSession()
       .then(accounts => {
-        console.log(accounts);
         if (accounts.length) {
           dispatch(setCurrentUser(accounts[0]));
           dispatch(setWalletType("pera"));
@@ -109,9 +107,26 @@ const CreateLink = () => {
     AVAILABLE_ASSETS();
   }, [address]);
 
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: "",
+          text: "share your link vault with who you want to tip or gift (if there is an asset in the link 😄)",
+          url: createdVault?.vault
+        });
+        console.log("Successfully shared");
+      } else {
+        console.log("Web Share API not supported");
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+    }
+  };
+
   const handleDropdown = () => {
     if (!address) {
-       errorToast("Please connect your wallet");
+      errorToast("Please connect your wallet");
       return;
     }
     setShowDropdownItems(!showDropdownItems);
@@ -132,11 +147,15 @@ const CreateLink = () => {
   };
 
   const createVaultAndFund = async () => {
-    if(!address) return errorToast("Please connect your wallet");
+    if (!address) return errorToast("Please connect your wallet");
     if (!selectedAsset) return errorToast("Please select a token you want to fund your vault with");
-    if(!amount) return errorToast("Please enter an amount to fund your vault with");
-    if(selectedAsset.minimumBalance < 200000) return errorToast(`You need a minimum of ${selectedAsset.minimumBalance/10**6} ALGO to fund your vault`);
-    if(selectedAsset.amount < amount) return errorToast(`You do not have sufficient balance to make this transaction`);
+    if (!amount) return errorToast("Please enter an amount to fund your vault with");
+    if (selectedAsset.minimumBalance < 200000)
+      return errorToast(
+        `You need a minimum of ${selectedAsset.minimumBalance / 10 ** 6} ALGO to fund your vault`
+      );
+    if (selectedAsset.amount < amount)
+      return errorToast(`You do not have sufficient balance to make this transaction`);
 
     const createdVault = await createVault();
     if (createdVault.address) {
@@ -166,7 +185,6 @@ const CreateLink = () => {
       }
     }
   };
-   console.log(createdVault, "createdVault");
   return (
     <>
       {!isVaultResolved ? (
@@ -201,7 +219,7 @@ const CreateLink = () => {
           <img src="/assets/svg/link-created.svg" alt="link created" />
           <h2> Link Created!</h2>
           <a href={createdVault?.vault} target="_blank">
-          <p className="link__address">{`${createdVault?.vault.substring(0, 36)}...`}</p>  
+            <p className="link__address">{`${createdVault?.vault.substring(0, 36)}...`}</p>
           </a>
           <div className="buttons__container">
             <CopyToClipboard text={createdVault?.vault}>
@@ -230,7 +248,7 @@ const CreateLink = () => {
                 {"Copy Link"}
               </CustomButton>
             </CopyToClipboard>
-            <CustomButton className="button__transparent">
+            <CustomButton className="button__transparent" onClick={handleShare}>
               <img src="/assets/svg/share-link.svg" alt="share" className="copy__icon" />
               Share Link
             </CustomButton>

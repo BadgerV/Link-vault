@@ -12,7 +12,6 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { claimVault } from "../../utils/integration";
 import { LoadingState } from "../LoadingState/LoadingState";
 import { successToast } from "../../utils/customToast";
-
 const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 const LaunchVault = () => {
@@ -27,14 +26,11 @@ const LaunchVault = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(location);
   const navigate = useNavigate();
   const getVaultNobleLink = async () => {
     setIsLoading(true);
     const nobleCurveKey = `${REACT_APP_CLIENT_URL}${location.pathname}`;
-    console.log(nobleCurveKey, "ok");
     const res = await getVault(nobleCurveKey);
-    console.log(res);
     setVaultNobleLink(res);
     setIsLoading(false);
     return res;
@@ -43,7 +39,6 @@ const LaunchVault = () => {
   const AVAILABLE_ASSETS = async () => {
     setIsLoading(true);
     const assets = await computeAssets(vaultNobleLink.address);
-    console.log(assets, "assets");
     setOwnedAssets(assets ?? { assets: [], nfts: [] });
 
     setIsLoading(false);
@@ -55,7 +50,6 @@ const LaunchVault = () => {
     (async () => {
       const result = await getVaultNobleLink();
       if (!result) navigate("/");
-      console.log(result, "result");
     })();
     setIsLoading(false);
   }, []);
@@ -65,58 +59,54 @@ const LaunchVault = () => {
     if (!vaultNobleLink) return;
     AVAILABLE_ASSETS();
     setIsLoading(false);
-  
   }, [vaultNobleLink]);
 
-  // console.log(params)
   const handleClaim = async () => {
-   const vault :any= await claimVault(vaultNobleLink, address, walletType, ownedAssets);
-    successToast('successfully claimed asset');
+    const vault: any = await claimVault(vaultNobleLink, address, walletType, ownedAssets);
+    successToast("successfully claimed asset");
     setShowPopup(false);
     setTimeout(() => {
       window.location.reload();
-    }, 3200)
-
+    }, 3200);
   };
-
-  
 
   return (
     <LaunchContainer>
-      {
-        isLoading ? <LoadingState width={500} height={'50vh'}/> :
+      {isLoading ? (
+        <LoadingState width={500} height={"50vh"} />
+      ) : (
         <div className="launch__">
-        <div className="launch__header">
-          <h3>Welcome,</h3>
-        </div>
-        <div className="launch__body">
-          <AssetsShowcase
-            ownedAssets={ownedAssets}
-            params={true}
-            setShowDropdownItems={setShowDropdownItems}
-            showDropdownItems={showDropdownItems}
-          />
-          <div className="buttons__container">
-            <CustomButton
-              variant="filled"
-              type="button"
-              className="deposit__button"
-              onClick={() => setShowDepositPopup(true)}
-            >
-              Deposit
-            </CustomButton>
-            <CustomButton
-              variant="filled"
-              type="button"
-              className="claim__button"
-              onClick={() => setShowPopup(true)}
-            >
-              Claim
-            </CustomButton>
+          <div className="launch__header">
+            <h3>Welcome,</h3>
+          </div>
+          <div className="launch__body">
+            <AssetsShowcase
+              ownedAssets={ownedAssets}
+              params={true}
+              setShowDropdownItems={setShowDropdownItems}
+              showDropdownItems={showDropdownItems}
+            />
+            <div className="buttons__container">
+              <CustomButton
+                variant="filled"
+                type="button"
+                className="deposit__button"
+                onClick={() => setShowDepositPopup(true)}
+              >
+                Deposit
+              </CustomButton>
+              <CustomButton
+                variant="filled"
+                type="button"
+                className="claim__button"
+                onClick={() => setShowPopup(true)}
+              >
+                Claim
+              </CustomButton>
+            </div>
           </div>
         </div>
-        </div> 
-      }
+      )}
       {showPopup && (
         <PopUp isOpen={showPopup} onClose={() => setShowPopup(false)}>
           <div className="popup__modal">
@@ -136,8 +126,8 @@ const LaunchVault = () => {
                 </a>
               </div>
               <div className="popup__third">
-                  <h3>via gift card</h3>
-                  <p>Claim into your gift card</p>
+                <h3>via gift card</h3>
+                <p>Claim into your gift card</p>
               </div>
             </div>
           </div>

@@ -6,6 +6,10 @@ export const CreatedLinkContainer = styled.div`
   flex-direction: column;
   gap: 1rem;
 
+  @media screen and (max-width: 500px) {
+    margin: 0 1rem;
+  }
+
   .link__address {
     border-bottom: 1px solid #653780;
     background: linear-gradient(180deg, rgba(254, 247, 249, 0) 0%, #fef7f9 100%);

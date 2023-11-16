@@ -8,12 +8,27 @@ export const LaunchContainer = styled.div`
   margin: auto;
   gap: 1rem;
 
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
+
   .launch__ {
     width: 500px !important;
     gap: 1rem;
     display: flex;
     flex-direction: column;
 
+    @media screen and (max-width: 700px) {
+      width: 90% !important;
+    }
+
+    @media screen and (max-width: 464px) {
+      width: 95% !important;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 97% !important;
+    }
   }
 
   .popup__third {
@@ -26,7 +41,6 @@ export const LaunchContainer = styled.div`
     cursor: not-allowed;
     background: whitesmoke;
     opacity: 0.5;
-
   }
 
   .popup__modal {
@@ -76,7 +90,7 @@ export const LaunchContainer = styled.div`
       border: solid 1px var(--vault-primary);
       border-radius: 6px;
       cursor: pointer;
-      background:#e53f7124;
+      background: #e53f7124;
       &:hover {
         background: #e53f71;
         color: white;
@@ -120,6 +134,10 @@ export const LaunchContainer = styled.div`
     border-radius: 10px;
     width: 100%;
     padding: 3rem;
+
+    @media screen and (max-width: 500px) {
+      padding: 1rem 1rem;
+    }
 
     .buttons__container {
       ${flexCenter()};

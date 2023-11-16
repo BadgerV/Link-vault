@@ -23,9 +23,6 @@ const ScrollContainer: React.FC = () => {
     });
   };
 
-  console.log(scrollPercentage);
-  console.log(scrollContainerRef.current, "scrollPosition");
-
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
 
@@ -57,17 +54,20 @@ const ScrollContainer: React.FC = () => {
         <div className="section__first__content">
           <h1> 2. </h1>
           <h2>Fund with Digital Asset(s).</h2>
-          <p>With just a few prompts, you have your LinkVault.</p>
+          <p>Fund your link vault with algorand asset or NFT(s).</p>
         </div>
       </ScrollSection>
       <ScrollSection visible={scrollPercentage > 66 && scrollPercentage <= 100}>
         <div className="section__first__content">
           <h1> 3. </h1>
           <h2>Share with love. </h2>
+          <p>Share your Link and claim to your algorand wallet </p>
           {/* <p>With just a few prompts, you have your LinkVault</p> */}
         </div>
       </ScrollSection>
-      <ScrollProgress scrollPercentage={scrollPercentage} />
+      <div className="scroll__percent">
+        <ScrollProgress scrollPercentage={scrollPercentage} />
+      </div>
     </ScrollContainerP>
   );
 };

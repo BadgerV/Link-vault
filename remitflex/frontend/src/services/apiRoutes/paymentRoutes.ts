@@ -7,5 +7,3 @@ export const currentRate = `${paymentRoute}/rate`;
 export const remitPayment = `${paymentRoute}/remit`;
 
 export const billPayment = `${paymentRoute}/bill`;
-
-

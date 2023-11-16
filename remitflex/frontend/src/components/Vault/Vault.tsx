@@ -53,7 +53,7 @@ const VaultScanner: React.FC = () => {
       return;
     } else {
       dispatch(setCurrentUser(linkWallet));
-      setStartScan(false)
+      setStartScan(false);
       navigate("/dashboard");
     }
   };

@@ -9,16 +9,25 @@ const ALGODSERVER = "https://mainnet-api.algonode.cloud/";
 
 export const algodClient = new algosdk.Algodv2(ALGODTOKEN, ALGODSERVER, PORT);
 
-export const sendTransaction = async (amount, address, linkVaultAddress, signerWalletType, selectedAsset) => {
-  if(!address) return errorToast("Please connect your wallet");
+export const sendTransaction = async (
+  amount,
+  address,
+  linkVaultAddress,
+  signerWalletType,
+  selectedAsset
+) => {
+  if (!address) return errorToast("Please connect your wallet");
   if (!selectedAsset) return errorToast("Please select a token you want to fund your vault with");
-  if(!amount) return errorToast("Please enter an amount to fund your vault with");
-  if(selectedAsset.minimumBalance < 200000) return errorToast(`You need a minimum of ${selectedAsset.minimumBalance/10**6} ALGO to fund your vault`);
-  if(selectedAsset.amount < amount) return errorToast(`You do not have sufficient balance to make this transaction`);
+  if (!amount) return errorToast("Please enter an amount to fund your vault with");
+  if (selectedAsset.minimumBalance < 200000)
+    return errorToast(
+      `You need a minimum of ${selectedAsset.minimumBalance / 10 ** 6} ALGO to fund your vault`
+    );
+  if (selectedAsset.amount < amount)
+    return errorToast(`You do not have sufficient balance to make this transaction`);
 
   const suggestedParams = await algodClient.getTransactionParams().do();
 
-  console.log(linkVaultAddress);
   const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
     from: address,
     to: linkVaultAddress,
@@ -30,12 +39,10 @@ export const sendTransaction = async (amount, address, linkVaultAddress, signerW
   const optInTxn = [{ txn: txn, signers: [address] }];
   const signedTxn = await signerWalletType.signTransaction([optInTxn]);
   const success = await algodClient.sendRawTransaction(signedTxn).do();
-  console.log(success);
   return success?.txId;
 };
 
 export const claimVault = async (vault, address, signerWalletType, storedAssets) => {
-  console.log(vault, address, signerWalletType, storedAssets);
   const vaultSK = await resolveVault(vault);
   const groupedTxn = [];
   const suggestedParams = await algodClient.getTransactionParams().do();
@@ -45,10 +52,10 @@ export const claimVault = async (vault, address, signerWalletType, storedAssets)
         const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
           from: vault.address,
           to: address,
-          amount:asset.amount - asset.minimumBalance - 300000,
+          amount: asset.amount - asset.minimumBalance - 300000,
           suggestedParams: suggestedParams
         });
-        console.log(asset.amount - asset.minimumBalance - 100000);
+
         groupedTxn.push(txn);
       } else {
         const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
@@ -64,7 +71,6 @@ export const claimVault = async (vault, address, signerWalletType, storedAssets)
     groupedTxn.map(txn => {
       const signedTxn = algosdk.signTransaction(txn, vaultSK);
       const success = algodClient.sendRawTransaction(signedTxn.blob).do();
-      console.log(success);
     });
   }
 };
@@ -91,19 +97,11 @@ export const sendAmountToASA = async (
     note: new Uint8Array(Buffer.from("Link vault created with asset")),
     suggestedParams: suggestedParams
   });
-  console.log(
-    linkVault.address,
-    selectedAsset.id,
-    Number(amount) * 10 ** selectedAsset.decimals,
-    selectedAsset
-  );
   const algoOptInTxn = [{ txn: algoTxn, signers: [address] }];
   const algoSignedTxn = await signerWalletType.signTransaction([algoOptInTxn]);
   const algoTxId = await algodClient.sendRawTransaction(algoSignedTxn).do();
-  console.log(algoTxId, "algoTxId");
   if (algoTxId) {
     const vault = await getVault(linkVault.vault);
-    console.log(vault, "vault");
     if (vault) {
       await resolveVault(vault)
         .then(async vaultSK => {
@@ -136,6 +134,6 @@ export const sendAmountToASA = async (
             return asaTxId;
           }
         });
-    } 
+    }
   }
 };

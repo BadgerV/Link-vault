@@ -1,11 +1,10 @@
-import React from 'react';
-import { SpinnerContainer, SpinnerOverlay } from './Spinner.styles';
+import React from "react";
+import { SpinnerContainer, SpinnerOverlay } from "./Spinner.styles";
 
-
-const Spinner : ()  => JSX.Element = () => (
-	<SpinnerOverlay>
-		  <SpinnerContainer/>
-	</SpinnerOverlay>
-	);
+const Spinner: () => JSX.Element = () => (
+  <SpinnerOverlay>
+    <SpinnerContainer />
+  </SpinnerOverlay>
+);
 
 export default Spinner;

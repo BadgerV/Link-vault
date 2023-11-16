@@ -9,7 +9,7 @@ type CustomScrollBarProps = {
 };
 
 export const ScrollContainerP = styled.div`
-  position: sticky;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,8 +21,28 @@ export const ScrollContainerP = styled.div`
   overflow-y: scroll;
   gap: 2rem;
 
+  @media screen and (max-width: 900px) {
+    padding: 2rem 1rem;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 500px) {
+      padding: 1rem 0.3rem;
+    }
+  }
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  .scroll__percent {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
   }
 
   margin-bottom: 2rem;
@@ -40,11 +60,27 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
   color: #fff;
   padding: 0rem 20rem;
 
+  @media screen and (max-width: 1390px) {
+    padding: 0rem 4rem;
+  }
+  @media screen and (max-width: 900px) {
+    opacity: 0.8;
+    padding: 0rem 1rem;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+  }
+
   .section__first__content {
     display: flex;
-    flex-wrap: no-wrap;
+    // flex-wrap: no-wrap;
     flex-direction: column;
-    white-space: nowrap;
+    // white-space: nowrap;
+
+    @media screen and (max-width: 900px) {
+      gap: 0.5rem;
+    }
   }
 
   h1 {
@@ -56,6 +92,10 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
     font-size: 1.5rem;
     font-family: var(--font-family-geom);
     font-weight: 700;
+
+    @media screen and (max-width: 900px) {
+      font-size: 1.1rem;
+    }
   }
 
   p {
@@ -65,18 +105,40 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
   }
 
   &:nth-child(1) {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: left;
     margin-top: 3rem;
+
+    @media screen and (max-width: 900px) {
+      justify-content: center;
+      margin-top: 0rem;
+    }
   }
   &:nth-child(2) {
     display: flex;
+    position: sticky;
+    top: 3rem;
     justify-content: right;
+
+    @media screen and (max-width: 900px) {
+      justify-content: center;
+      margin-top: 0rem;
+    }
   }
 
   &:nth-child(3) {
     display: flex;
     justify-content: left;
+    position: sticky;
+    top: 9rem;
+
+    @media screen and (max-width: 900px) {
+      justify-content: center;
+      margin-top: 0rem;
+      top: 0rem;
+    }
   }
 `;
 
@@ -86,10 +148,14 @@ export const ScrollProgress = styled.div<CustomScrollBarProps>`
   left: 50%;
   transform: translateX(-50%);
   width: 5px;
-  height: 100%;
+  height: 80%;
   border-radius: 2px;
   opacity: 1;
   background-color: #fad9e3;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 
 
   &::before {

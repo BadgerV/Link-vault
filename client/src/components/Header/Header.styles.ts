@@ -5,6 +5,12 @@ export const HeaderContainer = styled.div`
   ${flexRowBetween()};
   padding: 2rem;
 
+  .target__blank {
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 550px) {
     padding: 1rem;
   }
@@ -39,9 +45,9 @@ export const LogoContainer = styled.div`
   @media screen and (max-width: 500px) {
     width: 2rem;
   }
-  @media screen and (max-width: 360px) {
-    width: 1rem;
-  }
+  // @media screen and (max-width: 360px) {
+  //   width: 1rem;
+  // }
 
   h2 {
     font-weight: 700;
@@ -50,11 +56,11 @@ export const LogoContainer = styled.div`
     font-family: var(--font-family-geom);
 
     @media screen and (max-width: 500px) {
-      font-size: var(--font-size-s);
+      font-size: 1rem;
     }
-    @media screen and (max-width: 360px) {
-      font-size: 0.8rem;
-    }
+    // @media screen and (max-width: 360px) {
+    //   font-size: 0.8rem;
+    // }
   }
 `;
 
@@ -79,23 +85,24 @@ export const HeaderAddons = styled.div`
     cursor: pointer;
 
     @media screen and (max-width: 500px) {
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
-    @media screen and (max-width: 360px) {
-      font-size: 0.57rem;
-    }
+    // @media screen and (max-width: 360px) {
+    //   font-size: 0.57rem;
+    // }
   }
 
   button {
     > div {
       gap: 0.5rem;
     }
+
     @media screen and (max-width: 500px) {
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
-    @media screen and (max-width: 360px) {
-      font-size: 0.6rem;
-    }
+    // @media screen and (max-width: 360px) {
+    //   font-size: 0.6rem;
+    // }
   }
 `;
 
@@ -115,6 +122,10 @@ export const HeaderDropdown = styled.div`
     border-radius: 0.5rem;
     z-index: 100;
     width: 18.5rem;
+
+    @media screen and (max-width: 550px) {
+      top: 4.9rem;
+    }
 
     &__item {
       display: flex;

@@ -10,12 +10,16 @@ export const AssetsShowcaseContainer = styled.div`
     width: 100%;
   }
   .params-select {
-    color : black !important;
+    color: black !important;
   }
   .unset-params {
-    color : unset;
+    color: unset;
   }
-
+  .link-span {
+    @media screen and (max-width: 500px) {
+      font-size: 0.8rem !important;
+    }
+  }
   .link__types {
     border: solid 1px var(--vault-primary);
     border-radius: 10px;
