@@ -4,10 +4,10 @@ WORKDIR /app
 
 COPY ./server/package*.json ./
 
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY ./server/ ./
 
-EXPOSE 8000/tcp
+EXPOSE 3001/tcp
 
 CMD npm run start
