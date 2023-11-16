@@ -12,6 +12,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { claimVault } from "../../utils/integration";
 import { LoadingState } from "../LoadingState/LoadingState";
 import { successToast } from "../../utils/customToast";
+import { errorToast } from "../../utils/customToast";
 const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 const LaunchVault = () => {
@@ -62,6 +63,12 @@ const LaunchVault = () => {
   }, [vaultNobleLink]);
 
   const handleClaim = async () => {
+    const algoAsset = ownedAssets.assets.find(asset => asset.id == 0);
+
+    if (algoAsset.minimumBalance < 200000) {
+      errorToast("You need a minimum of 0.2 Algo to claim");
+      return;
+    }
     const vault: any = await claimVault(vaultNobleLink, address, walletType, ownedAssets);
     successToast("successfully claimed asset");
     setShowPopup(false);
