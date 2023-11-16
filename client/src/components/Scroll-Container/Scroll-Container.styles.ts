@@ -20,14 +20,14 @@ export const ScrollContainerP = styled.div`
   background-size: 100% 110%;
   overflow-y: scroll;
   gap: 2rem;
-  
+
   @media screen and (max-width: 900px) {
-    padding : 2rem 1rem;
+    padding: 2rem 1rem;
     justify-content: center;
     align-items: center;
 
     @media screen and (max-width: 500px) {
-      padding : 1rem 0.3rem;
+      padding: 1rem 0.3rem;
     }
   }
   &::-webkit-scrollbar {
@@ -35,14 +35,14 @@ export const ScrollContainerP = styled.div`
   }
 
   .scroll__percent {
-     position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
-     height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
 
-     @media screen and (max-width: 900px) {
+    @media screen and (max-width: 900px) {
       display: none;
-     }
+    }
   }
 
   margin-bottom: 2rem;
@@ -64,14 +64,13 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
     padding: 0rem 4rem;
   }
   @media screen and (max-width: 900px) {
-   opacity: 0.8;
-   padding: 0rem 1rem;
+    opacity: 0.8;
+    padding: 0rem 1rem;
 
-   h2 {
+    h2 {
       font-size: 1.1rem;
-   }
+    }
   }
-
 
   .section__first__content {
     display: flex;
@@ -140,7 +139,6 @@ export const ScrollSection = styled.div<ScrollSectionProps>`
       margin-top: 0rem;
       top: 0rem;
     }
-
   }
 `;
 

@@ -3,7 +3,6 @@ import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
   return (
     <>
       <ToastContainer
@@ -16,10 +15,8 @@ function App() {
         pauseOnHover={true}
       />
       <AppRouter />
-
     </>
-  )
-
+  );
 }
 
 export default App;

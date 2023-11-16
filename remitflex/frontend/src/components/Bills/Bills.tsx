@@ -48,67 +48,65 @@ const Bills = () => {
     // }
     //   setCategory(category)
     //  await getBills(selectedOption?.value, category, Navigate, dispatch);
-    if(category === 'false') return
+    if (category === "false") return;
     console.log({
-      country : selectedOption.value,
-      category : category
-     })
-    const res = await billAPI.billings.getCategories( {
-      country : selectedOption.value,
-      category : category
-     });
-    if(res) {
-      dispatch(setBills(res.data))
-      console.log(res, "data")
+      country: selectedOption.value,
+      category: category
+    });
+    const res = await billAPI.billings.getCategories({
+      country: selectedOption.value,
+      category: category
+    });
+    if (res) {
+      dispatch(setBills(res.data));
+      console.log(res, "data");
       setIsLoading(false);
-      Navigate('/services/pay' , {state : category})
-
+      Navigate("/services/pay", { state: category });
     }
     console.log(res, "response");
-
   };
 
   // useEffect(() => {
   //     console.log(category)
   // })
-  console.log(services)
+  console.log(services);
 
   return (
     <ProductsContainer>
-      {
-        isLoading ? <Spinner /> :
-      
-      <ProductsMiniContainer>
-        <ProductsTop>
-          <ProductsTopLeft>What bill do you want to pay?</ProductsTopLeft>
-          <ProductsTopRight>
-            <div className="SelectAndIconCont">
-              <img src="/assets/svg/MapPin.svg" className="map-icon" alt="map icon" />
-              <Select
-                options={options}
-                styles={customStyles}
-                defaultValue={selectedOption}
-                onChange={(e: any) => setSelectedOption(e)}
-              />
-            </div>
-          </ProductsTopRight>
-        </ProductsTop>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <ProductsMiniContainer>
+          <ProductsTop>
+            <ProductsTopLeft>What bill do you want to pay?</ProductsTopLeft>
+            <ProductsTopRight>
+              <div className="SelectAndIconCont">
+                <img src="/assets/svg/MapPin.svg" className="map-icon" alt="map icon" />
+                <Select
+                  options={options}
+                  styles={customStyles}
+                  defaultValue={selectedOption}
+                  onChange={(e: any) => setSelectedOption(e)}
+                />
+              </div>
+            </ProductsTopRight>
+          </ProductsTop>
 
-        <ProductsBoxesContainer>
-          {services?.map((service: any, i: number) => (
-            // <Link to ={`/payment/${service?.name}`}>
-            <ProductsBox notPart={false} key={i} onClick={() => payService(service?.category)}>
-              <ProductsBoxIcon src={service?.image} />
-              <ProductsBoxText>{service?.name}</ProductsBoxText>
+          <ProductsBoxesContainer>
+            {services?.map((service: any, i: number) => (
+              // <Link to ={`/payment/${service?.name}`}>
+              <ProductsBox notPart={false} key={i} onClick={() => payService(service?.category)}>
+                <ProductsBoxIcon src={service?.image} />
+                <ProductsBoxText>{service?.name}</ProductsBoxText>
+              </ProductsBox>
+              // </Link>
+            ))}
+            <ProductsBox notPart={true}>
+              <ProductsBoxText>More to come!</ProductsBoxText>
             </ProductsBox>
-            // </Link>
-          ))}
-          <ProductsBox notPart={true}>
-            <ProductsBoxText>More to come!</ProductsBoxText>
-          </ProductsBox>
-        </ProductsBoxesContainer>
-      </ProductsMiniContainer>
-}
+          </ProductsBoxesContainer>
+        </ProductsMiniContainer>
+      )}
     </ProductsContainer>
   );
 };

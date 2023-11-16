@@ -49,7 +49,7 @@ export const customStyles: any = {
     color: "black",
     fontSize: "0.8rem",
     cursor: "pointer",
-    fontFamily: "var(--font-family-nista)",
+    fontFamily: "var(--font-family-nista)"
   }),
   optionLabel: (provided: any, state: any) => ({
     ...provided,

@@ -15,20 +15,17 @@ export const CardContainer = styled.div`
   padding: 3rem;
   gap: 2rem;
 
-.link__amount {
-  @media screen and (max-width: 500px) {
-
-     width: 92% !important;
-   }
-
-}
+  .link__amount {
+    @media screen and (max-width: 500px) {
+      width: 92% !important;
+    }
+  }
 
   @media screen and (max-width: 700px) {
     width: 90%;
   }
 
   @media screen and (max-width: 500px) {
-
     padding: 1rem 2rem;
   }
 

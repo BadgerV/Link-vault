@@ -31,9 +31,8 @@ export type TransactionType = {
   status: string;
 };
 
-
 export interface WalletStatusType {
   address: string | undefined;
 }
 
-export type DropdownSelectType = [string, React.Dispatch<React.SetStateAction<string>>]
+export type DropdownSelectType = [string, React.Dispatch<React.SetStateAction<string>>];

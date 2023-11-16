@@ -113,31 +113,29 @@ const ConvertMoneyToLocalCurrency = () => {
       handleNextStep();
     }
   };
-   
+
   console.log(data);
-  const remitPayment  = async () => {
-    setIsLoading(true)
+  const remitPayment = async () => {
+    setIsLoading(true);
     // add a loading spinner to button
-    console.log(vault)
+    console.log(vault);
     const body = {
-      linkvaulturl : vault?.linkvault,
+      linkvaulturl: vault?.linkvault,
       account_bank: data.bankName.code,
-      amount: parseFloat((data.youPay))*currentRate,
+      amount: parseFloat(data.youPay) * currentRate,
       account_number: data.accountNumber,
       currency: "NGN",
       narration: data.reason,
-      debit_currency: "NGN",
+      debit_currency: "NGN"
     };
     console.log(body, "body");
     const payment = await paymentControl.remitPayment(body);
-    setIsLoading(false)
-    setTxId(payment?.data?.txId)
+    setIsLoading(false);
+    setTxId(payment?.data?.txId);
     console.log(payment, "payment");
 
-
-    handleNextStep()
-
-  }
+    handleNextStep();
+  };
 
   //  const resolveUserNameBankName = async () => {
   //   console.
@@ -178,202 +176,211 @@ const ConvertMoneyToLocalCurrency = () => {
         </StepContainer>
       )}
 
-      {
-        isLoading ? <Spinner /> :
+      {isLoading ? (
+        <Spinner />
+      ) : (
         <div className="position__step">
-        {currentStep === 1 && (
-          <div className="send__money">
-            <p className="send-head"> Send Money</p>
-            <div className="send__money__form">
-              <InputField
-                label={"Send"}
-                name={"youPay"}
-                value={data.youPay}
-                placeholder={""}
-                onChange={handleOnChange}
-                leftIcon={switchBtn ? renderNaira() : renderDollar()}
-                rightIcon={<></>}
-                disabled={false}
-                isPassword={false}
-                error={""}
-                type="number"
-              />
-              <div className="rate">
-                <img
-                  src="/assets/svg/toggle.svg"
-                  className="toggle_money"
-                  onClick={toggleBtn}
-                  alt="toggle"
+          {currentStep === 1 && (
+            <div className="send__money">
+              <p className="send-head"> Send Money</p>
+              <div className="send__money__form">
+                <InputField
+                  label={"Send"}
+                  name={"youPay"}
+                  value={data.youPay}
+                  placeholder={""}
+                  onChange={handleOnChange}
+                  leftIcon={switchBtn ? renderNaira() : renderDollar()}
+                  rightIcon={<></>}
+                  disabled={false}
+                  isPassword={false}
+                  error={""}
+                  type="number"
                 />
-                <p className="current_rate">$1 = ₦{currentRate && commaFormat(currentRate)}</p>
-              </div>
-              <InputField
-                label={"Recipient Gets"}
-                name={"recipient"}
-                value={commaFormat(((data.youPay) * currentRate).toFixed(2)) ?? "0"}
-                placeholder={""}
-                onChange={handleOnChange}
-                leftIcon={switchBtn ? renderDollar() : renderNaira()}
-                rightIcon={<></>}
-                disabled={false}
-                isPassword={false}
-                error={""}
-                type="text"
-                readonly={true}
-              />
-
-              <div className="fees">
-                <div className="init__header">
-                  <span>Fee</span>
-                  <span> $ 0</span>
+                <div className="rate">
+                  <img
+                    src="/assets/svg/toggle.svg"
+                    className="toggle_money"
+                    onClick={toggleBtn}
+                    alt="toggle"
+                  />
+                  <p className="current_rate">$1 = ₦{currentRate && commaFormat(currentRate)}</p>
                 </div>
-                <div className="init__header">
-                  <span>Transfer Time</span>
-                  <span>Instantly</span>
-                </div>
-              </div>
-              <div className="amount__paid">
-                <div className="init__header">
-                  <span>Amount to Pay</span>
-                  <span>$ {commaFormat(data.youPay) || "0"}</span>
-                </div>
-                <div className="init__header">
-                  <span>Recipient gets</span>
-                  <span>₦{commaFormat((parseFloat(data.youPay) * currentRate).toFixed(2)) || "0"}</span>
-                </div>
-                <Button
-                  title="Proceed"
-                  onClick={handleSendMoneyOnclick}
-                  className={!data.youPay ? "disabled-state" : ""}
-                  // onClick={handleOnclick}
+                <InputField
+                  label={"Recipient Gets"}
+                  name={"recipient"}
+                  value={commaFormat((data.youPay * currentRate).toFixed(2)) ?? "0"}
+                  placeholder={""}
+                  onChange={handleOnChange}
+                  leftIcon={switchBtn ? renderDollar() : renderNaira()}
+                  rightIcon={<></>}
+                  disabled={false}
+                  isPassword={false}
+                  error={""}
+                  type="text"
+                  readonly={true}
                 />
-              </div>
-            </div>
-          </div>
-        )}
 
-
-        {currentStep === 2 && (
-          <div className="send__money">
-            <p className="send-head"> Recipient Details</p>
-            <div className="send__money__form">
-              <Select
-                options={banksOptions}
-                placeholder="Select Bank"
-                onChange={(e: any) =>
-                  setData({
-                    ...data,
-                    bankName: e.option
-                  })
-                }
-                styles={customStyles}
-              />
-              <InputField
-                label={"Account Number"}
-                name={"accountNumber"}
-                value={data.accountNumber}
-                placeholder={""}
-                onChange={handleOnChange}
-                leftIcon={<></>}
-                rightIcon={<></>}
-                disabled={false}
-                isPassword={false}
-                error={""}
-                type="number"
-              />
-              {account && <p className="account__name">{account}</p>}
-              <InputField
-                label={"Reason"}
-                name={"reason"}
-                value={data.reason}
-                placeholder={""}
-                onChange={handleOnChange}
-                leftIcon={<></>}
-                rightIcon={<></>}
-                disabled={false}
-                isPassword={false}
-                error={""}
-                type="text"
-              />
-              <Button
-                title="Proceed"
-                onClick={handleRecipientDetailsOnclick}
-                className={!(data.bankName && account && data.reason) ? "disabled-state" : ""}
-              />
-            </div>
-          </div>
-        )}
-
-        {currentStep === 3 && (
-          <div className="send__money">
-            <p className="send-head">Review Transfer</p>
-            <div className="send__money__form">
-              <div className="amount__info">
-                <div className="bank__info">
+                <div className="fees">
                   <div className="init__header">
-                    <span>Bank Name</span>
-                    <span>{data?.bankName.name}</span>
+                    <span>Fee</span>
+                    <span> $ 0</span>
                   </div>
                   <div className="init__header">
-                    <span>Account Number</span>
-                    <span>{data?.accountNumber}</span>
-                  </div>
-                  <div className="init__header">
-                    <span>Reason</span>
-                    <span>{data?.reason}</span>
-                  </div>
-                </div>
-                <div className="bank__info">
-                  <div className="init__header">
-                    <span>You are sending</span>
-                    <span>${commaFormat(data.youPay)}</span>
-                  </div>
-                  <div className="init__header">
-                    <span>Recipient gets</span>
-                    <span>₦{commaFormat((data.youPay * currentRate).toFixed(2))}</span>
-                  </div>
-                  <div className="init__header">
-                    <span>Transfer time</span>
-                    <span>Within minutes</span>
-                  </div>
-                  <div className="init__header">
-                    <span>Transaction fee</span>
-                    <span>$ 0</span>
-                  </div>
-                  <div className="init__header">
-                    <span>Exchange rate</span>
-                    <span>$1 = ₦{currentRate && commaFormat(currentRate)}</span>
+                    <span>Transfer Time</span>
+                    <span>Instantly</span>
                   </div>
                 </div>
                 <div className="amount__paid">
                   <div className="init__header">
-                    <span>You Pay</span>
-                    <span>${data?.youPay}</span>
+                    <span>Amount to Pay</span>
+                    <span>$ {commaFormat(data.youPay) || "0"}</span>
                   </div>
+                  <div className="init__header">
+                    <span>Recipient gets</span>
+                    <span>
+                      ₦{commaFormat((parseFloat(data.youPay) * currentRate).toFixed(2)) || "0"}
+                    </span>
+                  </div>
+                  <Button
+                    title="Proceed"
+                    onClick={handleSendMoneyOnclick}
+                    className={!data.youPay ? "disabled-state" : ""}
+                    // onClick={handleOnclick}
+                  />
                 </div>
-                <Button title="Proceed" onClick={remitPayment} />
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {currentStep === 4 && (
-          <div className="successful__">
-            <img src="/assets/successful.svg" alt="successful" />
-            <p className="successful__text">Your transaction is successful</p>
-            <Button
-              title="Go to Dashboard"
-              onClick={() => {
-                navigate("/dashboard");
-              }}
-            />
-            <p>View transaction on <a className="algo__link" href={`https://algoexplorer.io/tx/${txId}`} target="_blank">algoexplorer</a></p>
-          </div>
-        )}
-      </div>
+          {currentStep === 2 && (
+            <div className="send__money">
+              <p className="send-head"> Recipient Details</p>
+              <div className="send__money__form">
+                <Select
+                  options={banksOptions}
+                  placeholder="Select Bank"
+                  onChange={(e: any) =>
+                    setData({
+                      ...data,
+                      bankName: e.option
+                    })
+                  }
+                  styles={customStyles}
+                />
+                <InputField
+                  label={"Account Number"}
+                  name={"accountNumber"}
+                  value={data.accountNumber}
+                  placeholder={""}
+                  onChange={handleOnChange}
+                  leftIcon={<></>}
+                  rightIcon={<></>}
+                  disabled={false}
+                  isPassword={false}
+                  error={""}
+                  type="number"
+                />
+                {account && <p className="account__name">{account}</p>}
+                <InputField
+                  label={"Reason"}
+                  name={"reason"}
+                  value={data.reason}
+                  placeholder={""}
+                  onChange={handleOnChange}
+                  leftIcon={<></>}
+                  rightIcon={<></>}
+                  disabled={false}
+                  isPassword={false}
+                  error={""}
+                  type="text"
+                />
+                <Button
+                  title="Proceed"
+                  onClick={handleRecipientDetailsOnclick}
+                  className={!(data.bankName && account && data.reason) ? "disabled-state" : ""}
+                />
+              </div>
+            </div>
+          )}
 
-      }
+          {currentStep === 3 && (
+            <div className="send__money">
+              <p className="send-head">Review Transfer</p>
+              <div className="send__money__form">
+                <div className="amount__info">
+                  <div className="bank__info">
+                    <div className="init__header">
+                      <span>Bank Name</span>
+                      <span>{data?.bankName.name}</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Account Number</span>
+                      <span>{data?.accountNumber}</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Reason</span>
+                      <span>{data?.reason}</span>
+                    </div>
+                  </div>
+                  <div className="bank__info">
+                    <div className="init__header">
+                      <span>You are sending</span>
+                      <span>${commaFormat(data.youPay)}</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Recipient gets</span>
+                      <span>₦{commaFormat((data.youPay * currentRate).toFixed(2))}</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Transfer time</span>
+                      <span>Within minutes</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Transaction fee</span>
+                      <span>$ 0</span>
+                    </div>
+                    <div className="init__header">
+                      <span>Exchange rate</span>
+                      <span>$1 = ₦{currentRate && commaFormat(currentRate)}</span>
+                    </div>
+                  </div>
+                  <div className="amount__paid">
+                    <div className="init__header">
+                      <span>You Pay</span>
+                      <span>${data?.youPay}</span>
+                    </div>
+                  </div>
+                  <Button title="Proceed" onClick={remitPayment} />
+                </div>
+              </div>
+            </div>
+          )}
 
+          {currentStep === 4 && (
+            <div className="successful__">
+              <img src="/assets/successful.svg" alt="successful" />
+              <p className="successful__text">Your transaction is successful</p>
+              <Button
+                title="Go to Dashboard"
+                onClick={() => {
+                  navigate("/dashboard");
+                }}
+              />
+              <p>
+                View transaction on{" "}
+                <a
+                  className="algo__link"
+                  href={`https://algoexplorer.io/tx/${txId}`}
+                  target="_blank"
+                >
+                  algoexplorer
+                </a>
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </SendContainer>
   );
 };

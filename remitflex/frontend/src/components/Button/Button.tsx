@@ -8,7 +8,7 @@ const Button: React.FC<ButtonPropType> = ({
   color,
   border,
   className,
-  type,
+  type
 }) => {
   return (
     <ButtonWrapper>

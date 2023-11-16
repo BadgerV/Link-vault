@@ -262,8 +262,6 @@ sendASATokens();
 
 It creates a recipient address using Linkvault's createVault function, and then sends ASAs or NFTs from a specified sender to the Linkvault address.
 
-
-
 ### Example: Claim a Linkvault to Algorand wallet withdrawing all ALGOs, (ASAs) and NFTs
 
 ```javascript
@@ -282,24 +280,24 @@ async function claimVault(recipientAddress = defaultConfig.MERCHANT_ADDRESS) {
   const vaultSK = new Uint8Array([...sk, ...pk]);
 
   // Create an asset transfer transaction for each ASA
-  const assetTransferTxns = balance.assets.map((asset) => {
+  const assetTransferTxns = balance.assets.map(asset => {
     return algosdk.makeAssetTransferTxnWithSuggestedParams(
-      vault.address,            // sender's address
-      recipientAddress,         // recipient's address for the ASA
-      recipientAddress,         // closeRemainderTo (close to recipient's address)
+      vault.address, // sender's address
+      recipientAddress, // recipient's address for the ASA
+      recipientAddress, // closeRemainderTo (close to recipient's address)
       undefined,
-      asset.amount,              // amount of the ASA to send
+      asset.amount, // amount of the ASA to send
       undefined,
-      asset.assetidx,            // asset index
+      asset.assetidx, // asset index
       params
     );
   });
 
   // Create a payment transaction for Algos
   const algoTransferTxn = algosdk.makePaymentTxnWithSuggestedParams(
-    vault.address,                   // sender's address
-    recipientAddress,                // recipient's address for Algos
-    balance.amount,                  // use the entire Algo balance
+    vault.address, // sender's address
+    recipientAddress, // recipient's address for Algos
+    balance.amount, // use the entire Algo balance
     undefined,
     undefined,
     params
@@ -309,10 +307,10 @@ async function claimVault(recipientAddress = defaultConfig.MERCHANT_ADDRESS) {
   const groupedTxns = [algoTransferTxn, ...assetTransferTxns];
 
   // Sign all transactions in the group
-  const signedTxns = groupedTxns.map((txn) => algosdk.signTransaction(txn, vaultSK));
+  const signedTxns = groupedTxns.map(txn => algosdk.signTransaction(txn, vaultSK));
 
   // Combine all signed transactions into a single blob
-  const signedTxnBlob = algosdk.concatArrays(...signedTxns.map((st) => st.blob));
+  const signedTxnBlob = algosdk.concatArrays(...signedTxns.map(st => st.blob));
 
   // Send the signed transaction group to the Algorand node
   const { txId } = await algodClient.sendRawTransaction(signedTxnBlob).do();
@@ -324,10 +322,9 @@ async function claimVault(recipientAddress = defaultConfig.MERCHANT_ADDRESS) {
 }
 
 // Example usage:
-const recipient = 'some_other_address'; // You can pass the recipient address as a parameter
+const recipient = "some_other_address"; // You can pass the recipient address as a parameter
 const result = await claimVault(recipient);
 ```
-
 
 ## Package Information
 

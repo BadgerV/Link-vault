@@ -56,7 +56,7 @@ export const LogoContainer = styled.div`
     font-family: var(--font-family-geom);
 
     @media screen and (max-width: 500px) {
-    font-size: 1rem;
+      font-size: 1rem;
     }
     // @media screen and (max-width: 360px) {
     //   font-size: 0.8rem;
@@ -96,7 +96,7 @@ export const HeaderAddons = styled.div`
     > div {
       gap: 0.5rem;
     }
-    
+
     @media screen and (max-width: 500px) {
       font-size: 1rem;
     }

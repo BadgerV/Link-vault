@@ -6,10 +6,10 @@ export const paymentControl = {
   getNGNrate: async () => {
     return await protectedGet(paymentRoute.currentRate);
   },
-  remitPayment: async (remit : IRemitPayment ) => {
+  remitPayment: async (remit: IRemitPayment) => {
     return await protectedPost(paymentRoute.remitPayment, remit);
   },
-  billPayment: async (bill : IBillPayment) => {
+  billPayment: async (bill: IBillPayment) => {
     return await protectedPost(paymentRoute.billPayment, bill);
   }
 };

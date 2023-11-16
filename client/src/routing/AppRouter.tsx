@@ -10,15 +10,15 @@ const LaunchVaultPage = lazy(() => import("../pages/LaunchVault"));
 
 const AppRouter = () => {
   return (
-    <Suspense fallback={<CustomHashLoader color="#e53f71" size={20}/>}>
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/create" element={<CreateLinkPage />} />
-        <Route path="/:vaultKey" element={<LaunchVaultPage />} />
-      </Routes>
-    </Router>
-   </Suspense>
+    <Suspense fallback={<CustomHashLoader color="#e53f71" size={20} />}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/create" element={<CreateLinkPage />} />
+          <Route path="/:vaultKey" element={<LaunchVaultPage />} />
+        </Routes>
+      </Router>
+    </Suspense>
   );
 };
 

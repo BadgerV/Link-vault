@@ -12,7 +12,6 @@ interface OptionLabelProps {
 }
 
 const OptionLabel: React.FC<OptionLabelProps> = ({ option }: OptionLabelProps) => {
-  console.log(option);
   return (
     <OptionLabelContainer>
       <div className="option-label__left">

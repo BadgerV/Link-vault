@@ -25,7 +25,6 @@ export const Header = () => {
     peraWallet
       .reconnectSession()
       .then(accounts => {
-        console.log(accounts);
         if (accounts.length) {
           dispatch(setCurrentUser(accounts[0]));
           dispatch(setWalletType("pera"));
@@ -74,7 +73,7 @@ export const Header = () => {
         });
         dispatch(setCurrentUser(accounts![0]));
         dispatch(setWalletType("pera"));
-        successToast("Successfully connected to Pera Wallet")
+        successToast("Successfully connected to Pera Wallet");
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -95,7 +94,7 @@ export const Header = () => {
         });
         dispatch(setCurrentUser(accounts![0]));
         dispatch(setWalletType("defly"));
-        successToast("Successfully connected to Defly Wallet")
+        successToast("Successfully connected to Defly Wallet");
       })
       .catch(error => {
         if (error?.data?.type !== "CONNECT_MODAL_CLOSED") {
@@ -122,11 +121,15 @@ export const Header = () => {
       </LogoContainer>
       <HeaderAddons>
         {location.pathname === "/" ? (
-          <a href="https://www.npmjs.com/package/link-vault" target="_blank" className="target__blank">
-          <div className="header__addons__items">
-            <span>Documentation</span>
-          </div>
-        </a>
+          <a
+            href="https://www.npmjs.com/package/link-vault"
+            target="_blank"
+            className="target__blank"
+          >
+            <div className="header__addons__items">
+              <span>Documentation</span>
+            </div>
+          </a>
         ) : null}
 
         <HeaderDropdown>

@@ -43,7 +43,6 @@ const accountBalances = async (address: string) => {
     nfts: accountInfo["created-assets"],
     minimumBalance: accountInfo["min-balance"]
   };
-  console.log(balances, "balances");
   return balances;
 };
 

@@ -26,8 +26,6 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
   setShowDropdownItems
 }: OwnedAssets) => {
   const dropdownRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-  // const [showDropdownItems, setShowDropdownItems] = useState(false);
-  // const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const address = useSelector((state: any) => state.currentUser?.currentUser);
 
   // handles the click event when clicked outside of dropdown
@@ -53,14 +51,8 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
     params ? setShowDropdownItems(true) : setShowDropdownItems(false);
   }, [params]);
 
-  // const handleSelectAsset = (asset: Asset) => {
-  //   if (params) return;
-  //   setSelectedAsset(asset);
-  //   setShowDropdownItems(false);
-  // };
-
   const handleDropdown = () => {
-    if(params) return;
+    if (params) return;
     if (!params && !address) {
       errorToast("Please connect your wallet");
       return;
@@ -75,7 +67,11 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
           className={`link__types ${showDropdownItems ? "link__active" : ""} `}
           onClick={handleDropdown}
         >
-          <span className={`link-span ${params ? "params-select" : "unset-params"} ${selectedAsset ? "asset-selected" : ""}`}>
+          <span
+            className={`link-span ${params ? "params-select" : "unset-params"} ${
+              selectedAsset ? "asset-selected" : ""
+            }`}
+          >
             {selectedAsset ? (
               <div className="selected__link">
                 <div className="selected__link__item">
@@ -88,7 +84,9 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
               "Algorand standard assets"
             )}
           </span>
-          { !params &&  <img src={"/assets/svg/dropdown.svg"} alt="dropdown" className="dropdown__icon" /> }
+          {!params && (
+            <img src={"/assets/svg/dropdown.svg"} alt="dropdown" className="dropdown__icon" />
+          )}
         </div>
         {showDropdownItems && (
           <div className="owned__assets">
@@ -99,8 +97,9 @@ export const AssetsShowcase: React.FC<OwnedAssets> = ({
                   className="owned__assets__item"
                   key={i}
                   onClick={() => {
-                       if(params) return
-                     handleSelectAsset(asset)}}
+                    if (params) return;
+                    handleSelectAsset(asset);
+                  }}
                 >
                   <OptionLabel key={i} option={asset} />
                 </div>

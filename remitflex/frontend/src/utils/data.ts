@@ -38,5 +38,3 @@ export const ProductsArray = [
     path: "false"
   }
 ];
-
-
