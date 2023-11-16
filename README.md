@@ -1,67 +1,91 @@
-# Link-vault
+## LinkVault
+
+[SolPayPLus](https://linkvault.com.ng/) stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
 
 Paving the Way for Widespread Crypto and Algorand Adoption, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration.
 
-# Introduction:
+![image](https://i.postimg.cc/9ftVHJZx/1.jpg)
 
-LinkVault stands as a beacon in the cryptocurrency landscape, transcending the role of a conventional wallet to become a harbinger of expansive crypto and Algorand adoption. This user-friendly platform is poised to revolutionize the crypto space by simplifying the process of onboarding a diverse range of users.
+## 🎉 About.
 
-# Accessible Onboarding:
+[Linkvault](https://linkvault.com.ng) simplifies Algorand wallet creation with a one-click solution, Providing Non Custodial algorand wallets via a simple link or QR. Including Algorand Standard Asset Integration, making it perfect to share with family and friends that do not necessarily use crypto prior and removes the complexity of Secret Phrases. [Linkvault's SDK](https://www.npmjs.com/package/link-vault) empowers developers to unlock Algorand's potential, making it a hub for innovation.
 
-LinkVault's onboarding process is designed to usher countless individuals into the world of cryptocurrencies and Algorand:
+To onboard more users across Africa, we need to look at building products in crypto that help users make payment for essential services with crypto.
 
-# User-Friendly Interface:
+[Remitflex](https://remitflex.com) erases fees and expands global accessibility. Remitflex covers remittances and payment of over 17,000 bill payments seamlessly, merging traditional finance with crypto and using the Linkvault sdk to process its USDC payment for services.
 
-With LinkVault's intuitive design, the complexities of crypto are demystified, making participation accessible even to those with minimal crypto knowledge.
+## 💫 Problem Description.
 
-# No Wallet Required:
+- Cryptocurrency Adoption Struggles:
+  Challenge: Cryptocurrency adoption falters in the face of onboarding complexities and wallet management intricacies.
 
-The daunting task of understanding and managing crypto wallets is a significant entry barrier. LinkVault eliminates this hurdle, allowing recipients to dive into the crypto world without worrying about wallets.
+- Limitations in Traditional Finance:
+  Challenge: Traditional remittance and bill payment systems grapple with exorbitant fees and geographical constraints.
 
-# Zero Cost Entry:
+## 🚀 The Solution.
 
-LinkVault offers free account creation, making it enticing for those who wish to explore digital assets without financial commitments.
+- [Linkvault](https://linkvault.com.ng) disrupts the norm, offering a one-click solution for creating encrypted Algorand wallets, erasing barriers and ushering in instantaneous adoption.
 
-# Use Cases Expanding Crypto Adoption:
+- [Remitflex](https://remitflex.com) leveraging Algorand's stability and Linkvault's intuitive wallets, redefines financial transactions, eradicating fees, and expanding accessibility across diverse payment categories.
 
-LinkVault serves as a versatile tool for driving crypto and Algorand adoption in multiple ways:
+## 🔄 Architectural Flow.
 
-# Peer-to-Peer Transactions:
+Link vault & remitflex Architectural flow
+![image](https://i.postimg.cc/2SR0npYn/Blank-diagram-1.jpg)
+![image](https://i.postimg.cc/gjrHPtX8/Blank-diagram.jpg)
 
-LinkVault simplifies the process of sending money to friends and family, offering a practical use case that doesn't necessitate in-depth crypto knowledge.
+## 🤖 Tools & Technologies
 
-# Merchant Adoption:
+- Link-Vault SDK our inhouse NPM package.
+- ReactJS - web framework.
+- TypeScript - for static typing.
+- Express - (remitflex engine).
+- algosdk - algorand for crafting transactions onchain.
+- docker - for containerizing and easy development.
+- Flutterwave SDK - payment gateway.
+- Styled-Components - for styling.
 
-By facilitating online payments to merchants that accept Algorand, LinkVault fosters the growth of crypto as a means of commerce.
+## 🪙 Local installation
 
-# Charitable Giving:
+- make sure you have docker installed installed, download [HERE](https://www.docker.com/products/docker-desktop/)
 
-The platform opens doors to donating to charities using crypto, making it more convenient for individuals to support causes they care about.
+* git clone the repository.
 
-# Expanding Algorand Ecosystem:
+```
+  $ git clone git@github.com:Samuellyworld/Link-vault.git
+```
 
-Beyond its contribution to wider crypto adoption, LinkVault plays a pivotal role in nurturing the growth of the Algorand ecosystem:
+- go to `link-vault` directory on your terminal
 
-# Blockchain Accessibility:
+```
+  $ cd link-vault
+```
 
-LinkVault simplifies Algorand transactions, broadening the accessibility of this innovative blockchain. This encourages developers and businesses to explore the vast potential of Algorand.
+- set your `.env` for `client`, `server` , `remitflex/frontend` and `remitflex/backend` folder.
 
-# Economic Activity:
+* copy everything on `.env.example` to a newly created `.env` file for both `client`, `server` `remitflex/frontend` and `remitflex/backend` directory.
 
-Increased adoption on the Algorand network has the potential to stimulate economic activity. This includes the development of decentralized applications (dApps) and projects in the decentralized finance (DeFi) sector.
+- build docker container and start app
 
-# Algorand Standard Asset Integration:
+```
+docker-compose up  --build
+```
 
-LinkVault seamlessly integrates with Algorand Standard Assets (ASAs), enabling users to engage with a wide variety of tokens and digital assets issued on the Algorand blockchain. This unlocks diverse possibilities for users and solidifies Algo's role within the Algorand ecosystem.
+## 👨🏼‍🍳 Team.
 
-# NFT Integration and Market Adoption:
+- [David Kazeem](https://github.com/davonjagah)
+- [Samuel Tosin](https://github.com/Samuellyworld)
+- [Ikuesan Emmanuel](https://ng.linkedin.com/in/ikuesan-emmanuel-7b312b165)
 
-In addition to the above, LinkVault has the potential to accelerate the adoption of non-fungible tokens (NFTs) within markets like ticketing and beyond:
+## 🔗 Links.
 
-# Ticketing and Events:
+- [Live](https://linkvault.com.ng/)
+- [NPM Package](https://www.npmjs.com/package/link-vault)
+- [Figma](https://www.figma.com/file/RayAw3ELTPhG1gYUzYeB9Z/LinkVault-%26-Remit-Flex?type=design&node-id=0-1&mode=design&t=zdH2M2YPHB8CK0Bp-0)
+- [Youtube](https://www.youtube.com/watch?v=y_CYJotFLYM)
+- [Deck](https://drive.google.com/file/d/1xsRDn525CR-bs2bUAaGg86YVk0UCX5Mh/view)
+- [RemitFlex Post man API Documentation](https://documenter.getpostman.com/view/9070802/2s9YXmWzwh)
 
-LinkVault can be a gateway for event organizers to sell NFT-based tickets, reducing fraud and enhancing the overall event experience.
+## 🪪 License.
 
-# Conclusion:
-
-LinkVault's mission goes beyond mere wallet functionality. It seeks to reshape the crypto landscape by making it accessible to all, spearheading crypto adoption, and nurturing the Algorand ecosystem. Furthermore, its potential to seamlessly integrate Algorand Standard Assets (ASAs) and NFTs into various markets signifies a broader vision that encompasses innovation, inclusivity, and the exciting future of digital finance. LinkVault doesn't just bridge the gap; it creates an inviting path into the future of finance and digital assets, including the dynamic world of ASAs and NFTs on the Algorand blockchain.
+Copyright LinkVault 2023 [**MIT LICENSE**](/LICENSE)
