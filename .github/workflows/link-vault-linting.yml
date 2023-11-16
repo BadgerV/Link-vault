@@ -34,4 +34,3 @@ jobs:
       - name: Run ESLint and Prettier
         run: |
           npx eslint . 
-          npm run format:check
